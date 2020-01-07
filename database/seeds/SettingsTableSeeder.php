@@ -25,7 +25,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => '30.04249824173365,31.22443199157715',
                 'created_at' => '2019-10-03 11:55:13',
                 'updated_at' => '2019-10-03 12:48:51',
-                'type_id' => 8,
+                'type_id' => 7,
                 'order' => NULL,
             ),
             15 =>
@@ -35,7 +35,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => '30.029093372455513,31.15600888795848',
                 'created_at' => '2019-10-07 08:01:12',
                 'updated_at' => '2019-10-07 08:01:20',
-                'type_id' => 8,
+                'type_id' => 7,
                 'order' => NULL,
             ),
             16 =>

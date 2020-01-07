@@ -315,7 +315,7 @@ export default {
     },
     themeMode: {
       get()    { return this.$store.state.theme },
-      set(val) { this.$store.dispatch('updateTheme', val) }
+      set(val) { this.$store.dispatch('updateTheme', val);localStorage.setItem('theme',val) }
     },
     windowWidth() {
       return this.$store.state.windowWidth
@@ -364,4 +364,3 @@ export default {
   height: calc(100% - 5rem);
 }
 </style>
-

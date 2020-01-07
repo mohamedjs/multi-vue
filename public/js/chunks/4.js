@@ -772,6 +772,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(val) {
         this.$store.dispatch('updateTheme', val);
+        localStorage.setItem('theme', val);
       }
     },
     windowWidth: function windowWidth() {
