@@ -47,6 +47,48 @@ const router = new Router({
             component: () => import('./views/users/users.vue'),
           },
           {
+              path: '/user/user-list',
+              name: 'app-user-list',
+              component: () => import('@/views/user/user-list/UserList.vue'),
+              meta: {
+                  breadcrumb: [
+                      { title: 'Home', url: '/' },
+                      { title: 'User' },
+                      { title: 'List', active: true },
+                  ],
+                  pageTitle: 'User List',
+                  //rule: 'editor'
+              },
+          },
+          {
+              path: '/user/user-view/:userId',
+              name: 'app-user-view',
+              component: () => import('@/views/user/UserView.vue'),
+              meta: {
+                  breadcrumb: [
+                      { title: 'Home', url: '/' },
+                      { title: 'User' },
+                      { title: 'View', active: true },
+                  ],
+                  pageTitle: 'User View',
+                  //rule: 'editor'
+              },
+          },
+          {
+              path: '/user/user-edit/:userId',
+              name: 'app-user-edit',
+              component: () => import('@/views/user/user-edit/UserEdit.vue'),
+              meta: {
+                  breadcrumb: [
+                      { title: 'Home', url: '/' },
+                      { title: 'User' },
+                      { title: 'Edit', active: true },
+                  ],
+                  pageTitle: 'User Edit',
+                //  rule: 'editor'
+              },
+          },
+          {
             path: '/countrys',
             name: 'countrys',
             component: () => import('./views/countries/countrys.vue'),

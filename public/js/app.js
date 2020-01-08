@@ -115542,43 +115542,100 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     // =============================================================================
     path: '',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
     },
     children: [{
       path: '/',
       name: 'home',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/src/views/Home.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/src/views/Home.vue"));
       }
     }, {
       path: '/users',
       name: 'users',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/users/users.vue */ "./resources/js/src/views/users/users.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/users/users.vue */ "./resources/js/src/views/users/users.vue"));
+      }
+    }, {
+      path: '/user/user-list',
+      name: 'app-user-list',
+      component: function component() {
+        return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
+      },
+      meta: {
+        breadcrumb: [{
+          title: 'Home',
+          url: '/'
+        }, {
+          title: 'User'
+        }, {
+          title: 'List',
+          active: true
+        }],
+        pageTitle: 'User List' //rule: 'editor'
+
+      }
+    }, {
+      path: '/user/user-view/:userId',
+      name: 'app-user-view',
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! @/views/user/UserView.vue */ "./resources/js/src/views/user/UserView.vue"));
+      },
+      meta: {
+        breadcrumb: [{
+          title: 'Home',
+          url: '/'
+        }, {
+          title: 'User'
+        }, {
+          title: 'View',
+          active: true
+        }],
+        pageTitle: 'User View' //rule: 'editor'
+
+      }
+    }, {
+      path: '/user/user-edit/:userId',
+      name: 'app-user-edit',
+      component: function component() {
+        return Promise.all(/*! import() */[__webpack_require__.e(25), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! @/views/user/user-edit/UserEdit.vue */ "./resources/js/src/views/user/user-edit/UserEdit.vue"));
+      },
+      meta: {
+        breadcrumb: [{
+          title: 'Home',
+          url: '/'
+        }, {
+          title: 'User'
+        }, {
+          title: 'Edit',
+          active: true
+        }],
+        pageTitle: 'User Edit' //  rule: 'editor'
+
       }
     }, {
       path: '/countrys',
       name: 'countrys',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./views/countries/countrys.vue */ "./resources/js/src/views/countries/countrys.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/countries/countrys.vue */ "./resources/js/src/views/countries/countrys.vue"));
       }
     }, {
       path: '/countrys_states/:id',
       name: 'countrys-states',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/states/states.vue */ "./resources/js/src/views/states/states.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/states/states.vue */ "./resources/js/src/views/states/states.vue"));
       }
     }, {
       path: '/countrys_citys/:id',
       name: 'countrys-citys',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./views/citys/citys.vue */ "./resources/js/src/views/citys/citys.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./views/citys/citys.vue */ "./resources/js/src/views/citys/citys.vue"));
       }
     }, {
       path: 'advertisments',
       name: 'advertisments',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/advertisments/advertisments.vue */ "./resources/js/src/views/advertisments/advertisments.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./views/advertisments/advertisments.vue */ "./resources/js/src/views/advertisments/advertisments.vue"));
       }
     }, {
       path: 'categorys',
@@ -115596,25 +115653,25 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: 'coupons',
       name: 'coupons',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./views/coupons/coupons.vue */ "./resources/js/src/views/coupons/coupons.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(28), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/coupons/coupons.vue */ "./resources/js/src/views/coupons/coupons.vue"));
       }
     }, {
       path: 'settings',
       name: 'settings',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(19), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/settings/settings.vue */ "./resources/js/src/views/settings/settings.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/settings/settings.vue */ "./resources/js/src/views/settings/settings.vue"));
       }
     }, {
       path: 'brands',
       name: 'brands',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./views/brands/brands.vue */ "./resources/js/src/views/brands/brands.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./views/brands/brands.vue */ "./resources/js/src/views/brands/brands.vue"));
       }
     }, {
       path: 'languages',
       name: 'languages',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./views/languages/languages.vue */ "./resources/js/src/views/languages/languages.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/languages/languages.vue */ "./resources/js/src/views/languages/languages.vue"));
       }
     }]
   }, // =============================================================================
@@ -115623,7 +115680,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   {
     path: '',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! @/layouts/full-page/FullPage.vue */ "./resources/js/src/layouts/full-page/FullPage.vue"));
+      return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! @/layouts/full-page/FullPage.vue */ "./resources/js/src/layouts/full-page/FullPage.vue"));
     },
     children: [// =============================================================================
     // PAGES
@@ -115632,19 +115689,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/login',
       name: 'Login',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
       }
     }, {
       path: '/register',
       name: 'Register',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
+        return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
       }
     }, {
       path: '/pages/error-404',
       name: 'pageError404',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! @/views/pages/Error404.vue */ "./resources/js/src/views/pages/Error404.vue"));
+        return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! @/views/pages/Error404.vue */ "./resources/js/src/views/pages/Error404.vue"));
       }
     }]
   }, // Redirect to 404 page, if no match found
