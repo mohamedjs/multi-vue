@@ -22,10 +22,10 @@ class Content extends Model
 
   }
 
-  public function getImagePreviewAttribute($value)
-  {
-    return url('/uploads/content/image/'.$value);
-  }
+    public function getImageAttribute($value)
+   {
+     return $value ? $value : url('/images/user-03.jpg') ;
+   }
 
   ////////////////// set path ////////////////
   public function setPathAttribute($value){

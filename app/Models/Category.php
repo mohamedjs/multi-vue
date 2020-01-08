@@ -22,10 +22,10 @@ class Category extends Model
   //   }
   // }
   //
-     public function getImageAttribute($value)
-     {
-       return $value ? $value : url('/images/avatar-s-1.png') ;
-     }
+    public function getImageAttribute($value)
+   {
+     return $value ? $value : url('/images/user-03.jpg') ;
+   }
 
 
 

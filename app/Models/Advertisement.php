@@ -23,7 +23,7 @@ class Advertisement extends Model
 
     public function getImageAttribute($value)
    {
-     return $value ? $value : url('/images/avatar-s-1.png') ;
+     return $value ? $value : url('/images/user-03.jpg') ;
    }
 
     public function getAdsUrlAttribute($value)
