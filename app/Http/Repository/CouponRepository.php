@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repository;
 
-use App\Coupon;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 
 class CouponRepository
@@ -14,7 +14,7 @@ class CouponRepository
         $per_page = $request->per_page;
       }
       if($request->has('search') && $request->search != ''){
-        $coupons = $coupons->whereLike(['coupon' ,'value' , 'expire_date' , 'client_id' , 'used'],$request->search);
+        $coupons = $coupons->whereLike(['coupon' ,'value' , 'expire_date' , 'user_id' , 'used'],$request->search);
       }
       $coupons = $coupons->Paginate($per_page);
       $coupons->appends($request->all());

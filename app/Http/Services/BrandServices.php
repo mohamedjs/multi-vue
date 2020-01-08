@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Brand;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandServices

@@ -30,21 +30,21 @@ Route::middleware(['auth:api'])->group(function () {
   Route::resource('languages','Api\LanguageController');
   Route::get('all_country', function()
   {
-    return \App\Country::select('id','name as label')->get();
+    return \App\Models\Country::select('id','name as label')->get();
   });
   Route::get('all_state', function()
   {
-    return \App\State::select('id','name as label')->get();
+    return \App\Models\State::select('id','name as label')->get();
   });
   Route::get('all_category', function()
   {
-    $categorys = \App\Category::select('id','title as label')->get();
+    $categorys = \App\Models\Category::select('id','title as label')->get();
     $categorys->prepend(['id' => null ,'label'=> 'Choose Parent' ]);
     return  $categorys;
   });
   Route::get('content_type', function()
   {
-    return \App\Type::select('id','title as label')->get();
+    return \App\Models\Type::select('id','title as label')->get();
   });
   Route::post('delete_all','Api\HomeController@delete_all');
 });

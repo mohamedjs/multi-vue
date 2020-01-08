@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\State;
+use App\Models\State;
 use App\Http\Requests\Api\StateRequest;
 use App\Http\Repository\StateRepository;
 use App\Http\Services\StateServices;

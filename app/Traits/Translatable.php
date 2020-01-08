@@ -11,9 +11,9 @@
 
 namespace App\Traits;
 
-use App\HasTranslation;
-use App\HasBody;
-use App\Language;
+use App\Models\HasTranslation;
+use App\Models\HasBody;
+use App\Models\Language;
 
 trait Translatable {
 

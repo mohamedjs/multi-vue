@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Advertisement;
+use App\Models\Advertisement;
 use App\Http\Requests\Api\AdvertismentRequest;
 use App\Http\Repository\AdvertismentRepository;
 use App\Http\Services\AdvertismentServices;

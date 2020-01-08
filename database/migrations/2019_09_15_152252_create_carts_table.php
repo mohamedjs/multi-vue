@@ -18,7 +18,7 @@ class CreateCartsTable extends Migration {
 			$table->integer('quantity');
 			$table->decimal('price', 10);
 			$table->decimal('total_price', 10);
-			$table->integer('client_id')->unsigned()->index('carts_client_id_foreign');
+			$table->integer('user_id')->unsigned()->index('carts_user_id_foreign');
 			$table->integer('product_id')->unsigned()->index('carts_product_id_foreign');
 			$table->timestamps();
 		});

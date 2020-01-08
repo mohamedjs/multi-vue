@@ -18,11 +18,11 @@ class CreateOrdersTable extends Migration
             $table->decimal('shipping_amount',10,2);
             $table->decimal('total_price', 10,2);
             $table->tinyInteger('status')->default('1');
-            $table->integer('client_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('address_id')->unsigned();
 
-            $table->foreign('client_id')->references('id')->on('clients')->onUpdate('RESTRICT')->onDelete('CASCADE');
-            $table->foreign('address_id')->references('id')->on('client_addresses')->onUpdate('RESTRICT')->onDelete('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('CASCADE');
+            $table->foreign('address_id')->references('id')->on('user_addresses')->onUpdate('RESTRICT')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Language;
+use App\Models\Language;
 use App\Http\Requests\Api\LanguageRequest;
 use App\Http\Repository\LanguageRepository;
 use App\Http\Services\LanguageServices;

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repository;
 
-use App\City;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class CityRepository

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Country;
+use App\Models\Country;
 use App\Http\Requests\Api\CountryRequest;
 use App\Http\Repository\CountryRepository;
 use App\Http\Services\CountryServices;

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repository;
 
-use App\Setting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class SettingRepository

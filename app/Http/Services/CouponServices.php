@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Coupon;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 
 class CouponServices

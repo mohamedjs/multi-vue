@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
-use App\Setting;
+use App\Models\Setting;
 class SettingRequest extends FormRequest
 {
     /**

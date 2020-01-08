@@ -2,7 +2,7 @@
 namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
-use App\Category;
+use App\Models\Category;
 class CategoryRequest extends FormRequest
 {
     /**

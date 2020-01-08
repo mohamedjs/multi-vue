@@ -29,12 +29,12 @@ class AddColumToContact extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('contacts', function (Blueprint $table) {
-            $table->dropColumn('lang');
-            $table->dropForeign('city_id');
-            $table->dropForeign('product_id');
-        });
-    }
+    // public function down()
+    // {
+    //     Schema::table('contacts', function (Blueprint $table) {
+    //         $table->dropColumn('lang');
+    //         $table->dropForeign('city_id');
+    //         $table->dropForeign('product_id');
+    //     });
+    // }
 }

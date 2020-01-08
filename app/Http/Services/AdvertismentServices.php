@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Advertisement;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
 class AdvertismentServices

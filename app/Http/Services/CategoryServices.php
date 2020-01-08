@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryServices

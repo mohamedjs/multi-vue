@@ -14,7 +14,7 @@ class AddForeignKeysToCartsTable extends Migration {
 	{
 		Schema::table('carts', function(Blueprint $table)
 		{
-			$table->foreign('client_id')->references('id')->on('clients')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('CASCADE');
 			$table->foreign('product_id')->references('id')->on('products')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}
@@ -29,7 +29,7 @@ class AddForeignKeysToCartsTable extends Migration {
 	{
 		Schema::table('carts', function(Blueprint $table)
 		{
-			$table->dropForeign('carts_client_id_foreign');
+			$table->dropForeign('carts_user_id_foreign');
 			$table->dropForeign('carts_product_id_foreign');
 		});
 	}

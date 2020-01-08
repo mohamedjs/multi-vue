@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repository;
 
-use App\Advertisement;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
 class AdvertismentRepository

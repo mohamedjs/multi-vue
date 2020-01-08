@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Language;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class LanguageServices

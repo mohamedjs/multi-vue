@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 use App\Product;
-use App\Contact;
-use App\Client;
-use App\ClientAddress;
-use App\ClientRate;
-use App\State;
-use App\City;
-use App\Cart;
-use App\Category;
-use App\Order;
-use App\Coupon;
-use App\OrderDetail;
+use App\Models\Contact;
+use App\User;
+use App\Models\UserAddress;
+use App\Models\UserRate;
+use App\Models\State;
+use App\Models\City;
+use App\Models\Cart;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Coupon;
+use App\Models\OrderDetail;
 use App\Http\Middleware\Language;
 use Validator;
 use Mail;
@@ -26,7 +26,7 @@ class HomeController extends Controller
   //api for home page to get analyticsData
   public function index()
   {
-    $data ['anyclients']   = $this->anayltic(Client::query());
+    $data ['anyclients']   = $this->anayltic(user::query());
     $data ['anyorders']    = $this->anayltic(Order::query());
     $data ['anyrevenus']   = $this->anayltic(Order::query(),'revenue');
     $data ['anycarts']     = $this->anayltic(Cart::query());

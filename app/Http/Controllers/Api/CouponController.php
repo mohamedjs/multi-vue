@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Coupon;
+use App\Models\Coupon;
 use App\Http\Requests\Api\CouponRequest;
 use App\Http\Repository\CouponRepository;
 use App\Http\Services\CouponServices;

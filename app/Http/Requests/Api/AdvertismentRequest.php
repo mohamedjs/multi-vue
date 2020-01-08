@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
-use App\Advertisement;
+use App\Models\Advertisement;
 class AdvertismentRequest extends FormRequest
 {
     /**

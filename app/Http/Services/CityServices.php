@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\City;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class CityServices

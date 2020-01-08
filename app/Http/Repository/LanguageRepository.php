@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repository;
 
-use App\Language;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class LanguageRepository

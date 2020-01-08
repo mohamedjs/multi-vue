@@ -2,7 +2,7 @@
 namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
-use App\Brand;
+use App\Models\Brand;
 class BrandRequest extends FormRequest
 {
     /**

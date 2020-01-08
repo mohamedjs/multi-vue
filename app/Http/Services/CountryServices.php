@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Country;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class CountryServices

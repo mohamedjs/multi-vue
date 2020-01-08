@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repository;
 
-use App\State;
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class StateRepository

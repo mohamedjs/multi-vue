@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
-use App\City;
+use App\Models\City;
 class CityRequest extends FormRequest
 {
     /**

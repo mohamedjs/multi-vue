@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Category;
+use App\Models\Category;
 use App\Http\Requests\Api\CategoryRequest;
 use App\Http\Repository\CategoryRepository;
 use App\Http\Services\CategoryServices;

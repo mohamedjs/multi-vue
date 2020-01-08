@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Setting;
+use App\Models\Setting;
 use App\Http\Requests\Api\SettingRequest;
 use App\Http\Repository\SettingRepository;
 use App\Http\Services\SettingServices;

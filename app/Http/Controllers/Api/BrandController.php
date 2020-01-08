@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Brand;
+use App\Models\Brand;
 use App\Http\Requests\Api\BrandRequest;
 use App\Http\Repository\BrandRepository;
 use App\Http\Services\BrandServices;

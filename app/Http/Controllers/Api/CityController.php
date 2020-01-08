@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\City;
+use App\Models\City;
 use App\Http\Requests\Api\CityRequest;
 use App\Http\Repository\CityRepository;
 use App\Http\Services\CityServices;

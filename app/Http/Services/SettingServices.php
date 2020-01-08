@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\Setting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class SettingServices
