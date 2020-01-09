@@ -848,8 +848,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
   fetchUsers: function fetchUsers(_ref) {
     var commit = _ref.commit;
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users").then(function (response) {
-        commit('SET_USERS', response.data);
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users").then(function (response) {
+        commit('SET_USERS', response.data.data.users);
         resolve(response);
       }).catch(function (error) {
         reject(error);
@@ -860,7 +860,7 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
     _objectDestructuringEmpty(_ref2);
 
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users/".concat(userId)).then(function (response) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users/".concat(userId, "/edit")).then(function (response) {
         resolve(response);
       }).catch(function (error) {
         reject(error);
@@ -870,7 +870,7 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
   removeRecord: function removeRecord(_ref3, userId) {
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].delete("/api/user-management/users/".concat(userId)).then(function (response) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].delete("/api/users/".concat(userId)).then(function (response) {
         commit('REMOVE_RECORD', userId);
         resolve(response);
       }).catch(function (error) {

@@ -42,7 +42,7 @@ class UserController extends Controller
 
   public function edit($id)
   {
-    $user = User::find($id);
+    $user = User::with(['cities.state.country'])->whereId($id)->first();
     return response()->json(['status' => 'success' , 'data' => $user , 'message' => 'Get User For Edit Success']);
   }
 

@@ -56,7 +56,7 @@ Route::get('items',function(){
   $data['icon'] = 'HomeIcon';
   $data['i18n'] = 'home';
   array_push($array,(object)$data);
-  $data['url'] = '/users';
+  $data['url'] = '/user/user-list';
   $data['name'] = 'Users';
   $data['slug'] = 'users';
   $data['icon'] = 'UsersIcon';

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','image','phone','user_name','bod','status','gender' , 'user_type' , 'home_phone' ,'website'
+        'name', 'email', 'password','image','phone','user_name','bod','status','gender' , 'user_type' , 'home_phone' ,'website' , 'verified'
     ];
 
     /**
@@ -65,13 +65,13 @@ class User extends Authenticatable
 
     public function cities()
     {
-        return $this->belongsToMany('App\Models\City','client_addresses','user_id','city_id')
+        return $this->belongsToMany('App\Models\City','user_addresses','user_id','city_id')
         ->withPivot('id','address','details')->withTimestamps();
     }
 
     public function rates()
     {
-        return $this->belongsToMany('App\Models\Product','client_rates','user_id','product_id')
+        return $this->belongsToMany('App\Models\Product','user_rates','user_id','product_id')
         ->withPivot('id', 'rate' , 'comment' , 'publish')->where('publish','=', 1)->withTimestamps();
     }
 
@@ -91,4 +91,52 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Coupon','user_id','id')->where('used',1);
     }
 
+    public function getStatusAttribute($value){
+        if($value == 1){
+            $value = 'active';
+        }
+        if($value == 2){
+            $value = 'blocked';
+        }
+        if($value == 3 || !$value){
+            $value = 'non active';
+        }
+        return $value;
+    }
+
+    public function getGenderAttribute($value){
+        if($value == 1 || !$value){
+            $value = 'Male';
+        }
+        if($value == 2){
+            $value = 'Female';
+        }
+        return $value;
+    }
+
+    public function getUserTypeAttribute($value){
+        if($value == 1){
+            $value = 'Admin';
+        }
+        if($value == 2){
+            $value = 'Staff';
+        }
+        if($value == 3 || !$value){
+            $value = 'User';
+        }
+        return $value;
+    }
+
+    public function getVerifiedAttribute($value){
+        if($value){
+            $value = 'Yes';
+        }
+        if(!$value){
+            $value = 'No';
+        }
+        return $value;
+    }
+    public function getUserNameAttribute($value){
+        return $value ?? 'UserName';
+    }
 }

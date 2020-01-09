@@ -14,8 +14,8 @@
     <vx-card ref="filterCard" title="Filters" class="user-list-filters mb-8" actionButtons @refresh="resetColFilters" @remove="resetColFilters">
       <div class="vx-row">
         <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
-          <label class="text-sm opacity-75">Role</label>
-          <v-select :options="roleOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="roleFilter" class="mb-4 md:mb-0" />
+          <label class="text-sm opacity-75">UserType</label>
+          <v-select :options="user_typeOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="user_typeFilter" class="mb-4 md:mb-0" />
         </div>
         <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
           <label class="text-sm opacity-75">Status</label>
@@ -26,8 +26,8 @@
           <v-select :options="isVerifiedOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="isVerifiedFilter" class="mb-4 sm:mb-0" />
         </div>
         <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
-          <label class="text-sm opacity-75">Department</label>
-          <v-select :options="departmentOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="departmentFilter" />
+          <label class="text-sm opacity-75">Gender</label>
+          <v-select :options="genderOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="genderFilter" />
         </div>
       </div>
     </vx-card>
@@ -168,35 +168,34 @@ export default {
     return {
 
       // Filter Options
-      roleFilter: { label: 'All', value: 'all' },
-      roleOptions: [
+      user_typeFilter: { label: 'All', value: 'all' },
+      user_typeOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Admin', value: 'admin' },
-        { label: 'User', value: 'user' },
-        { label: 'Staff', value: 'staff' },
+        { label: 'Admin', value: '2' },
+        { label: 'User', value: '4' },
+        { label: 'Staff', value: '3' },
       ],
 
       statusFilter: { label: 'All', value: 'all' },
       statusOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Active', value: 'active' },
-        { label: 'Deactivated', value: 'deactivated' },
-        { label: 'Blocked', value: 'blocked' },
+        { label: 'Active', value: '1' },
+        { label: 'Deactivated', value: '3' },
+        { label: 'Blocked', value: '2' },
       ],
 
       isVerifiedFilter: { label: 'All', value: 'all' },
       isVerifiedOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Yes', value: 'yes' },
-        { label: 'No', value: 'no' },
+        { label: 'Yes', value: '1' },
+        { label: 'No', value: '0' },
       ],
 
-      departmentFilter: { label: 'All', value: 'all' },
-      departmentOptions: [
+      genderFilter: { label: 'All', value: 'all' },
+      genderOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Sales', value: 'sales' },
-        { label: 'Development', value: 'development' },
-        { label: 'Management', value: 'management' },
+        { label: 'Male', value: '1' },
+        { label: 'Female', value: '2' },
       ],
 
       searchQuery: "",
@@ -221,7 +220,7 @@ export default {
         },
         {
           headerName: 'Username',
-          field: 'username',
+          field: 'user_name',
           filter: true,
           width: 210,
           cellRendererFramework: 'CellRendererLink'
@@ -240,13 +239,13 @@ export default {
         },
         {
           headerName: 'Country',
-          field: 'country',
+          field: 'cities.state.country.name',
           filter: true,
           width: 150,
         },
         {
-          headerName: 'Role',
-          field: 'role',
+          headerName: 'UserType',
+          field: 'user_type',
           filter: true,
           width: 150,
         },
@@ -259,15 +258,15 @@ export default {
         },
         {
           headerName: 'Verified',
-          field: 'is_verified',
+          field: 'verified',
           filter: true,
           width: 125,
           cellRendererFramework: 'CellRendererVerified',
           cellClass: "text-center"
         },
         {
-          headerName: 'Department',
-          field: 'department',
+          headerName: 'Gender',
+          field: 'gender',
           filter: true,
           width: 150,
         },
@@ -289,8 +288,8 @@ export default {
     }
   },
   watch: {
-    roleFilter(obj) {
-      this.setColumnFilter("role", obj.value)
+    user_typeFilter(obj) {
+      this.setColumnFilter("user_type", obj.value)
     },
     statusFilter(obj) {
       this.setColumnFilter("status", obj.value)
@@ -299,8 +298,8 @@ export default {
       let val = obj.value === "all" ? "all" : obj.value == "yes" ? "true" : "false"
       this.setColumnFilter("is_verified", val)
     },
-    departmentFilter(obj) {
-      this.setColumnFilter("department", obj.value)
+    genderFilter(obj) {
+      this.setColumnFilter("gender", obj.value)
     },
   },
   computed: {
@@ -343,7 +342,7 @@ export default {
       this.gridApi.onFilterChanged()
 
       // Reset Filter Options
-      this.roleFilter = this.statusFilter = this.isVerifiedFilter = this.departmentFilter = { label: 'All', value: 'all' }
+      this.user_typeFilter = this.statusFilter = this.isVerifiedFilter = this.genderFilter = { label: 'All', value: 'all' }
 
       this.$refs.filterCard.removeRefreshAnimation()
     },

@@ -183,22 +183,22 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       // Filter Options
-      roleFilter: {
+      user_typeFilter: {
         label: 'All',
         value: 'all'
       },
-      roleOptions: [{
+      user_typeOptions: [{
         label: 'All',
         value: 'all'
       }, {
         label: 'Admin',
-        value: 'admin'
+        value: '2'
       }, {
         label: 'User',
-        value: 'user'
+        value: '4'
       }, {
         label: 'Staff',
-        value: 'staff'
+        value: '3'
       }],
       statusFilter: {
         label: 'All',
@@ -209,13 +209,13 @@ __webpack_require__.r(__webpack_exports__);
         value: 'all'
       }, {
         label: 'Active',
-        value: 'active'
+        value: '1'
       }, {
         label: 'Deactivated',
-        value: 'deactivated'
+        value: '3'
       }, {
         label: 'Blocked',
-        value: 'blocked'
+        value: '2'
       }],
       isVerifiedFilter: {
         label: 'All',
@@ -226,27 +226,24 @@ __webpack_require__.r(__webpack_exports__);
         value: 'all'
       }, {
         label: 'Yes',
-        value: 'yes'
+        value: '1'
       }, {
         label: 'No',
-        value: 'no'
+        value: '0'
       }],
-      departmentFilter: {
+      genderFilter: {
         label: 'All',
         value: 'all'
       },
-      departmentOptions: [{
+      genderOptions: [{
         label: 'All',
         value: 'all'
       }, {
-        label: 'Sales',
-        value: 'sales'
+        label: 'Male',
+        value: '1'
       }, {
-        label: 'Development',
-        value: 'development'
-      }, {
-        label: 'Management',
-        value: 'management'
+        label: 'Female',
+        value: '2'
       }],
       searchQuery: "",
       // AgGrid
@@ -267,7 +264,7 @@ __webpack_require__.r(__webpack_exports__);
         headerCheckboxSelection: true
       }, {
         headerName: 'Username',
-        field: 'username',
+        field: 'user_name',
         filter: true,
         width: 210,
         cellRendererFramework: 'CellRendererLink'
@@ -283,12 +280,12 @@ __webpack_require__.r(__webpack_exports__);
         width: 200
       }, {
         headerName: 'Country',
-        field: 'country',
+        field: 'cities.state.country.name',
         filter: true,
         width: 150
       }, {
-        headerName: 'Role',
-        field: 'role',
+        headerName: 'UserType',
+        field: 'user_type',
         filter: true,
         width: 150
       }, {
@@ -299,14 +296,14 @@ __webpack_require__.r(__webpack_exports__);
         cellRendererFramework: 'CellRendererStatus'
       }, {
         headerName: 'Verified',
-        field: 'is_verified',
+        field: 'verified',
         filter: true,
         width: 125,
         cellRendererFramework: 'CellRendererVerified',
         cellClass: "text-center"
       }, {
-        headerName: 'Department',
-        field: 'department',
+        headerName: 'Gender',
+        field: 'gender',
         filter: true,
         width: 150
       }, {
@@ -325,8 +322,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   watch: {
-    roleFilter: function roleFilter(obj) {
-      this.setColumnFilter("role", obj.value);
+    user_typeFilter: function user_typeFilter(obj) {
+      this.setColumnFilter("user_type", obj.value);
     },
     statusFilter: function statusFilter(obj) {
       this.setColumnFilter("status", obj.value);
@@ -335,8 +332,8 @@ __webpack_require__.r(__webpack_exports__);
       var val = obj.value === "all" ? "all" : obj.value == "yes" ? "true" : "false";
       this.setColumnFilter("is_verified", val);
     },
-    departmentFilter: function departmentFilter(obj) {
-      this.setColumnFilter("department", obj.value);
+    genderFilter: function genderFilter(obj) {
+      this.setColumnFilter("gender", obj.value);
     }
   },
   computed: {
@@ -378,7 +375,7 @@ __webpack_require__.r(__webpack_exports__);
       this.gridApi.setFilterModel(null);
       this.gridApi.onFilterChanged(); // Reset Filter Options
 
-      this.roleFilter = this.statusFilter = this.isVerifiedFilter = this.departmentFilter = {
+      this.user_typeFilter = this.statusFilter = this.isVerifiedFilter = this.genderFilter = {
         label: 'All',
         value: 'all'
       };
@@ -435,30 +432,36 @@ __webpack_require__.r(__webpack_exports__);
   name: 'CellRendererActions',
   methods: {
     editRecord: function editRecord() {
-      this.$router.push("/apps/user/user-edit/" + 268).catch(function () {});
+      //this.$router.push("/apps/user/user-edit/" + 268).catch(() => {})
+
       /*
         Below line will be for actual product
         Currently it's commented due to demo purpose - Above url is for demo purpose
-         this.$router.push("/apps/user/user-edit/" + this.params.data.id).catch(() => {})
       */
+      this.$router.push("/user/user-edit/" + this.params.data.id).catch(function () {});
     },
     confirmDeleteRecord: function confirmDeleteRecord() {
       this.$vs.dialog({
         type: 'confirm',
         color: 'danger',
         title: "Confirm Delete",
-        text: "You are about to delete \"".concat(this.params.data.username, "\""),
+        text: "You are about to delete \"".concat(this.params.data.user_name, "\""),
         accept: this.deleteRecord,
         acceptText: "Delete"
       });
     },
     deleteRecord: function deleteRecord() {
+      var _this = this;
+
       /* Below two lines are just for demo purpose */
       this.showDeleteSuccess();
       /* UnComment below lines for enabling true flow if deleting user */
-      // this.$store.dispatch("userManagement/removeRecord", this.params.data.id)
-      //   .then(()   => { this.showDeleteSuccess() })
-      //   .catch(err => { console.error(err)       })
+
+      this.$store.dispatch("userManagement/removeRecord", this.params.data.id).then(function () {
+        _this.showDeleteSuccess();
+      }).catch(function (err) {
+        console.error(err);
+      });
     },
     showDeleteSuccess: function showDeleteSuccess() {
       this.$vs.notify({
@@ -492,7 +495,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'CellRendererLink',
   computed: {
     url: function url() {
-      return "/apps/user/user-view/268"; // Below line will be for actual product
+      return "/user/user-view/" + this.params.data.id; // Below line will be for actual product
       // Currently it's commented due to demo purpose - Above url is for demo purpose
       // return "/apps/user/user-view/" + this.params.data.id
     }
@@ -704,22 +707,22 @@ var render = function() {
               { staticClass: "vx-col md:w-1/4 sm:w-1/2 w-full" },
               [
                 _c("label", { staticClass: "text-sm opacity-75" }, [
-                  _vm._v("Role")
+                  _vm._v("UserType")
                 ]),
                 _vm._v(" "),
                 _c("v-select", {
                   staticClass: "mb-4 md:mb-0",
                   attrs: {
-                    options: _vm.roleOptions,
+                    options: _vm.user_typeOptions,
                     clearable: false,
                     dir: _vm.$vs.rtl ? "rtl" : "ltr"
                   },
                   model: {
-                    value: _vm.roleFilter,
+                    value: _vm.user_typeFilter,
                     callback: function($$v) {
-                      _vm.roleFilter = $$v
+                      _vm.user_typeFilter = $$v
                     },
-                    expression: "roleFilter"
+                    expression: "user_typeFilter"
                   }
                 })
               ],
@@ -785,21 +788,21 @@ var render = function() {
               { staticClass: "vx-col md:w-1/4 sm:w-1/2 w-full" },
               [
                 _c("label", { staticClass: "text-sm opacity-75" }, [
-                  _vm._v("Department")
+                  _vm._v("Gender")
                 ]),
                 _vm._v(" "),
                 _c("v-select", {
                   attrs: {
-                    options: _vm.departmentOptions,
+                    options: _vm.genderOptions,
                     clearable: false,
                     dir: _vm.$vs.rtl ? "rtl" : "ltr"
                   },
                   model: {
-                    value: _vm.departmentFilter,
+                    value: _vm.genderFilter,
                     callback: function($$v) {
-                      _vm.departmentFilter = $$v
+                      _vm.genderFilter = $$v
                     },
-                    expression: "departmentFilter"
+                    expression: "genderFilter"
                   }
                 })
               ],
@@ -1158,7 +1161,7 @@ var render = function() {
     [
       _c("vs-avatar", {
         staticClass: "flex-shrink-0 mr-2",
-        attrs: { src: _vm.params.data.avatar, size: "30px" },
+        attrs: { src: _vm.params.data.image, size: "30px" },
         on: {
           click: function($event) {
             return _vm.$router.push(_vm.url)
@@ -1322,8 +1325,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
   fetchUsers: function fetchUsers(_ref) {
     var commit = _ref.commit;
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users").then(function (response) {
-        commit('SET_USERS', response.data);
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users").then(function (response) {
+        commit('SET_USERS', response.data.data.users);
         resolve(response);
       }).catch(function (error) {
         reject(error);
@@ -1334,7 +1337,7 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
     _objectDestructuringEmpty(_ref2);
 
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/user-management/users/".concat(userId)).then(function (response) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users/".concat(userId, "/edit")).then(function (response) {
         resolve(response);
       }).catch(function (error) {
         reject(error);
@@ -1344,7 +1347,7 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
   removeRecord: function removeRecord(_ref3, userId) {
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
-      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].delete("/api/user-management/users/".concat(userId)).then(function (response) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].delete("/api/users/".concat(userId)).then(function (response) {
         commit('REMOVE_RECORD', userId);
         resolve(response);
       }).catch(function (error) {
