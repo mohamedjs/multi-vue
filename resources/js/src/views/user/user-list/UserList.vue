@@ -31,7 +31,15 @@
         </div>
       </div>
     </vx-card>
-
+    <add-new-user  :isSidebarActive="addNewDataSidebar" @closeSidebar="addNewDataSidebar = false" />
+    <vs-prompt title="Export To Excel" class="export-options" @cancle="clearFields" @accept="exportToExcel" accept-text="Export" @close="clearFields" :active.sync="activePrompt">
+        <vs-input v-model="fileName" placeholder="Enter File Name.." class="w-full" />
+        <v-select v-model="selectedFormat" :options="formats" class="my-4" />
+        <div class="flex">
+          <span class="mr-4">Cell Auto Width:</span>
+          <vs-switch v-model="cellAutoWidth">Cell Auto Width</vs-switch>
+        </div>
+    </vs-prompt>
     <div class="vx-card p-6">
 
       <div class="flex flex-wrap items-center">
@@ -62,6 +70,13 @@
           </vs-dropdown>
         </div>
 
+        <!-- Add New User -->
+          <div class="p-3 rounded-lg flex cursor-pointer items-center justify-between text-lg font-medium text-base text-primary border border-solid border-primary" @click="addNewDataSidebar = true">
+              <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
+              <span class="ml-2 text-base text-primary">Add New</span>
+          </div>
+
+
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
           <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4" v-model="searchQuery" @input="updateSearchQuery" placeholder="Search..." />
           <!-- <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button> -->
@@ -77,28 +92,14 @@
             <vs-dropdown-menu>
 
               <vs-dropdown-item>
-                <span class="flex items-center">
+                <span class="flex items-center" @click="delet_all_selected()">
                   <feather-icon icon="TrashIcon" svgClasses="h-4 w-4" class="mr-2" />
                   <span>Delete</span>
                 </span>
               </vs-dropdown-item>
 
               <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="ArchiveIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>Archive</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="FileIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>Print</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
+                <span class="flex items-center" @click="activePrompt=true">
                   <feather-icon icon="SaveIcon" svgClasses="h-4 w-4" class="mr-2" />
                   <span>CSV</span>
                 </span>
@@ -123,6 +124,7 @@
         :animateRows="true"
         :floatingFilter="true"
         :pagination="true"
+        :rowMultiSelectWithClick="true"
         :paginationPageSize="paginationPageSize"
         :suppressPaginationPanel="true"
         :enableRtl="$vs.rtl">
@@ -151,13 +153,13 @@ import CellRendererLink from "./cell-renderer/CellRendererLink.vue"
 import CellRendererStatus from "./cell-renderer/CellRendererStatus.vue"
 import CellRendererVerified from "./cell-renderer/CellRendererVerified.vue"
 import CellRendererActions from "./cell-renderer/CellRendererActions.vue"
-
+import AddNewUser from './AddNewUser.vue';
 
 export default {
   components: {
     AgGridVue,
     vSelect,
-
+    AddNewUser,
     // Cell Renderer
     CellRendererLink,
     CellRendererStatus,
@@ -171,35 +173,42 @@ export default {
       user_typeFilter: { label: 'All', value: 'all' },
       user_typeOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Admin', value: '2' },
-        { label: 'User', value: '4' },
-        { label: 'Staff', value: '3' },
+        { label: 'Admin', value: 'admin' },
+        { label: 'User', value: 'user' },
+        { label: 'Staff', value: 'staff' },
       ],
 
       statusFilter: { label: 'All', value: 'all' },
       statusOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Active', value: '1' },
-        { label: 'Deactivated', value: '3' },
-        { label: 'Blocked', value: '2' },
+        { label: 'Active', value: 'active' },
+        { label: 'Deactivated', value: 'deactivated' },
+        { label: 'Blocked', value: 'blocked' },
       ],
 
       isVerifiedFilter: { label: 'All', value: 'all' },
       isVerifiedOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Yes', value: '1' },
-        { label: 'No', value: '0' },
+        { label: 'Yes', value: 'yes' },
+        { label: 'No', value: 'no' },
       ],
 
       genderFilter: { label: 'All', value: 'all' },
       genderOptions: [
         { label: 'All', value: 'all' },
-        { label: 'Male', value: '1' },
-        { label: 'Female', value: '2' },
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' },
       ],
 
       searchQuery: "",
-
+      addNewDataSidebar: false,
+      formats:["xlsx", "csv", "txt"] ,
+      cellAutoWidth: true,
+      selectedFormat: "xlsx",
+      headerTitle: ["Name",'UserName',"Email", "Phone",'Status','Gender', 'Birth Day','UserType','Verified'],
+      headerVal: ["name",'user_name',"email", "phone",'status','gender','bod','user_type','verified'],
+      fileName: "",
+      activePrompt: false,
       // AgGrid
       gridApi: null,
       gridOptions: {},
@@ -348,6 +357,67 @@ export default {
     },
     updateSearchQuery(val) {
       this.gridApi.setQuickFilter(val)
+    },
+    delet_all_selected(){
+      var _this = this
+      console.log(this.gridApi.getSelectedRows());
+      let result = this.gridApi.getSelectedRows().map(a => a.id);
+      console.log(result);
+      var delete_data = new FormData()
+      delete_data.append('all_data',result)
+      delete_data.append('table','users')
+      this.$http.post('/api/delete_all/',delete_data)
+      .then(function(response){
+        _this.$vs.notify({
+          title:'Success',
+          text: response.data.message,
+          color:(response.data.status == 'success')?'success':'danger',
+          iconPack: 'feather',
+          icon:(response.data.status == 'success')?'icon-success-circle':'icon-alert-circle'})
+          _this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
+          // _this.alertActive= true
+          // _this.alertSuccess = response.data.message
+          //_this.currentx = _this.currentx + 1
+       })
+      .catch(function (error) {
+        _this.$vs.notify({
+          title:'Error',
+          text: error,
+          color:'danger',
+          iconPack: 'feather',
+          icon:'icon-alert-circle'})
+      });
+    },
+    exportToExcel() {
+      import('@/vendor/Export2Excel').then(excel => {
+        const list = this.gridApi.getSelectedRows()
+        const data = this.formatJson(this.headerVal, list)
+        excel.export_json_to_excel({
+          header: this.headerTitle,
+          data,
+          filename: this.fileName,
+          autoWidth: this.cellAutoWidth,
+          bookType: this.selectedFormat
+        })
+        this.clearFields()
+      })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        // Add col name which needs to be translated
+        // if (j === 'timestamp') {
+        //   return parseTime(v[j])
+        // } else {
+        //   return v[j]
+        // }
+
+        return v[j]
+      }))
+    },
+    clearFields() {
+      this.fileName = ""
+      this.cellAutoWidth = true
+      this.selectedFormat = "xlsx"
     }
   },
   mounted() {

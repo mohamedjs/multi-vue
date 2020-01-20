@@ -10,67 +10,33 @@
 <template>
   <div id="user-edit-tab-info">
     <div class="vx-row">
-      <div class="vx-col w-full md:w-1/2">
-
-        <!-- Col Header -->
-        <div class="flex items-end">
-          <feather-icon icon="UserIcon" class="mr-2" svgClasses="w-5 h-5" />
-          <span class="leading-none font-medium">Personal Information</span>
-        </div>
-
-        <!-- Col Content -->
-        <div>
-
-          <!-- DOB -->
-          <div class="mt-4">
-            <label class="text-sm">Birth Date</label>
-            <flat-pickr v-model="data_local.dob" :config="{ dateFormat: 'd F Y', maxDate: new Date() }" class="w-full" v-validate="'required'" name="dob" />
-            <span class="text-danger text-sm"  v-show="errors.has('dob')">{{ errors.first('dob') }}</span>
-          </div>
-
-          <vs-input class="w-full mt-4" label="Mobile" v-model="data_local.mobile" v-validate="{regex: '^\\+?([0-9]+)$' }" name="mobile" />
-          <span class="text-danger text-sm"  v-show="errors.has('mobile')">{{ errors.first('mobile') }}</span>
-
-          <vs-input class="w-full mt-4" label="Website" v-model="data_local.website" v-validate="'url:require_protocol'" name="website" data-vv-as="field" />
-          <span class="text-danger text-sm"  v-show="errors.has('website')">{{ errors.first('website') }}</span>
-
-          <!-- Gender -->
-          <div class="mt-4">
-            <label class="text-sm">Gender</label>
-            <div class="mt-2">
-              <vs-radio v-model="data_local.gender" vs-value="male" class="mr-4">Male</vs-radio>
-              <vs-radio v-model="data_local.gender" vs-value="female" class="mr-4">Female</vs-radio>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
       <!-- Address Col -->
-      <div class="vx-col w-full md:w-1/2">
+      <div class="vx-col w-full md:w-1/2" v-for="(city,index) in data_local.cities.slice(0,4)" :key="city.id">
 
           <!-- Col Header -->
           <div class="flex items-end md:mt-0 mt-base">
             <feather-icon icon="MapPinIcon" class="mr-2" svgClasses="w-5 h-5" />
-            <span class="leading-none font-medium">Address</span>
+            <span class="leading-none font-medium">Address {{index + 1}}</span>
           </div>
 
           <!-- Col Content -->
-          <div>
-            <vs-input class="w-full mt-4" label="Address Line 1" v-model="data_local.cities.pivot.address" v-validate="'required'" name="addd_line_1" />
+          <div v-if="city">
+            <vs-input class="w-full mt-4" label="Address Line" v-model="city.pivot.address" v-validate="'required'" name="addd_line_1" />
             <span class="text-danger text-sm"  v-show="errors.has('addd_line_1')">{{ errors.first('addd_line_1') }}</span>
 
-            <vs-input class="w-full mt-4" label="City" v-model="data_local.cities.name" v-validate="'required|alpha'" name="city" />
+            <vs-input class="w-full mt-4" label="City" v-model="city.name" v-validate="'required|alpha'" name="city" />
             <span class="text-danger text-sm"  v-show="errors.has('city')">{{ errors.first('city') }}</span>
 
-            <vs-input class="w-full mt-4" label="State" v-model="data_local.cities.state.name" v-validate="'required|alpha'" name="state" />
+            <vs-input class="w-full mt-4" label="State" v-model="city.state.name" v-validate="'required|alpha'" name="state" />
             <span class="text-danger text-sm"  v-show="errors.has('state')">{{ errors.first('state') }}</span>
 
-            <vs-input class="w-full mt-4" label="Country" v-model="data_local.cities.state.country.name" v-validate="'required|alpha'" name="country" />
+            <vs-input class="w-full mt-4" label="Country" v-model="city.state.country.name" v-validate="'required|alpha'" name="country" />
             <span class="text-danger text-sm"  v-show="errors.has('country')">{{ errors.first('country') }}</span>
 
           </div>
+          <br v-if="city.id%2">
       </div>
+
     </div>
 
     <!-- Save & Reset Button -->
@@ -86,14 +52,10 @@
 </template>
 
 <script>
-import flatPickr from 'vue-flatpickr-component'
-import 'flatpickr/dist/flatpickr.css'
 import vSelect from 'vue-select'
-
 export default {
   components: {
-    vSelect,
-    flatPickr
+    vSelect
   },
   props: {
     data: {

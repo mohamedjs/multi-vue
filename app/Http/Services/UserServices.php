@@ -33,7 +33,7 @@ class UserServices
             $user = new User();
         }
         $data = $request->all();
-        if($request->has('image')){
+        if($request->hasFile('image')){
           $img = $this->uploaderService->upload($request->image, "users") ;
           $data = $request->except(['image']);
           $data['image'] = $img;

@@ -2,10 +2,6 @@
 
 use Faker\Generator as Faker;
 
-$path = base_path() . '/uploads/product/main_image/';
-if (!\File::exists($path)) {
-    \File::makeDirectory($path, 0777, true);
-}
 $price = random_int(100,10000);
 $factory->define(App\Models\Product::class, function (Faker $faker) use ($path,$price){
     return [
@@ -13,12 +9,19 @@ $factory->define(App\Models\Product::class, function (Faker $faker) use ($path,$
         'description' =>$faker->text(random_int(30,1000)) ,
         'short_description' =>$faker->text(random_int(30,100)) ,
         'discount' => 15,
+        'main_image' => $faker->imageUrl() ,
         'price' => $price,
-        'price_after_discount' => ($price - ($price * (15/100))),
+        'special_price_type' => 15,
+        'special_price' => ($price - ($price * (15/100))),
+        'special_price_start' => '02-02-2018',
+        'special_price_end' => '08-02-2018',
+        'meta_keyword' => $faker->text(random_int(30,100)) ,
+        'meta_title'=> $faker->text(random_int(30,100)),
+        'meta_description'=> $faker->text(random_int(30,100)),
+        'sku'=> $faker->text(random_int(30,50)),
         'category_id'=> App\Models\Category::whereNotNull('parent_id')->inRandomOrder()->get()[0] ,
         'brand_id'=> App\Models\Brand::inRandomOrder()->get()[0] ,
         'special' => 1,
         'active' => 1,
-        'image'  => $faker->image($path,1280,720,'technics',false)
     ];
 });

@@ -16,7 +16,7 @@
               Below line will be for actual product
               Currently it's commented due to demo purpose - Above url is for demo purpose
             */
-              this.$router.push("/user/user-edit/" + this.params.data.id).catch(() => {})
+              this.$router.push("user-edit/" + this.params.data.id).catch(() => {})
 
           },
           confirmDeleteRecord() {

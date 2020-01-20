@@ -179,18 +179,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -199,16 +187,13 @@ __webpack_require__.r(__webpack_exports__);
       user_not_found: false
     };
   },
-  computed: {
-    userAddress: function userAddress() {
-      var str = "";
-
-      for (var field in this.user_data.location) {
-        str += field + " ";
-      }
-
-      return str;
-    }
+  computed: {// userAddress() {
+    //   let str = ""
+    //   for(var field in this.user_data.location) {
+    //     str += field + " "
+    //   }
+    //   return str
+    // }
   },
   methods: {
     confirmDeleteRecord: function confirmDeleteRecord() {
@@ -216,21 +201,30 @@ __webpack_require__.r(__webpack_exports__);
         type: 'confirm',
         color: 'danger',
         title: "Confirm Delete",
-        text: "You are about to delete \"".concat(this.user_data.username, "\""),
+        text: "You are about to delete \"".concat(this.user_data.user_name, "\""),
         accept: this.deleteRecord,
         acceptText: "Delete"
       });
     },
     deleteRecord: function deleteRecord() {
+      var _this = this;
+
       /* Below two lines are just for demo purpose */
       this.$router.push({
         name: 'app-user-list'
       });
       this.showDeleteSuccess();
       /* UnComment below lines for enabling true flow if deleting user */
-      // this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
-      //   .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
-      //   .catch(err => { console.error(err)       })
+
+      this.$store.dispatch("userManagement/removeRecord", this.user_data.id).then(function () {
+        _this.$router.push({
+          name: 'app-user-list'
+        });
+
+        _this.showDeleteSuccess();
+      }).catch(function (err) {
+        console.error(err);
+      });
     },
     showDeleteSuccess: function showDeleteSuccess() {
       this.$vs.notify({
@@ -241,7 +235,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     // Register Module UserManagement Module
     if (!_store_user_management_moduleUserManagement_js__WEBPACK_IMPORTED_MODULE_0__["default"].isRegistered) {
@@ -251,10 +245,10 @@ __webpack_require__.r(__webpack_exports__);
 
     var userId = this.$route.params.userId;
     this.$store.dispatch("userManagement/fetchUser", userId).then(function (res) {
-      _this.user_data = res.data;
+      _this2.user_data = res.data.data;
     }).catch(function (err) {
       if (err.response.status === 404) {
-        _this.user_not_found = true;
+        _this2.user_not_found = true;
         return;
       }
 
@@ -391,7 +385,7 @@ var render = function() {
                         _c("div", { staticClass: "img-container mb-4" }, [
                           _c("img", {
                             staticClass: "rounded w-full",
-                            attrs: { src: _vm.user_data.avatar }
+                            attrs: { src: _vm.user_data.image }
                           })
                         ])
                       ]
@@ -410,7 +404,7 @@ var render = function() {
                               _vm._v("Username")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.username))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.user_name))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -453,15 +447,7 @@ var render = function() {
                               _vm._v("Role")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.role))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Company")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.company))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.user_type))])
                           ])
                         ])
                       ]
@@ -528,7 +514,7 @@ var render = function() {
                               _vm._v("Birth Date")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.dob))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.bod))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -536,7 +522,7 @@ var render = function() {
                               _vm._v("Mobile")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.user_data.mobile))])
+                            _c("td", [_vm._v(_vm._s(_vm.user_data.phone))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -549,116 +535,10 @@ var render = function() {
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Languages")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.languages_known.join(", "))
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
                               _vm._v("Gender")
                             ]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.user_data.gender))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Contact")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.contact_options.join(", "))
-                              )
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col lg:w-1/2 w-full" },
-                  [
-                    _c(
-                      "vx-card",
-                      {
-                        staticClass: "mb-base",
-                        attrs: { title: "Social Links" }
-                      },
-                      [
-                        _c("table", [
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Twitter")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.twitter))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Facebook")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.social_links.facebook)
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Instagram")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.user_data.social_links.instagram)
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Github")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.github))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("CodePen")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.codepen))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { staticClass: "font-semibold" }, [
-                              _vm._v("Slack")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.user_data.social_links.slack))
-                            ])
                           ])
                         ])
                       ]
@@ -666,101 +546,6 @@ var render = function() {
                   ],
                   1
                 )
-              ]),
-              _vm._v(" "),
-              _c("vx-card", [
-                _c("div", { staticClass: "vx-row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "vx-col w-full" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "flex items-end px-3" },
-                        [
-                          _c("feather-icon", {
-                            staticClass: "mr-2",
-                            attrs: { svgClasses: "w-6 h-6", icon: "LockIcon" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            { staticClass: "font-medium text-lg leading-none" },
-                            [_vm._v("Permissions")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("vs-divider")
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "block overflow-x-auto" }, [
-                  _c(
-                    "table",
-                    { staticClass: "w-full permissions-table" },
-                    [
-                      _c(
-                        "tr",
-                        _vm._l(
-                          ["Module", "Read", "Write", "Create", "Delete"],
-                          function(heading) {
-                            return _c(
-                              "th",
-                              {
-                                key: heading,
-                                staticClass:
-                                  "font-semibold text-base text-left px-3 py-2"
-                              },
-                              [_vm._v(_vm._s(heading))]
-                            )
-                          }
-                        ),
-                        0
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.user_data.permissions, function(val, name) {
-                        return _c(
-                          "tr",
-                          { key: name },
-                          [
-                            _c("td", { staticClass: "px-3 py-2" }, [
-                              _vm._v(_vm._s(name))
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(val, function(permission, name) {
-                              return _c(
-                                "td",
-                                {
-                                  key: name + permission,
-                                  staticClass: "px-3 py-2"
-                                },
-                                [
-                                  _c("vs-checkbox", {
-                                    staticClass: "pointer-events-none",
-                                    model: {
-                                      value: val[name],
-                                      callback: function($$v) {
-                                        _vm.$set(val, name, $$v)
-                                      },
-                                      expression: "val[name]"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ])
               ])
             ],
             1

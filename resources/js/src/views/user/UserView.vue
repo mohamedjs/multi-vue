@@ -27,7 +27,7 @@
           <!-- Avatar Col -->
           <div class="vx-col" id="avatar-col">
             <div class="img-container mb-4">
-              <img :src="user_data.avatar" class="rounded w-full" />
+              <img :src="user_data.image" class="rounded w-full" />
             </div>
           </div>
 
@@ -36,7 +36,7 @@
             <table>
               <tr>
                 <td class="font-semibold">Username</td>
-                <td>{{ user_data.username }}</td>
+                <td>{{ user_data.user_name }}</td>
               </tr>
               <tr>
                 <td class="font-semibold">Name</td>
@@ -59,11 +59,7 @@
               </tr>
               <tr>
                 <td class="font-semibold">Role</td>
-                <td>{{ user_data.role }}</td>
-              </tr>
-              <tr>
-                <td class="font-semibold">Company</td>
-                <td>{{ user_data.company }}</td>
+                <td>{{ user_data.user_type }}</td>
               </tr>
             </table>
           </div>
@@ -83,33 +79,25 @@
             <table>
               <tr>
                 <td class="font-semibold">Birth Date</td>
-                <td>{{ user_data.dob }}</td>
+                <td>{{ user_data.bod }}</td>
               </tr>
               <tr>
                 <td class="font-semibold">Mobile</td>
-                <td>{{ user_data.mobile }}</td>
+                <td>{{ user_data.phone }}</td>
               </tr>
               <tr>
                 <td class="font-semibold">Website</td>
                 <td>{{ user_data.website }}</td>
               </tr>
               <tr>
-                <td class="font-semibold">Languages</td>
-                <td>{{ user_data.languages_known.join(", ") }}</td>
-              </tr>
-              <tr>
                 <td class="font-semibold">Gender</td>
                 <td>{{ user_data.gender }}</td>
-              </tr>
-              <tr>
-                <td class="font-semibold">Contact</td>
-                <td>{{ user_data.contact_options.join(", ") }}</td>
               </tr>
             </table>
           </vx-card>
         </div>
 
-        <div class="vx-col lg:w-1/2 w-full">
+        <!-- <div class="vx-col lg:w-1/2 w-full">
           <vx-card title="Social Links" class="mb-base">
             <table>
               <tr>
@@ -138,11 +126,16 @@
               </tr>
             </table>
           </vx-card>
-        </div>
+        </div> -->
       </div>
 
       <!-- Permissions -->
-      <vx-card>
+      <!--
+        You can also use `Object.keys(Object.values(data_local.permissions)[0])` this logic if you consider,
+        our data structure. You just have to loop over above variable to get table headers.
+        Below we made it simple. So, everyone can understand.
+       -->
+      <!-- <vx-card>
 
         <div class="vx-row">
           <div class="vx-col w-full">
@@ -157,11 +150,6 @@
         <div class="block overflow-x-auto">
           <table class="w-full permissions-table">
             <tr>
-              <!--
-                You can also use `Object.keys(Object.values(data_local.permissions)[0])` this logic if you consider,
-                our data structure. You just have to loop over above variable to get table headers.
-                Below we made it simple. So, everyone can understand.
-               -->
               <th class="font-semibold text-base text-left px-3 py-2" v-for="heading in ['Module', 'Read', 'Write', 'Create', 'Delete']" :key="heading">{{ heading }}</th>
             </tr>
 
@@ -174,7 +162,7 @@
           </table>
         </div>
 
-      </vx-card>
+      </vx-card> -->
     </div>
   </div>
 </template>
@@ -190,13 +178,13 @@ export default {
     }
   },
   computed: {
-    userAddress() {
-      let str = ""
-      for(var field in this.user_data.location) {
-        str += field + " "
-      }
-      return str
-    }
+    // userAddress() {
+    //   let str = ""
+    //   for(var field in this.user_data.location) {
+    //     str += field + " "
+    //   }
+    //   return str
+    // }
   },
   methods: {
     confirmDeleteRecord() {
@@ -204,7 +192,7 @@ export default {
         type: 'confirm',
         color: 'danger',
         title: `Confirm Delete`,
-        text: `You are about to delete "${this.user_data.username}"`,
+        text: `You are about to delete "${this.user_data.user_name}"`,
         accept: this.deleteRecord,
         acceptText: "Delete"
       })
@@ -215,9 +203,9 @@ export default {
       this.showDeleteSuccess()
 
       /* UnComment below lines for enabling true flow if deleting user */
-      // this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
-      //   .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
-      //   .catch(err => { console.error(err)       })
+      this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
+        .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
+        .catch(err => { console.error(err)       })
     },
     showDeleteSuccess() {
       this.$vs.notify({
@@ -236,7 +224,7 @@ export default {
 
     const userId = this.$route.params.userId
     this.$store.dispatch("userManagement/fetchUser", userId)
-      .then(res => { this.user_data = res.data })
+      .then(res => { this.user_data = res.data.data })
       .catch(err => {
         if(err.response.status === 404) {
           this.user_not_found = true

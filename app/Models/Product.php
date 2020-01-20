@@ -9,8 +9,9 @@ class Product extends Model
     use Translatable;
     protected $table="products";
   //use ForceDeletes;
-  protected $fillable = ['title','main_image','price','discount','price_after_discount',
-                        'special','active','description','short_description','category_id','brand_id','stock'];
+  protected $fillable = ['title','main_image','price','special_price_type','special_price',
+                        'special','active','description','short_description','special_price_end','special_price_start',
+                        'meta_keyword','meta_title','meta_description','sku','category_id','brand_id','stock','min_stock'];
   public function getPriceAttribute($value){
     return (int) $value;
   }
@@ -52,17 +53,6 @@ class Product extends Model
   public function images()
   {
     return $this->hasMany('App\Models\ProductImage','product_id','id');
-  }
-
-  public function operators()
-  {
-    return $this->belongsToMany('App\Models\Operator','posts','product_id','operator_id')
-    ->withPivot('id','published_date','active','url','user_id')->withTimestamps();
-  }
-
-  public function posts()
-  {
-    return $this->hasMany('App\Models\Post','product_id','id');
   }
 
   public function client_rates()

@@ -28,7 +28,7 @@
 
     <v-nav-menu
       :navMenuItems = "navMenuItems"
-      title         = "Vuexy"
+      title         = "L-Ecommerce"
       parent        = ".layout--main" />
 
     <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
@@ -313,4 +313,3 @@ export default {
 }
 
 </script>
-

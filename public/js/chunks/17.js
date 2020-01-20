@@ -174,7 +174,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
-            thisIns.$emit('update', response.data.data);
+            thisIns.$router.push({
+              name: 'app-user-list'
+            });
             thisIns.$vs.notify({
               title: 'Success',
               text: response.data.status,
@@ -670,7 +672,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     exportToExcel: function exportToExcel() {
       var _this2 = this;
 
-      Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! @/vendor/Export2Excel */ "./resources/js/src/vendor/Export2Excel.js")).then(function (excel) {
+      Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! @/vendor/Export2Excel */ "./resources/js/src/vendor/Export2Excel.js")).then(function (excel) {
         var list = _this2.selected;
 
         var data = _this2.formatJson(_this2.headerVal, list);

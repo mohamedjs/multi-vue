@@ -5632,7 +5632,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "vx-logo-text text-primary" }, [
-                  _vm._v("Vuexy")
+                  _vm._v("L-Ecommerce")
                 ])
               ],
               1
@@ -7506,7 +7506,7 @@ var render = function() {
       _c("v-nav-menu", {
         attrs: {
           navMenuItems: _vm.navMenuItems,
-          title: "Vuexy",
+          title: "L-Ecommerce",
           parent: ".layout--main"
         }
       }),

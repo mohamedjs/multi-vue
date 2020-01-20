@@ -14,7 +14,7 @@ class AddColumToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->Integer('stock')->after('brand_id')->nullable();
+            //$table->Integer('stock')->after('brand_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumToProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('stock');
+          //  $table->dropColumn('stock');
         });
     }
 }

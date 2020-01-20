@@ -99,8 +99,9 @@ export default {
               if(response.data.status == "success")
                 thisIns.er_active   = false
                 thisIns.errorActive = false
+                thisIns.$emit('closeSidebar');
                 thisIns.SError=[]
-                thisIns.$router.push({name:'app-user-list'})
+                thisIns.$router.push("user-view/"+response.data.data.id)
                 thisIns.$vs.notify({
                   title:'Success',
                   text: response.data.status,

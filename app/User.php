@@ -99,29 +99,29 @@ class User extends Authenticatable
             $value = 'blocked';
         }
         if($value == 3 || !$value){
-            $value = 'non active';
+            $value = 'deactivated';
         }
         return $value;
     }
 
     public function getGenderAttribute($value){
         if($value == 1 || !$value){
-            $value = 'Male';
+            $value = 'male';
         }
         if($value == 2){
-            $value = 'Female';
+            $value = 'female';
         }
         return $value;
     }
 
     public function getUserTypeAttribute($value){
-        if($value == 1){
+        if($value == 2){
             $value = 'Admin';
         }
-        if($value == 2){
+        if($value == 3){
             $value = 'Staff';
         }
-        if($value == 3 || !$value){
+        if($value == 4 || !$value){
             $value = 'User';
         }
         return $value;
