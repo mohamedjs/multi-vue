@@ -43,10 +43,10 @@ class DatabaseSeeder extends Seeder
         //$this->call(FactorySeeder::class);
         //$this->call(MigrationsTableSeeder::class);
         factory(App\User::class,40)->create();
-        //factory(App\Models\UserAddress::class, 10)->create();
+        factory(App\Models\UserAddress::class, 10)->create();
         factory(App\Models\Product::class, 50)->create();
         factory(App\Models\ProductImage::class, 30)->create();
-        factory(App\Models\Order::class, 300)->create();
+        factory(App\Models\Order::class, 100)->create();
         //factory(App\ClientCarts::class, 20)->create();
         $this->call(AdvertisementsTableSeeder::class);
         $this->call(CouponsTableSeeder::class);
