@@ -137,6 +137,21 @@ const router = new Router({
             path: 'languages',
             name: 'languages',
             component: () => import('./views/languages/languages.vue'),
+          },
+          {
+            path: 'products',
+            name: 'products',
+            component: () => import('./views/products/Products.vue'),
+          },
+          {
+            path: 'products-create',
+            name: 'product-add',
+            component: () => import('./views/products/ProductForm.vue'),
+          },
+          {
+            path: 'products-update/:productId',
+            name: 'product-update',
+            component: () => import('./views/products/ProductForm.vue'),
           }
         ]
       },

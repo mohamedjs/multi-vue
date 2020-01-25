@@ -44,10 +44,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -56,7 +56,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-perfect-scrollbar */ "./node_modules/vue-perfect-scrollbar/dist/index.js");
 /* harmony import */ var vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/views/ServerError.vue */ "./resources/js/src/views/ServerError.vue");
-/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -93,22 +92,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    isUsers: '',
+    isBrandss: '',
     isSidebarActive: {
       type: Boolean,
       required: true
@@ -117,12 +105,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   data: function data() {
     return {
       data: new FormData(),
-      coupon: {
-        'number': 1,
-        'value': '',
-        'expire_date': new Date()
+      brand: {
+        'title': [],
+        'image': ''
       },
       SError: [],
+      langs: [],
       errorActive: false,
       er_active: false,
       settings: {
@@ -147,8 +135,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   methods: {
     initValues: function initValues() {
-      this.coupon.number = '';
-      this.coupon.expire_date = '';
+      this.brand.title = [];
+      this.$refs.fileUpload.srcs = [];
     },
     submitForm: function submitForm() {
       var thisIns = this;
@@ -159,11 +147,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
               'content-type': 'multipart/form-data'
             }
           };
-          thisIns.data.append('value', thisIns.coupon.value);
-          thisIns.data.append('number', thisIns.coupon.number);
-          thisIns.data.append('expire_date', new Date(thisIns.coupon.expire_date).toISOString().slice(0, 10)); //console.log();
 
-          thisIns.$http.post('api/coupons', thisIns.data, config).then(function (response) {
+          for (var _i = 0, _Object$entries = Object.entries(thisIns.brand.title); _i < _Object$entries.length; _i++) {
+            var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                key = _Object$entries$_i[0],
+                value = _Object$entries$_i[1];
+
+            thisIns.data.append('title' + '[' + key + ']', thisIns.brand.title[key]);
+          }
+
+          thisIns.$http.post('api/brands', thisIns.data, config).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -179,10 +172,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             if (error.response.status == 422) {
               thisIns.SError = [];
 
-              for (var _i = 0, _Object$entries = Object.entries(error.response.data.errors); _i < _Object$entries.length; _i++) {
-                var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-                    key = _Object$entries$_i[0],
-                    value = _Object$entries$_i[1];
+              for (var _i2 = 0, _Object$entries2 = Object.entries(error.response.data.errors); _i2 < _Object$entries2.length; _i2++) {
+                var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+                    key = _Object$entries2$_i[0],
+                    value = _Object$entries2$_i[1];
 
                 thisIns.SError.push(value);
               }
@@ -217,29 +210,47 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           });
         }
       });
+    },
+    uploadFiles: function uploadFiles() {
+      var files = this.$refs.fileUpload.$refs.fileInput.files;
+      console.log(this.$refs.fileUpload); // for (let i = 0; i < files.length; i++) {
+
+      this.data.append('image', files[0]); // }
     }
+  },
+  created: function created() {
+    var thisIns = this;
+    this.$http.get('/api/languages').then(function (response) {
+      thisIns.langs = response.data.data.languages.data;
+    }).catch(function (error) {
+      thisIns.$vs.notify({
+        title: 'Error',
+        text: error,
+        color: 'danger',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle'
+      });
+    });
   },
   components: {
     VuePerfectScrollbar: vue_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0___default.a,
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__["default"],
     ServerError: _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/coupons.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/brands.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddNewCoupon_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddNewCoupon.vue */ "./resources/js/src/views/coupons/AddNewCoupon.vue");
-/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-/* harmony import */ var _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/views/ServerError.vue */ "./resources/js/src/views/ServerError.vue");
+/* harmony import */ var _AddNewBrand_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddNewBrand.vue */ "./resources/js/src/views/brands/AddNewBrand.vue");
+/* harmony import */ var _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/views/ServerError.vue */ "./resources/js/src/views/ServerError.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -370,36 +381,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AddNewCoupon: _AddNewCoupon_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ServerError: _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AddNewBrand: _AddNewBrand_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ServerError: _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     var _ref;
 
     return _ref = {
       selected: [],
-      coupons: [],
+      brands: [],
       SError: []
-    }, _defineProperty(_ref, "selected", []), _defineProperty(_ref, "couponId", ''), _defineProperty(_ref, "DataEdit", new FormData()), _defineProperty(_ref, "coupon", {
-      'number': 1,
-      'value': '',
-      'expire_date': new Date()
-    }), _defineProperty(_ref, "url", '/api/coupons'), _defineProperty(_ref, "currentx", 1), _defineProperty(_ref, "popupActive", false), _defineProperty(_ref, "alertActive", false), _defineProperty(_ref, "errorActive", false), _defineProperty(_ref, "er_active", false), _defineProperty(_ref, "alertSuccess", 'Alert'), _defineProperty(_ref, "searchx", ''), _defineProperty(_ref, "itemsPerPage", 4), _defineProperty(_ref, "total", 1), _defineProperty(_ref, "isMounted", false), _defineProperty(_ref, "addNewDataSidebar", false), _ref;
+    }, _defineProperty(_ref, "selected", []), _defineProperty(_ref, "brandId", ''), _defineProperty(_ref, "DataEdit", new FormData()), _defineProperty(_ref, "brand", {
+      'title': [],
+      'image': ''
+    }), _defineProperty(_ref, "url", '/api/brands'), _defineProperty(_ref, "currentx", 1), _defineProperty(_ref, "searchx", ''), _defineProperty(_ref, "popupActive", false), _defineProperty(_ref, "alertActive", false), _defineProperty(_ref, "errorActive", false), _defineProperty(_ref, "er_active", false), _defineProperty(_ref, "alertSuccess", 'Alert'), _defineProperty(_ref, "itemsPerPage", 4), _defineProperty(_ref, "total", 1), _defineProperty(_ref, "isMounted", false), _defineProperty(_ref, "addNewDataSidebar", false), _ref;
   },
   computed: {
     currentPage: function currentPage() {
@@ -411,19 +410,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    onChildUpdate: function onChildUpdate(coupon) {
+    onChildUpdate: function onChildUpdate(brand) {
       this.alertActive = true;
-      this.alertSuccess = 'Coupon Added SuccessFully';
-      this.getCoupon();
+      this.alertSuccess = 'Brand Added SuccessFully';
+      this.getBrand();
     },
     edit: function edit(id) {
       var _this = this;
 
-      this.couponId = id;
-      this.$http.get('/api/coupons/' + id + '/edit').then(function (response) {
-        _this.coupon.name = response.data.data.name;
-        _this.coupon.code = response.data.data.code;
-        _this.coupon.phonecode = response.data.data.phonecode;
+      this.brandId = id;
+      this.$http.get('/api/brands/' + id + '/edit').then(function (response) {
+        _this.brand.title = response.data.data.langs;
+        _this.$refs.fileUpload.srcs = [{
+          src: response.data.data.image,
+          orientation: 'm',
+          type: 'image',
+          percent: null,
+          error: false,
+          remove: null
+        }];
         _this.popupActive = true;
       }).catch(function (error) {
         _this.$vs.notify({
@@ -435,10 +440,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
-    deleteCoupon: function deleteCoupon(id) {
+    deleteBrand: function deleteBrand(id) {
       var _this = this;
 
-      this.$http.delete('/api/coupons/' + id).then(function (response) {
+      this.$http.delete('/api/brands/' + id).then(function (response) {
         _this.$vs.notify({
           title: 'Success',
           text: response.data.status,
@@ -450,7 +455,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.alertActive = true;
         _this.alertSuccess = response.data.message;
 
-        _this.getCoupon(_this.currentx); //_this.currentx = _this.currentx + 1
+        _this.getBrand(_this.currentx); //_this.currentx = _this.currentx + 1
 
       }).catch(function (error) {
         _this.$vs.notify({
@@ -462,7 +467,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
-    updateCoupon: function updateCoupon() {
+    updateBrand: function updateBrand() {
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
@@ -471,11 +476,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               'content-type': 'multipart/form-data'
             }
           };
-          thisIns.DataEdit.append('number', thisIns.coupon.number);
-          thisIns.DataEdit.append('value', thisIns.coupon.value);
-          thisIns.DataEdit.append('expire_date', new Date(thisIns.coupon.expire_date).toISOString().slice(0, 10));
+
+          for (var _i = 0, _Object$entries = Object.entries(thisIns.brand.title); _i < _Object$entries.length; _i++) {
+            var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                key = _Object$entries$_i[0],
+                value = _Object$entries$_i[1];
+
+            thisIns.DataEdit.append('title' + '[' + key + ']', thisIns.brand.title[key]);
+          }
+
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('api/coupons/' + thisIns.couponId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('api/brands/' + thisIns.brandId, thisIns.DataEdit, config).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;
@@ -489,15 +500,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
             thisIns.alertActive = true;
             thisIns.alertSuccess = response.data.message;
-            thisIns.getCoupon(thisIns.currentx); //thisIns.currentx = thisIns.currentx + 1
+            thisIns.getBrand(thisIns.currentx); //thisIns.currentx = thisIns.currentx + 1
           }).catch(function (error) {
             if (error.response.status == 422) {
               thisIns.SError = [];
 
-              for (var _i = 0, _Object$entries = Object.entries(error.response.data.errors); _i < _Object$entries.length; _i++) {
-                var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-                    key = _Object$entries$_i[0],
-                    value = _Object$entries$_i[1];
+              for (var _i2 = 0, _Object$entries2 = Object.entries(error.response.data.errors); _i2 < _Object$entries2.length; _i2++) {
+                var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+                    key = _Object$entries2$_i[0],
+                    value = _Object$entries2$_i[1];
 
                 thisIns.SError.push(value);
               }
@@ -541,7 +552,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(result);
       var delete_data = new FormData();
       delete_data.append('all_data', result);
-      delete_data.append('table', 'coupons');
+      delete_data.append('table', 'advertisements');
       this.$http.post('/api/delete_all/', delete_data).then(function (response) {
         _this.$vs.notify({
           title: 'Success',
@@ -554,7 +565,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.alertActive = true;
         _this.alertSuccess = response.data.message;
 
-        _this.getCoupon(_this.currentx); //_this.currentx = _this.currentx + 1
+        _this.getBrand(_this.currentx); //_this.currentx = _this.currentx + 1
 
       }).catch(function (error) {
         _this.$vs.notify({
@@ -566,19 +577,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
-    showState: function showState(id) {
-      this.$router.replace('/states/' + id);
-    },
-    getCoupon: function getCoupon() {
+    getBrand: function getBrand() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.$vs.loading();
       var value = page ? page : 1;
       var thisIns = this;
       this.$http.get(this.url.indexOf('?') > -1 ? this.url + '&page=' + value + '&search=' + this.searchx : this.url + '?page=' + value + '&search=' + this.searchx).then(function (response) {
-        thisIns.coupons = response.data.data.coupons.data;
-        thisIns.currentx = response.data.data.coupons.current_page;
-        thisIns.itemsPerPage = response.data.data.coupons.per_page;
-        thisIns.total = response.data.data.coupons.last_page;
+        thisIns.brands = response.data.data.brands.data;
+        thisIns.currentx = response.data.data.brands.current_page;
+        thisIns.itemsPerPage = response.data.data.brands.per_page;
+        thisIns.total = response.data.data.brands.last_page;
         thisIns.$vs.loading.close();
       }).catch(function (error) {
         thisIns.$vs.notify({
@@ -591,14 +599,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         thisIns.$vs.loading.close();
       });
     },
+    uploadFiles: function uploadFiles() {
+      var files = this.$refs.fileUpload.$refs.fileInput.files; // for (let i = 0; i < files.length; i++) {
+
+      this.DataEdit.append('image', files[0]); // }
+    },
     handleSearch: function handleSearch() {
       this.$vs.loading();
       var thisIns = this;
       this.$http.get(this.url.indexOf('?') > -1 ? this.url + '&search=' + this.searchx : this.url + '?search=' + this.searchx).then(function (response) {
-        thisIns.coupons = response.data.data.coupons.data;
-        thisIns.currentx = response.data.data.coupons.current_page;
-        thisIns.itemsPerPage = response.data.data.coupons.per_page;
-        thisIns.total = response.data.data.coupons.last_page;
+        thisIns.brands = response.data.data.brands.data;
+        thisIns.currentx = response.data.data.brands.current_page;
+        thisIns.itemsPerPage = response.data.data.brands.per_page;
+        thisIns.total = response.data.data.brands.last_page;
         thisIns.$vs.loading.close();
       }).catch(function (error) {
         thisIns.$vs.notify({
@@ -618,10 +631,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.$vs.loading();
         var thisIns = this;
         this.$http.get(this.url.indexOf('?') > -1 ? this.url + '&page=' + value + '&search=' + this.searchx : this.url + '?page=' + value + '&search=' + this.searchx).then(function (response) {
-          thisIns.coupons = response.data.data.coupons.data;
-          thisIns.currentx = response.data.data.coupons.current_page;
-          thisIns.itemsPerPage = response.data.data.coupons.per_page;
-          thisIns.total = response.data.data.coupons.last_page;
+          thisIns.brands = response.data.data.brands.data;
+          thisIns.currentx = response.data.data.brands.current_page;
+          thisIns.itemsPerPage = response.data.data.brands.per_page;
+          thisIns.total = response.data.data.brands.last_page;
           thisIns.$vs.loading.close();
         }).catch(function (error) {
           thisIns.$vs.notify({
@@ -639,12 +652,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler(itemsPerPage) {
         this.$vs.loading();
         var thisIns = this;
-        this.url = '/api/coupons?per_page=' + itemsPerPage + '&search=' + this.searchx;
+        this.url = '/api/brands?per_page=' + itemsPerPage + '&search=' + this.searchx;
         this.$http.get(this.url).then(function (response) {
-          thisIns.coupons = response.data.data.coupons.data;
-          thisIns.currentx = response.data.data.coupons.current_page;
-          thisIns.itemsPerPage = response.data.data.coupons.per_page;
-          thisIns.total = response.data.data.coupons.last_page;
+          thisIns.brands = response.data.data.brands.data;
+          thisIns.currentx = response.data.data.brands.current_page;
+          thisIns.itemsPerPage = response.data.data.brands.per_page;
+          thisIns.total = response.data.data.brands.last_page;
           thisIns.$vs.loading.close();
         }).catch(function (error) {
           thisIns.$vs.notify({
@@ -663,10 +676,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$vs.loading();
     var thisIns = this;
     this.$http.get(this.url).then(function (response) {
-      thisIns.coupons = response.data.data.coupons.data;
-      thisIns.currentx = response.data.data.coupons.current_page;
-      thisIns.itemsPerPage = response.data.data.coupons.per_page;
-      thisIns.total = response.data.data.coupons.last_page;
+      thisIns.brands = response.data.data.brands.data;
+      thisIns.currentx = response.data.data.brands.current_page;
+      thisIns.itemsPerPage = response.data.data.brands.per_page;
+      thisIns.total = response.data.data.brands.last_page;
       thisIns.$vs.loading.close();
     }).catch(function (error) {
       thisIns.$vs.notify({
@@ -686,10 +699,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -698,17 +711,17 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".add-new-data-sidebar[data-v-6f6f7e9e]  .vs-sidebar--background {\n  z-index: 52010;\n}\n.add-new-data-sidebar[data-v-6f6f7e9e]  .vs-sidebar {\n  z-index: 52010;\n  width: 400px;\n  max-width: 90vw;\n}\n[dir] .add-new-data-sidebar[data-v-6f6f7e9e]  .vs-sidebar .img-upload {\n  margin-top: 2rem;\n}\n[dir] .add-new-data-sidebar[data-v-6f6f7e9e]  .vs-sidebar .img-upload .con-img-upload {\n  padding: 0;\n}\n.add-new-data-sidebar[data-v-6f6f7e9e]  .vs-sidebar .img-upload .con-input-upload {\n  width: 100%;\n}\n[dir] .add-new-data-sidebar[data-v-6f6f7e9e]  .vs-sidebar .img-upload .con-input-upload {\n  margin: 0;\n}\n.scroll-area--data-list-add-new[data-v-6f6f7e9e] {\n  height: calc(100% - 4.3rem);\n}", ""]);
+exports.push([module.i, ".add-new-data-sidebar[data-v-3ee807af]  .vs-sidebar--background {\n  z-index: 52010;\n}\n.add-new-data-sidebar[data-v-3ee807af]  .vs-sidebar {\n  z-index: 52010;\n  width: 400px;\n  max-width: 90vw;\n}\n[dir] .add-new-data-sidebar[data-v-3ee807af]  .vs-sidebar .img-upload {\n  margin-top: 2rem;\n}\n[dir] .add-new-data-sidebar[data-v-3ee807af]  .vs-sidebar .img-upload .con-img-upload {\n  padding: 0;\n}\n.add-new-data-sidebar[data-v-3ee807af]  .vs-sidebar .img-upload .con-input-upload {\n  width: 100%;\n}\n[dir] .add-new-data-sidebar[data-v-3ee807af]  .vs-sidebar .img-upload .con-input-upload {\n  margin: 0;\n}\n.scroll-area--data-list-add-new[data-v-3ee807af] {\n  height: calc(100% - 4.3rem);\n}", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -724,15 +737,15 @@ exports.push([module.i, "#data-list-thumb-view .vs-con-table .vs-table--header {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -754,15 +767,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./coupons.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./brands.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -846,10 +859,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -929,144 +942,74 @@ var render = function() {
             "div",
             { staticClass: "p-6" },
             [
-              _c("vs-input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: "required|min:1",
-                    expression: "'required|min:1'"
-                  }
-                ],
-                staticClass: "w-full",
-                attrs: { label: "Coupon Value", name: "value" },
-                model: {
-                  value: _vm.coupon.value,
-                  callback: function($$v) {
-                    _vm.$set(_vm.coupon, "value", $$v)
-                  },
-                  expression: "coupon.value"
-                }
+              _vm._l(_vm.langs, function(lang, index) {
+                return _c(
+                  "div",
+                  { key: index },
+                  [
+                    _c("vs-input", {
+                      directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required",
+                          expression: "'required'"
+                        }
+                      ],
+                      staticClass: "w-full",
+                      attrs: {
+                        label: "Brand Title " + lang.short_code,
+                        name: "title_" + lang.short_code
+                      },
+                      model: {
+                        value: _vm.brand.title[lang.short_code],
+                        callback: function($$v) {
+                          _vm.$set(_vm.brand.title, lang.short_code, $$v)
+                        },
+                        expression: "brand.title[lang.short_code]"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("title_" + lang.short_code),
+                            expression: "errors.has('title_'+lang.short_code)"
+                          }
+                        ],
+                        staticClass: "text-danger text-sm"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.errors.first("title_" + lang.short_code))
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
               }),
               _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("value"),
-                      expression: "errors.has('value')"
-                    }
-                  ],
-                  staticClass: "text-danger text-sm"
+              _c("vs-upload", {
+                ref: "fileUpload",
+                staticClass: "img-upload",
+                attrs: {
+                  limit: 1,
+                  "show-upload-button": false,
+                  text: "Upload Image"
                 },
-                [_vm._v(_vm._s(_vm.errors.first("value")))]
-              ),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "number" } }, [
-                _vm._v("Coupon Number")
-              ]),
-              _vm._v(" "),
-              _c("vs-input-number", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: "required|min:1|max:1000",
-                    expression: "'required|min:1|max:1000'"
+                on: {
+                  change: function($event) {
+                    return _vm.uploadFiles()
                   }
-                ],
-                staticClass: "w-full",
-                attrs: { id: "number", name: "number" },
-                model: {
-                  value: _vm.coupon.number,
-                  callback: function($$v) {
-                    _vm.$set(_vm.coupon, "number", $$v)
-                  },
-                  expression: "coupon.number"
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("number"),
-                      expression: "errors.has('number')"
-                    }
-                  ],
-                  staticClass: "text-danger text-sm"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("number")))]
-              ),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "date_format" } }, [
-                _vm._v("Coupon Expire Date")
-              ]),
-              _vm._v(" "),
-              _c(
-                "datepicker",
-                {
-                  directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "date_format:yyyy-MM-dd",
-                      expression: "'date_format:yyyy-MM-dd'"
-                    }
-                  ],
-                  attrs: {
-                    id: "date_format",
-                    name: "date_format",
-                    format: "yyyy-MM-dd"
-                  },
-                  model: {
-                    value: _vm.coupon.expire_date,
-                    callback: function($$v) {
-                      _vm.$set(_vm.coupon, "expire_date", $$v)
-                    },
-                    expression: "coupon.expire_date"
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "calender-header",
-                      attrs: { slot: "beforeCalendarHeader" },
-                      slot: "beforeCalendarHeader"
-                    },
-                    [_vm._v("\n          Choose a Date\n        ")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("date_format"),
-                      expression: "errors.has('date_format')"
-                    }
-                  ],
-                  staticClass: "text-danger text-sm"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("date_format")))]
-              )
+              })
             ],
-            1
+            2
           )
         ]
       ),
@@ -1119,10 +1062,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=template&id=66a0e31e&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/coupons/coupons.vue?vue&type=template&id=66a0e31e& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=template&id=7f8c8155&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/brands/brands.vue?vue&type=template&id=7f8c8155& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1170,7 +1113,7 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("add-new-coupon", {
+      _c("add-new-brand", {
         attrs: { isSidebarActive: _vm.addNewDataSidebar },
         on: {
           update: _vm.onChildUpdate,
@@ -1184,11 +1127,7 @@ var render = function() {
         "vs-table",
         {
           ref: "table",
-          attrs: {
-            multiple: "",
-            "max-items": _vm.itemsPerPage,
-            data: _vm.coupons
-          },
+          attrs: { multiple: "", data: _vm.brands },
           scopedSlots: _vm._u([
             {
               key: "default",
@@ -1202,30 +1141,19 @@ var render = function() {
                         "vs-tr",
                         { key: indextr, attrs: { data: tr } },
                         [
+                          _c("vs-td", { staticClass: "img-container" }, [
+                            _c("img", {
+                              staticClass: "product-img",
+                              attrs: { src: tr.image }
+                            })
+                          ]),
+                          _vm._v(" "),
                           _c("vs-td", [
                             _c(
                               "p",
                               { staticClass: "product-name font-medium" },
-                              [_vm._v(_vm._s(tr.coupon))]
+                              [_vm._v(_vm._s(tr.title))]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("vs-td", [
-                            _c("p", { staticClass: "product-category" }, [
-                              _vm._v(_vm._s(tr.value))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("vs-td", [
-                            _c("p", { staticClass: "product-price" }, [
-                              _vm._v(_vm._s(tr.expire_date))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("vs-td", [
-                            _c("p", { staticClass: "product-price" }, [
-                              _vm._v(_vm._s(tr.used))
-                            ])
                           ]),
                           _vm._v(" "),
                           _c("vs-td", [
@@ -1237,8 +1165,34 @@ var render = function() {
                                   "vx-tooltip",
                                   {
                                     attrs: {
+                                      color: "success",
+                                      text: "Edit Brand"
+                                    }
+                                  },
+                                  [
+                                    _c("vs-button", {
+                                      attrs: {
+                                        color: "success",
+                                        type: "border",
+                                        "icon-pack": "feather",
+                                        icon: "icon-edit"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.edit(tr.id)
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "vx-tooltip",
+                                  {
+                                    attrs: {
                                       color: "danger",
-                                      text: "Delete Coupon"
+                                      text: "Delete Brand"
                                     }
                                   },
                                   [
@@ -1251,7 +1205,7 @@ var render = function() {
                                       },
                                       on: {
                                         click: function($event) {
-                                          return _vm.deleteCoupon(tr.id)
+                                          return _vm.deleteBrand(tr.id)
                                         }
                                       }
                                     })
@@ -1421,14 +1375,14 @@ var render = function() {
                               ) +
                                 " - " +
                                 _vm._s(
-                                  _vm.coupons.length -
+                                  _vm.brands.length -
                                     _vm.currentPage * _vm.itemsPerPage >
                                     0
                                     ? _vm.currentPage * _vm.itemsPerPage
-                                    : _vm.coupons.length
+                                    : _vm.brands.length
                                 ) +
                                 " of " +
-                                _vm._s(_vm.coupons.length)
+                                _vm._s(_vm.brands.length)
                             )
                           ]),
                           _vm._v(" "),
@@ -1543,17 +1497,11 @@ var render = function() {
             "template",
             { slot: "thead" },
             [
-              _c("vs-th", { attrs: { "sort-key": "name" } }, [
-                _vm._v("coupon")
+              _c("vs-th", [_vm._v("Image")]),
+              _vm._v(" "),
+              _c("vs-th", { attrs: { "sort-key": "title" } }, [
+                _vm._v("Brand Title")
               ]),
-              _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "code" } }, [_vm._v("value")]),
-              _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "PhoneCode" } }, [
-                _vm._v("expire_date")
-              ]),
-              _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "code" } }, [_vm._v("Used")]),
               _vm._v(" "),
               _c("vs-th", [_vm._v("Action")])
             ],
@@ -1584,7 +1532,7 @@ var render = function() {
       _c(
         "vs-popup",
         {
-          attrs: { title: "UpdateCoupon", active: _vm.popupActive },
+          attrs: { title: "UpdateBrand", active: _vm.popupActive },
           on: {
             "update:active": function($event) {
               _vm.popupActive = $event
@@ -1604,86 +1552,67 @@ var render = function() {
             attrs: { alertActi: _vm.er_active, data: _vm.SError }
           }),
           _vm._v(" "),
-          _c("vs-input", {
-            directives: [
-              {
-                name: "validate",
-                rawName: "v-validate",
-                value: "required|min:1",
-                expression: "'required|min:1'"
-              }
-            ],
-            staticClass: "w-full",
-            attrs: { label: "Coupon Value", name: "value" },
-            model: {
-              value: _vm.coupon.value,
-              callback: function($$v) {
-                _vm.$set(_vm.coupon, "value", $$v)
-              },
-              expression: "coupon.value"
-            }
+          _vm._l(_vm.brand.title, function(lang, index) {
+            return _c(
+              "div",
+              { key: index },
+              [
+                _c("vs-input", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: {
+                    label: "Brand Title " + index,
+                    name: "title_" + index
+                  },
+                  model: {
+                    value: _vm.brand.title[index],
+                    callback: function($$v) {
+                      _vm.$set(_vm.brand.title, index, $$v)
+                    },
+                    expression: "brand.title[index]"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("title_" + index),
+                        expression: "errors.has('title_'+index)"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("title_" + index)))]
+                )
+              ],
+              1
+            )
           }),
           _vm._v(" "),
-          _c(
-            "span",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.errors.has("value"),
-                  expression: "errors.has('value')"
-                }
-              ],
-              staticClass: "text-danger text-sm"
+          _c("vs-upload", {
+            ref: "fileUpload",
+            staticClass: "img-upload",
+            attrs: {
+              limit: 1,
+              "show-upload-button": false,
+              text: "Upload Image",
+              "single-upload": true
             },
-            [_vm._v(_vm._s(_vm.errors.first("value")))]
-          ),
-          _vm._v(" "),
-          _c("vs-input-number", {
-            directives: [
-              {
-                name: "validate",
-                rawName: "v-validate",
-                value: "required|min:1|max:1000",
-                expression: "'required|min:1|max:1000'"
+            on: {
+              change: function($event) {
+                return _vm.uploadFiles()
               }
-            ],
-            staticClass: "w-full",
-            attrs: { label: "Coupon Number", name: "number" },
-            model: {
-              value: _vm.coupon.number,
-              callback: function($$v) {
-                _vm.$set(_vm.coupon, "number", $$v)
-              },
-              expression: "coupon.number"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.errors.has("number"),
-                  expression: "errors.has('number')"
-                }
-              ],
-              staticClass: "text-danger text-sm"
-            },
-            [_vm._v(_vm._s(_vm.errors.first("number")))]
-          ),
-          _vm._v(" "),
-          _c("datepicker", {
-            attrs: { format: "yyyy-MM-dd" },
-            model: {
-              value: _vm.coupon.expire_date,
-              callback: function($$v) {
-                _vm.$set(_vm.coupon, "expire_date", $$v)
-              },
-              expression: "coupon.expire_date"
             }
           }),
           _vm._v(" "),
@@ -1694,14 +1623,14 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.updateCoupon($event)
+                  return _vm.updateBrand($event)
                 }
               }
             },
             [_vm._v("Update Data")]
           )
         ],
-        1
+        2
       )
     ],
     1
@@ -1783,18 +1712,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/AddNewCoupon.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/views/coupons/AddNewCoupon.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/src/views/brands/AddNewBrand.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/views/brands/AddNewBrand.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddNewCoupon_vue_vue_type_template_id_6f6f7e9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true& */ "./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true&");
-/* harmony import */ var _AddNewCoupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddNewCoupon.vue?vue&type=script&lang=js& */ "./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true& */ "./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true&");
+/* harmony import */ var _AddNewBrand_vue_vue_type_template_id_3ee807af_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true& */ "./resources/js/src/views/brands/AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true&");
+/* harmony import */ var _AddNewBrand_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddNewBrand.vue?vue&type=script&lang=js& */ "./resources/js/src/views/brands/AddNewBrand.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true& */ "./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1805,83 +1734,83 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _AddNewCoupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AddNewCoupon_vue_vue_type_template_id_6f6f7e9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AddNewCoupon_vue_vue_type_template_id_6f6f7e9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AddNewBrand_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddNewBrand_vue_vue_type_template_id_3ee807af_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddNewBrand_vue_vue_type_template_id_3ee807af_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "6f6f7e9e",
+  "3ee807af",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/coupons/AddNewCoupon.vue"
+component.options.__file = "resources/js/src/views/brands/AddNewBrand.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/src/views/brands/AddNewBrand.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/src/views/brands/AddNewBrand.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewCoupon.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewBrand.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true& ***!
-  \*******************************************************************************************************************/
+/***/ "./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=style&index=0&id=6f6f7e9e&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_style_index_0_id_6f6f7e9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=style&index=0&id=3ee807af&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_style_index_0_id_3ee807af_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/src/views/brands/AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/src/views/brands/AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_template_id_6f6f7e9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/AddNewCoupon.vue?vue&type=template&id=6f6f7e9e&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_template_id_6f6f7e9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_template_id_3ee807af_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/AddNewBrand.vue?vue&type=template&id=3ee807af&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_template_id_3ee807af_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewCoupon_vue_vue_type_template_id_6f6f7e9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewBrand_vue_vue_type_template_id_3ee807af_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/coupons.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/src/views/coupons/coupons.vue ***!
-  \****************************************************/
+/***/ "./resources/js/src/views/brands/brands.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/src/views/brands/brands.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _coupons_vue_vue_type_template_id_66a0e31e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./coupons.vue?vue&type=template&id=66a0e31e& */ "./resources/js/src/views/coupons/coupons.vue?vue&type=template&id=66a0e31e&");
-/* harmony import */ var _coupons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./coupons.vue?vue&type=script&lang=js& */ "./resources/js/src/views/coupons/coupons.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./coupons.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _brands_vue_vue_type_template_id_7f8c8155___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./brands.vue?vue&type=template&id=7f8c8155& */ "./resources/js/src/views/brands/brands.vue?vue&type=template&id=7f8c8155&");
+/* harmony import */ var _brands_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./brands.vue?vue&type=script&lang=js& */ "./resources/js/src/views/brands/brands.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./brands.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1892,9 +1821,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _coupons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _coupons_vue_vue_type_template_id_66a0e31e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _coupons_vue_vue_type_template_id_66a0e31e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _brands_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _brands_vue_vue_type_template_id_7f8c8155___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _brands_vue_vue_type_template_id_7f8c8155___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1904,54 +1833,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/coupons/coupons.vue"
+component.options.__file = "resources/js/src/views/brands/brands.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/coupons.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/src/views/coupons/coupons.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/src/views/brands/brands.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/src/views/brands/brands.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./coupons.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./brands.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss& ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./coupons.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--8-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./brands.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/coupons/coupons.vue?vue&type=template&id=66a0e31e&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/src/views/coupons/coupons.vue?vue&type=template&id=66a0e31e& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/src/views/brands/brands.vue?vue&type=template&id=7f8c8155&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/src/views/brands/brands.vue?vue&type=template&id=7f8c8155& ***!
+  \*********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_template_id_66a0e31e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./coupons.vue?vue&type=template&id=66a0e31e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/coupons/coupons.vue?vue&type=template&id=66a0e31e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_template_id_66a0e31e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_template_id_7f8c8155___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./brands.vue?vue&type=template&id=7f8c8155& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/brands/brands.vue?vue&type=template&id=7f8c8155&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_template_id_7f8c8155___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_template_id_66a0e31e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_brands_vue_vue_type_template_id_7f8c8155___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

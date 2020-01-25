@@ -114570,6 +114570,7 @@ __webpack_require__.r(__webpack_exports__);
     'setting': 'Settings',
     'brand': 'Brands',
     'language': 'Languages',
+    'products': 'Products',
     'advertisments': {
       'ads_url': 'Ads Url',
       'image': 'Upload Image'
@@ -114585,6 +114586,7 @@ __webpack_require__.r(__webpack_exports__);
     'setting': 'اعدات الموقع',
     'brand': 'العﻻمات التجارية',
     'language': 'لغات الموقع',
+    'products': 'المنتجات',
     'advertisments': {
       'ads_url': 'رابط اﻻعﻻن',
       'image': 'صورة اﻻعﻻن'
@@ -115542,25 +115544,25 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     // =============================================================================
     path: '',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
     },
     children: [{
       path: '/',
       name: 'home',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/src/views/Home.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(27), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/src/views/Home.vue"));
       }
     }, {
       path: '/users',
       name: 'users',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/users/users.vue */ "./resources/js/src/views/users/users.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./views/users/users.vue */ "./resources/js/src/views/users/users.vue"));
       }
     }, {
       path: '/user',
       name: 'app-user-list',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -115579,7 +115581,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/user-view/:userId',
       name: 'app-user-view',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! @/views/user/UserView.vue */ "./resources/js/src/views/user/UserView.vue"));
+        return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! @/views/user/UserView.vue */ "./resources/js/src/views/user/UserView.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -115598,7 +115600,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/user-edit/:userId',
       name: 'app-user-edit',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! @/views/user/user-edit/UserEdit.vue */ "./resources/js/src/views/user/user-edit/UserEdit.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! @/views/user/user-edit/UserEdit.vue */ "./resources/js/src/views/user/user-edit/UserEdit.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -115617,61 +115619,79 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/countrys',
       name: 'countrys',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/countries/countrys.vue */ "./resources/js/src/views/countries/countrys.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/countries/countrys.vue */ "./resources/js/src/views/countries/countrys.vue"));
       }
     }, {
       path: '/countrys_states/:id',
       name: 'countrys-states',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/states/states.vue */ "./resources/js/src/views/states/states.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./views/states/states.vue */ "./resources/js/src/views/states/states.vue"));
       }
     }, {
       path: '/countrys_citys/:id',
       name: 'countrys-citys',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./views/citys/citys.vue */ "./resources/js/src/views/citys/citys.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/citys/citys.vue */ "./resources/js/src/views/citys/citys.vue"));
       }
     }, {
       path: 'advertisments',
       name: 'advertisments',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./views/advertisments/advertisments.vue */ "./resources/js/src/views/advertisments/advertisments.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/advertisments/advertisments.vue */ "./resources/js/src/views/advertisments/advertisments.vue"));
       }
     }, {
       path: 'categorys',
       name: 'categorys',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./views/categorys/categorys.vue */ "./resources/js/src/views/categorys/categorys.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/categorys/categorys.vue */ "./resources/js/src/views/categorys/categorys.vue"));
       }
     }, {
       path: 'categorys/:id',
       name: 'categorys-subs',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./views/categorys/categorys.vue */ "./resources/js/src/views/categorys/categorys.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/categorys/categorys.vue */ "./resources/js/src/views/categorys/categorys.vue"));
       }
     }, {
       path: 'coupons',
       name: 'coupons',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(28), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/coupons/coupons.vue */ "./resources/js/src/views/coupons/coupons.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(30), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/coupons/coupons.vue */ "./resources/js/src/views/coupons/coupons.vue"));
       }
     }, {
       path: 'settings',
       name: 'settings',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/settings/settings.vue */ "./resources/js/src/views/settings/settings.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! ./views/settings/settings.vue */ "./resources/js/src/views/settings/settings.vue"));
       }
     }, {
       path: 'brands',
       name: 'brands',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./views/brands/brands.vue */ "./resources/js/src/views/brands/brands.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/brands/brands.vue */ "./resources/js/src/views/brands/brands.vue"));
       }
     }, {
       path: 'languages',
       name: 'languages',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/languages/languages.vue */ "./resources/js/src/views/languages/languages.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/languages/languages.vue */ "./resources/js/src/views/languages/languages.vue"));
+      }
+    }, {
+      path: 'products',
+      name: 'products',
+      component: function component() {
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./views/products/Products.vue */ "./resources/js/src/views/products/Products.vue"));
+      }
+    }, {
+      path: 'products-create',
+      name: 'product-add',
+      component: function component() {
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(4), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/products/ProductForm.vue */ "./resources/js/src/views/products/ProductForm.vue"));
+      }
+    }, {
+      path: 'products-update/:productId',
+      name: 'product-update',
+      component: function component() {
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(4), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/products/ProductForm.vue */ "./resources/js/src/views/products/ProductForm.vue"));
       }
     }]
   }, // =============================================================================
@@ -115680,7 +115700,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   {
     path: '',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! @/layouts/full-page/FullPage.vue */ "./resources/js/src/layouts/full-page/FullPage.vue"));
+      return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! @/layouts/full-page/FullPage.vue */ "./resources/js/src/layouts/full-page/FullPage.vue"));
     },
     children: [// =============================================================================
     // PAGES
@@ -115689,19 +115709,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/login',
       name: 'Login',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
       }
     }, {
       path: '/register',
       name: 'Register',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
+        return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
       }
     }, {
       path: '/pages/error-404',
       name: 'pageError404',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! @/views/pages/Error404.vue */ "./resources/js/src/views/pages/Error404.vue"));
+        return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! @/views/pages/Error404.vue */ "./resources/js/src/views/pages/Error404.vue"));
       }
     }]
   }, // Redirect to 404 page, if no match found
@@ -115746,6 +115766,7 @@ router.beforeEach(function (to, from, next) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _axios_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/axios.js */ "./resources/js/src/axios.js");
 /*=========================================================================================
   File Name: actions.js
   Description: Vuex Store - actions
@@ -115754,6 +115775,7 @@ __webpack_require__.r(__webpack_exports__);
   Author: Pixinvent
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
+
 var actions = {
   // /////////////////////////////////////////////
   // COMPONENTS
@@ -115803,6 +115825,28 @@ var actions = {
 
     dispatch('updateUserInfo', {
       userRole: payload.userRole
+    });
+  },
+  fetchCategory: function fetchCategory(_ref9) {
+    var commit = _ref9.commit;
+    return new Promise(function (resolve, reject) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/all_category').then(function (response) {
+        resolve(response);
+      }).catch(function (error) {
+        console.log(error);
+        reject(error);
+      });
+    });
+  },
+  fetchBrand: function fetchBrand(_ref10) {
+    var commit = _ref10.commit;
+    return new Promise(function (resolve, reject) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/all_brand').then(function (response) {
+        resolve(response);
+      }).catch(function (error) {
+        console.log(error);
+        reject(error);
+      });
     });
   }
 };
@@ -117016,6 +117060,162 @@ var mutations = {
 
 /***/ }),
 
+/***/ "./resources/js/src/store/product/moduleProductManagement.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/store/product/moduleProductManagement.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _moduleProductManagementState_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./moduleProductManagementState.js */ "./resources/js/src/store/product/moduleProductManagementState.js");
+/* harmony import */ var _moduleProductManagementMutations_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./moduleProductManagementMutations.js */ "./resources/js/src/store/product/moduleProductManagementMutations.js");
+/* harmony import */ var _moduleProductManagementActions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./moduleProductManagementActions.js */ "./resources/js/src/store/product/moduleProductManagementActions.js");
+/* harmony import */ var _moduleProductManagementGetters_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./moduleProductManagementGetters.js */ "./resources/js/src/store/product/moduleProductManagementGetters.js");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: _moduleProductManagementState_js__WEBPACK_IMPORTED_MODULE_0__["default"],
+  mutations: _moduleProductManagementMutations_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  actions: _moduleProductManagementActions_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  getters: _moduleProductManagementGetters_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/product/moduleProductManagementActions.js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/src/store/product/moduleProductManagementActions.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _axios_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/axios.js */ "./resources/js/src/axios.js");
+/*=========================================================================================
+  File Name: moduleCalendarActions.js
+  Description: Calendar Module Actions
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: Pixinvent
+  Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  fetchProduct: function fetchProduct(_ref, productId) {
+    var commit = _ref.commit;
+    return new Promise(function (resolve, reject) {
+      _axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/products/' + productId + '/edit').then(function (response) {
+        commit('SET_PRODUCT', response.data.data);
+        resolve(response);
+      }).catch(function (error) {
+        reject(error);
+      });
+    });
+  },
+  resetProduct: function resetProduct(_ref2, productId) {
+    var commit = _ref2.commit;
+    return new Promise(function (resolve, reject) {
+      commit('RESET_PRODUCT');
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/product/moduleProductManagementGetters.js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/src/store/product/moduleProductManagementGetters.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/product/moduleProductManagementMutations.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/src/store/product/moduleProductManagementMutations.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  SET_PRODUCT: function SET_PRODUCT(state, product) {
+    state.product = product;
+  },
+  RESET_PRODUCT: function RESET_PRODUCT(state) {
+    state.product = {
+      'title': '',
+      'main_image': '',
+      'price': '',
+      'special_price_type': '',
+      'special_price': '',
+      'special': '',
+      'active': '',
+      'description': '',
+      'short_description': '',
+      'special_price_end': '',
+      'special_price_start': '',
+      'meta_keyword': '',
+      'meta_title': '',
+      'meta_description': '',
+      'sku': '',
+      'category_id': '',
+      'brand_id': '',
+      'stock': '',
+      'min_stock': ''
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/product/moduleProductManagementState.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/src/store/product/moduleProductManagementState.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  product: {
+    'title': '',
+    'main_image': '',
+    'price': '',
+    'special_price_type': '',
+    'special_price': '',
+    'special': '',
+    'active': '',
+    'description': '',
+    'short_description': '',
+    'special_price_end': '',
+    'special_price_start': '',
+    'meta_keyword': '',
+    'meta_title': '',
+    'meta_description': '',
+    'sku': '',
+    'category_id': '',
+    'brand_id': '',
+    'stock': '',
+    'min_stock': ''
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/src/store/state.js":
 /*!*****************************************!*\
   !*** ./resources/js/src/store/state.js ***!
@@ -117118,6 +117318,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mutations */ "./resources/js/src/store/mutations.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions */ "./resources/js/src/store/actions.js");
 /* harmony import */ var _eCommerce_moduleECommerce_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./eCommerce/moduleECommerce.js */ "./resources/js/src/store/eCommerce/moduleECommerce.js");
+/* harmony import */ var _product_moduleProductManagement_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./product/moduleProductManagement.js */ "./resources/js/src/store/product/moduleProductManagement.js");
 /*=========================================================================================
   File Name: store.js
   Description: Vuex store
@@ -117139,6 +117340,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 // import moduleAuth from './auth/moduleAuth.js'
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   getters: _getters__WEBPACK_IMPORTED_MODULE_3__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -117150,9 +117352,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     // chat: moduleChat,
     // email: moduleEmail,
     //auth: moduleAuth,
-    eCommerce: _eCommerce_moduleECommerce_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+    eCommerce: _eCommerce_moduleECommerce_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    product: _product_moduleProductManagement_js__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  strict: "development" !== 'production'
+  strict: false
 }));
 
 /***/ }),

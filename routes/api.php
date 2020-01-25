@@ -28,6 +28,7 @@ Route::middleware(['auth:api'])->group(function () {
   Route::resource('settings','Api\SettingController');
   Route::resource('brands','Api\BrandController');
   Route::resource('languages','Api\LanguageController');
+  Route::resource('products','Api\ProductController');
   Route::get('all_country', function()
   {
     return \App\Models\Country::select('id','name as label')->get();
@@ -41,6 +42,12 @@ Route::middleware(['auth:api'])->group(function () {
     $categorys = \App\Models\Category::select('id','title as label')->get();
     $categorys->prepend(['id' => null ,'label'=> 'Choose Parent' ]);
     return  $categorys;
+  });
+  Route::get('all_brand', function()
+  {
+    $brands = \App\Models\Brand::select('id','title as label')->get();
+    $brands->prepend(['id' => null ,'label'=> 'Choose Parent' ]);
+    return  $brands;
   });
   Route::get('content_type', function()
   {
@@ -103,6 +110,12 @@ Route::get('items',function(){
   $data['slug'] = 'language';
   $data['icon'] = 'ChromeIcon';
   $data['i18n'] = 'language';
+  array_push($array,(object)$data);
+  $data['url'] = '/products';
+  $data['name'] = 'Products';
+  $data['slug'] = 'products';
+  $data['icon'] = 'BookIcon';
+  $data['i18n'] = 'products';
   array_push($array,(object)$data);
   return $array;
 });

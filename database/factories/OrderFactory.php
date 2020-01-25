@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Order::class, function (Faker $faker){
     return [
         'user_id'  => 1 ,
-        'address_id' => App\Models\UserAddress::inRandomOrder()->get()[0] ,
+        'address_id' => App\Models\UserAddress::inRandomOrder()->first() ,
         'shipping_amount' => 50,
         'status' => random_int(1, 3) ,
         'total_price' => 1200,

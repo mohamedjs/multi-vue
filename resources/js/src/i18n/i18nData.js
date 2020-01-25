@@ -10,6 +10,7 @@ export default {
 		'setting' : 'Settings',
 		'brand': 'Brands',
 		'language' : 'Languages',
+		'products' :'Products',
 		'advertisments':{
 			'ads_url':'Ads Url',
 			'image' : 'Upload Image'
@@ -25,6 +26,7 @@ export default {
 		'setting' : 'اعدات الموقع',
 		'brand': 'العﻻمات التجارية',
 		'language' : 'لغات الموقع',
+		'products' : 'المنتجات',
 		'advertisments':{
 			'ads_url':'رابط اﻻعﻻن',
 			'image' : 'صورة اﻻعﻻن'
