@@ -14,7 +14,7 @@
     <v-select v-model="$store.state.product.product.brand_id" v-validate="'required'" name="brand_id" :options="brandOptions"></v-select>
     <span class="text-danger text-sm" v-show="errors.has('brand_id')">{{ errors.first('brand_id') }}</span>
     <br>
-    
+
     <vs-input v-validate="'required'" label-placeholder="Sku" name="sku" v-model="$store.state.product.product.sku" class="w-full" />
     <span class="text-danger text-sm" v-show="errors.has('sku')">{{ errors.first('sku') }}</span>
     <br>
@@ -61,7 +61,7 @@ export default {
       return this.$store.state.AppActiveUser
     },
   },
-  mounted() {
+  created() {
     this.$store.dispatch('fetchCategory')
     .then(res => { this.categoryOptions = res.data })
     .catch(err => { console.error(err) })
@@ -70,6 +70,11 @@ export default {
     .then(res => { this.brandOptions = res.data })
     .catch(err => { console.error(err) })
 
+    if(this.$route.params.productId){
+      console.log(this.$store.state.product.product.brand_id);
+      this.$store.state.product.product.brand_id     = {id:this.$store.state.product.product.brand_id.id , label :this.$store.state.product.product.brand_id.title }
+      this.$store.state.product.product.category_id     = {id:this.$store.state.product.product.category_id.id , label :this.$store.state.product.product.category_id.title }
+    }
   },
   components: {
     'v-select': vSelect,

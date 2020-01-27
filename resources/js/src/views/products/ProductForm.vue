@@ -54,7 +54,9 @@ export default {
       options:[],
       errorActive:false,
       er_active:false,
-      data : new FormData()
+      data : new FormData(),
+      product : ['title','price','special_price_type','special_price','special','active','description','short_description','special_price_end','special_price_start',
+                'meta_keyword','meta_title','meta_description','sku','category_id','brand_id','stock','min_stock']
     }
   },
   watch: {
@@ -77,12 +79,18 @@ export default {
       .catch(err => { console.error(err) })
     },
     saveChange(){
+      console.log(this.$store.state.product.product[brand_id]);
+      this.$store.state.product.product.brand_id    = this.$store.state.product.product[brand_id].id
+      this.$store.state.product.product.category_id = this.$store.state.product.product.category_id.id
+      this.$store.state.product.product.special     = this.$store.state.product.product.special ? 1:0
+      this.$store.state.product.product.active      = this.$store.state.product.product.active ? 1:0
       var _this = this
       var id = ''
       const config = {  headers: { 'content-type': 'multipart/form-data' } }
       for (var key in this.$store.state.product.product ) {
-          console.log(key, this.$store.state.product.product [key]);
-          this.data.append(key, this.$store.state.product.product [key]);
+          if(this.product.includes(key))
+              this.data.append(key, this.$store.state.product.product[key]);
+
       }
       if(this.$route.params.productId){
         id = this.$route.params.productId
