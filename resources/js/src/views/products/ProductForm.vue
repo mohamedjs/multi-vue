@@ -10,7 +10,7 @@
       </vs-tab>
       <vs-tab icon-pack="feather" icon="icon-info"  :label="!isSmallerScreen ? 'Gallery' : ''">
         <div class="tab-change-pwd md:ml-4 md:mt-0 mt-4 ml-0">
-          <product-images/>
+          <product-images @uploadMimg="uploadMimg" @uploadGallery = "uploadGallery" />
         </div>
       </vs-tab>
       <vs-tab icon-pack="feather" icon="icon-info" :label="!isSmallerScreen ? 'Prices' : ''">
@@ -55,17 +55,14 @@ export default {
       errorActive:false,
       er_active:false,
       data : new FormData(),
-      product : ['title','price','special_price_type','special_price','special','active','description','short_description','special_price_end','special_price_start',
-                'meta_keyword','meta_title','meta_description','sku','category_id','brand_id','stock','min_stock']
+      product : ['title','price','special_price_type','special_price','description','short_description','special_price_end','special_price_start',
+                'meta_keyword','meta_title','meta_description','sku','stock','min_stock']
     }
   },
   watch: {
     activeTab() {
       if(this.$route.params.productId){
         this.fetch_product_data(this.$route.params.productId)
-      }
-      else{
-        this.reset_product_data()
       }
     }
   },
@@ -79,24 +76,21 @@ export default {
       .catch(err => { console.error(err) })
     },
     saveChange(){
-      console.log(this.$store.state.product.product[brand_id]);
-      this.$store.state.product.product.brand_id    = this.$store.state.product.product[brand_id].id
-      this.$store.state.product.product.category_id = this.$store.state.product.product.category_id.id
-      this.$store.state.product.product.special     = this.$store.state.product.product.special ? 1:0
-      this.$store.state.product.product.active      = this.$store.state.product.product.active ? 1:0
+      this.data.append('brand_id',this.$store.state.product.product.brand_id.id)
+      this.data.append('category_id',this.$store.state.product.product.category_id.id)
+      this.data.append('special',this.$store.state.product.product.special ? 1:0)
+      this.data.append('active',this.$store.state.product.product.active ? 1:0)
       var _this = this
       var id = ''
-      const config = {  headers: { 'content-type': 'multipart/form-data' } }
       for (var key in this.$store.state.product.product ) {
           if(this.product.includes(key))
               this.data.append(key, this.$store.state.product.product[key]);
-
       }
       if(this.$route.params.productId){
         id = this.$route.params.productId
         this.data.append('_method' , 'patch')
       }
-      this.$http.post('/api/products/'+ id,this.data,config)
+      this.$http.post('/api/products/'+ id,this.data)
       .then(function (response){
           _this.er_active   = false
           _this.errorActive = false
@@ -109,6 +103,8 @@ export default {
             icon:'icon-alert-circle'})
             _this.alertActive= true
             _this.alertSuccess = response.data.message
+            _this.reset_product_data()
+            _this.$router.push({name : 'products'})
         }).catch(function (error) {
           if(error.response.status == 422)
           {
@@ -137,7 +133,7 @@ export default {
       this.data.append('main_image' , file)
     },
     uploadGallery(file){
-      this.data.append('image[]' , file)
+      this.data.append('images[]' , file)
     }
   },
   computed: {

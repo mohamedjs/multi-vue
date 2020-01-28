@@ -50,7 +50,7 @@ class Product extends Model
     return $this->belongsTo('App\Models\Brand','brand_id','id');
   }
 
-  public function gallerys()
+  public function gallery()
   {
     return $this->hasMany('App\Models\ProductImage','product_id','id');
   }

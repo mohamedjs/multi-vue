@@ -19,7 +19,10 @@ Vue.use(Vuesax)
 // axios
 import axios from "./axios.js"
 Vue.prototype.$http = axios
-
+axios.interceptors.request.use(config => {
+  config.headers['X-localization'] = localStorage.getItem("lang") ? localStorage.getItem("lang") :'en';
+  return config;
+});
 
 // API Calls
 //import "./http/requests"

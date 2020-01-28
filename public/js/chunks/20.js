@@ -160,17 +160,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('name', thisIns.user.name);
           thisIns.data.append('email', thisIns.user.email);
           thisIns.data.append('phone', thisIns.user.phone);
           thisIns.data.append('password', thisIns.user.password);
           thisIns.data.append('password_confirmation', thisIns.user.password_confirmation);
-          thisIns.$http.post('api/users', thisIns.data, config).then(function (response) {
+          thisIns.$http.post('api/users', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -506,18 +501,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('name', thisIns.user.name);
           thisIns.DataEdit.append('email', thisIns.user.email);
           thisIns.DataEdit.append('phone', thisIns.user.phone);
           thisIns.DataEdit.append('password', thisIns.user.password);
           thisIns.DataEdit.append('password_confirmation', thisIns.user.password_confirmation);
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('api/users/' + thisIns.userId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('api/users/' + thisIns.userId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::post('register', 'Api\AuthController@signup');
 Route::post('login', 'Api\AuthController@login');
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['api_cookie'])->group(function () {
   Route::get('home','Api\HomeController@index');
   Route::post('lang','Api\HomeController@ChangeLocale');
   Route::resource('users','Api\UserController');
@@ -118,4 +118,12 @@ Route::get('items',function(){
   $data['i18n'] = 'products';
   array_push($array,(object)$data);
   return $array;
+});
+//apllication route
+Route::prefix('user')->group(function () {
+Route::post('register', 'Api\User\AuthController@signup');
+Route::post('login', 'Api\User\AuthController@login');
+  //Route::middleware(['auth:api'])->group(function () {
+    Route::get('index', 'Api\User\HomeController@index');
+  //})
 });

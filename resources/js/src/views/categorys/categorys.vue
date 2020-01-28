@@ -247,14 +247,13 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.DataEdit.append('title' , thisIns.category.title)
           thisIns.DataEdit.append('coding' , thisIns.category.coding)
           if(thisIns.category.parent_id.id){
             thisIns.DataEdit.append('parent_id' , thisIns.category.parent_id.id)
           }
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post('/api/categorys/'+thisIns.categoryId, thisIns.DataEdit ,config)
+          thisIns.$http.post('/api/categorys/'+thisIns.categoryId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

@@ -234,7 +234,6 @@ export default {
       // Here will go your API call for updating data
       // You can get data in "this.data_local"
       var _this = this
-      const config = {  headers: { 'content-type': 'multipart/form-data' } }
       this.DataEdit.append('name' , this.data_local.name)
       this.DataEdit.append('email' , this.data_local.email)
       this.DataEdit.append('website' , this.data_local.website)
@@ -246,7 +245,7 @@ export default {
       this.DataEdit.append('verified' , this.verified(this.data_local.verified))
       this.DataEdit.append('gender' , (this.data_local.gender == 'male') ? '1' : '2')
       this.DataEdit.append('_method' , 'patch')
-      this.$http.post('/api/users/'+_this.$route.params.userId ,this.DataEdit,config)
+      this.$http.post('/api/users/'+_this.$route.params.userId ,this.DataEdit)
         .then(function (response){
             _this.er_active   = false
             _this.errorActive = false

@@ -686,6 +686,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(val) {
         this.$emit('updateFooter', val);
+        localStorage.setItem('footer', val);
       }
     },
     hideScrollToTopLocal: {
@@ -716,6 +717,7 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(val) {
         if (this.navbarType == 'static') return;
         this.$emit('updateNavbarColor', val);
+        localStorage.setItem('nav_color', val);
       }
     },
     navbarTypeLocal: {
@@ -740,6 +742,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(val) {
         this.$store.commit('UPDATE_PRIMARY_COLOR', val);
+        localStorage.setItem('color', val);
       }
     },
     reduced_sidebar: {
@@ -785,6 +788,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$vs.theme({
         primary: color
       });
+      localStorage.setItem('color', color);
     }
   },
   components: {
@@ -1931,39 +1935,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateLocale: function updateLocale(locale) {
-      var thisIns = this; //this.$vs.loading()
+      var _this = this;
 
-      this.$http.post('api/lang', {
-        'lang': locale
-      }).then(function (response) {
-        if (response.data.status == "success") thisIns.$i18n.locale = locale;
-        localStorage.setItem("lang", locale);
-        thisIns.$vs.rtl = locale == 'ar' ? true : false;
-        document.documentElement.setAttribute("dir", locale == 'ar' ? "rtl" : "ltr");
-        var location = thisIns.$route.fullPath;
-        thisIns.$router.replace('/');
-        thisIns.$nextTick(function () {
-          return thisIns.$router.replace(location);
-        });
-        thisIns.$validator.localize(locale);
-        thisIns.$vs.notify({
-          title: 'Success',
-          text: response.data.status,
-          color: 'success',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle'
-        }); //thisIns.$vs.loading.close()
-      }).catch(function (error) {
-        thisIns.$vs.notify({
-          title: 'Error',
-          text: error,
-          color: 'danger',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle'
-        });
-        return Promise.reject(error);
-        thisIns.$vs.loading.close();
-      }); //this.$vs.loading.close()
+      this.$i18n.locale = locale;
+      localStorage.setItem("lang", locale);
+      this.$http.defaults.headers.common['X-localization'] = locale;
+      this.$vs.rtl = locale == 'ar' ? true : false;
+      document.documentElement.setAttribute("dir", locale == 'ar' ? "rtl" : "ltr");
+      var location = this.$route.fullPath;
+      this.$router.replace('/');
+      this.$nextTick(function () {
+        return _this.$router.replace(location);
+      });
+      this.$validator.localize(locale);
     }
   }
 });
@@ -5632,7 +5616,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "vx-logo-text text-primary" }, [
-                  _vm._v("L-V-E-com")
+                  _vm._v("L-V-E-Com")
                 ])
               ],
               1
@@ -7506,7 +7490,7 @@ var render = function() {
       _c("v-nav-menu", {
         attrs: {
           navMenuItems: _vm.navMenuItems,
-          title: "L-Ecommerce",
+          title: "L-E-V-Com",
           parent: ".layout--main"
         }
       }),

@@ -28,7 +28,7 @@
 
     <v-nav-menu
       :navMenuItems = "navMenuItems"
-      title         = "L-Ecommerce"
+      title         = "L-E-V-Com"
       parent        = ".layout--main" />
 
     <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">

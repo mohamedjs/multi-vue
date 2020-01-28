@@ -209,12 +209,11 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           for (const [key, value] of Object.entries(thisIns.brand.title)) {
             thisIns.DataEdit.append('title'+'['+key+']', thisIns.brand.title[key])
           }
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post('api/brands/'+thisIns.brandId, thisIns.DataEdit ,config)
+          thisIns.$http.post('api/brands/'+thisIns.brandId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

@@ -209,11 +209,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('key', thisIns.setting.key);
           thisIns.data.append('type_id', thisIns.setting.type_id.id);
 
@@ -221,7 +216,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             thisIns.data.append('value', thisIns.setting.value);
           }
 
-          thisIns.$http.post(location.origin + '/api/settings', thisIns.data, config).then(function (response) {
+          thisIns.$http.post(location.origin + '/api/settings', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.data = new FormData();
@@ -665,11 +660,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('key', thisIns.setting.key);
           thisIns.DataEdit.append('type_id', thisIns.setting.type_id.id);
 
@@ -678,7 +668,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post(location.origin + '/api/settings/' + thisIns.settingId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post(location.origin + '/api/settings/' + thisIns.settingId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

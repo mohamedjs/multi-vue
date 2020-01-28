@@ -74,11 +74,10 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           for (const [key, value] of Object.entries(thisIns.brand.title)) {
             thisIns.data.append('title'+'['+key+']', thisIns.brand.title[key])
           }
-          thisIns.$http.post('api/brands', thisIns.data ,config)
+          thisIns.$http.post('api/brands', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

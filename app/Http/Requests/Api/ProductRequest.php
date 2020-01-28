@@ -31,9 +31,11 @@ class ProductRequest extends FormRequest
           case 'POST':
           {
             return [
-              'title' => 'required|array',
+              'title' => 'required',
               //'title.*' => 'required|string|max:255',
               'main_image' => 'required|mimes:jpeg,bmp,png',
+              'images' => '',
+              'images.*'=> 'mimes:jpeg,bmp,png',
               'price' =>'required',
               'special_price_type' =>'required',
               'special_price'=>'required',

@@ -284,14 +284,13 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.DataEdit.append('key' , thisIns.setting.key)
           thisIns.DataEdit.append('type_id' , thisIns.setting.type_id.id)
           if(!thisIns.DataEdit.has('value')){
             thisIns.DataEdit.append('value' , thisIns.setting.value)
           }
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post(location.origin+'/api/settings/'+thisIns.settingId, thisIns.DataEdit ,config)
+          thisIns.$http.post(location.origin+'/api/settings/'+thisIns.settingId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

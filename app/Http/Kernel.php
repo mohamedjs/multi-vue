@@ -41,8 +41,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-          \App\Http\Middleware\AddAuthTokenHeader::class,
-          \App\Http\Middleware\Language::class,
+          \App\Http\Middleware\ApiLanguage::class,
             'throttle:60,1',
             'bindings',
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -66,6 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'api_cookie' => \App\Http\Middleware\AddAuthTokenHeader::class,
     ];
 
     /**

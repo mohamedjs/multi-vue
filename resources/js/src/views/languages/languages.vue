@@ -216,12 +216,11 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.DataEdit.append('title' , thisIns.language.title)
           thisIns.DataEdit.append('short_code' , thisIns.language.short_code)
           thisIns.DataEdit.append('rtl' , thisIns.language.rtl)
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post('api/languages/'+thisIns.languageId, thisIns.DataEdit ,config)
+          thisIns.$http.post('api/languages/'+thisIns.languageId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

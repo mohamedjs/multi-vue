@@ -27,38 +27,15 @@ export default {
   },
   methods: {
     updateLocale(locale) {
-      var thisIns = this
-        //this.$vs.loading()
-        this.$http.post('api/lang', {'lang' : locale})
-          .then(function (response){
-            if(response.data.status == "success")
-              thisIns.$i18n.locale = locale
+              this.$i18n.locale = locale
               localStorage.setItem("lang",locale)
-              thisIns.$vs.rtl = locale == 'ar' ? true:false;
+              this.$http.defaults.headers.common['X-localization'] =  locale
+              this.$vs.rtl = locale == 'ar' ? true:false;
               document.documentElement.setAttribute("dir", locale == 'ar' ? "rtl" : "ltr")
-              var location = thisIns.$route.fullPath
-              thisIns.$router.replace('/')
-              thisIns.$nextTick(() => thisIns.$router.replace(location))
-              thisIns.$validator.localize(locale);
-              thisIns.$vs.notify({
-                title:'Success',
-                text: response.data.status,
-                color:'success',
-                iconPack: 'feather',
-                icon:'icon-alert-circle'})
-            //thisIns.$vs.loading.close()
-            }).catch(function (error) {
-              thisIns.$vs.notify({
-                  title:'Error',
-                  text: error,
-                  color:'danger',
-                  iconPack: 'feather',
-                  icon:'icon-alert-circle'})
-                return Promise.reject(error)
-                thisIns.$vs.loading.close()
-            });
-            //this.$vs.loading.close()
-
+              var location = this.$route.fullPath
+              this.$router.replace('/')
+              this.$nextTick(() => this.$router.replace(location))
+              this.$validator.localize(locale);
     },
   }
 }

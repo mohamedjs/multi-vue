@@ -69,12 +69,7 @@ export default {
     this.$store.dispatch('fetchBrand')
     .then(res => { this.brandOptions = res.data })
     .catch(err => { console.error(err) })
-
-    if(this.$route.params.productId){
-      console.log(this.$store.state.product.product.brand_id);
-      this.$store.state.product.product.brand_id     = {id:this.$store.state.product.product.brand_id.id , label :this.$store.state.product.product.brand_id.title }
-      this.$store.state.product.product.category_id     = {id:this.$store.state.product.product.category_id.id , label :this.$store.state.product.product.category_id.title }
-    }
+    
   },
   components: {
     'v-select': vSelect,

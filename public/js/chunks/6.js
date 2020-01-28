@@ -154,15 +154,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('title', thisIns.category.title);
           thisIns.data.append('coding', thisIns.category.coding);
           thisIns.data.append('parent_id', thisIns.category.parent_id.id);
-          thisIns.$http.post('/api/categorys', thisIns.data, config).then(function (response) {
+          thisIns.$http.post('/api/categorys', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -519,11 +514,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('title', thisIns.category.title);
           thisIns.DataEdit.append('coding', thisIns.category.coding);
 
@@ -532,7 +522,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('/api/categorys/' + thisIns.categoryId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('/api/categorys/' + thisIns.categoryId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

@@ -74,10 +74,9 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.data.append('name' , thisIns.state.name)
           thisIns.data.append('country_id' , thisIns.state.country_id.id)
-          thisIns.$http.post(location.origin+'/api/states', thisIns.data ,config)
+          thisIns.$http.post(location.origin+'/api/states', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

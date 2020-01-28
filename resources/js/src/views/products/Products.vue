@@ -145,9 +145,11 @@
 
 <script>
 import ServerError from '@/views/ServerError.vue';
+import vSelect from 'vue-select'
 export default {
   components: {
-    ServerError
+    ServerError,
+    'v-select': vSelect,
   },
   data() {
     return {
@@ -239,12 +241,11 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           for (const [key, value] of Object.entries(thisIns.product.title)) {
             thisIns.DataEdit.append('title'+'['+key+']', thisIns.product.title[key])
           }
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post('api/products/'+thisIns.productId, thisIns.DataEdit ,config)
+          thisIns.$http.post('api/products/'+thisIns.productId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration {
 			$table->decimal('special_price', 10)->nullable();
 			$table->boolean('special')->default(0);
 			$table->boolean('active')->default(1);
-			$table->LongText('description');
+			$table->LongText('description')->nullable();
 			$table->text('short_description', 65535)->nullable();
 			$table->date('special_price_start')->nullable();
 			$table->date('special_price_end')->nullable();
@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration {
 			$table->text('meta_description')->nullable();
 			$table->integer('stock')->default('0');
 			$table->integer('min_stock')->default('0');
+			$table->integer('seller')->default('0');
 			$table->integer('category_id')->unsigned()->index('products_category_id_foreign');
 			$table->integer('brand_id')->unsigned()->index('products_brand_id_foreign');
 			$table->timestamps();

@@ -148,15 +148,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('name', thisIns.city.name);
           thisIns.data.append('shipping_amount', thisIns.city.shipping_amount);
           thisIns.data.append('state_id', thisIns.city.state_id.id);
-          thisIns.$http.post(location.origin + '/api/citys', thisIns.data, config).then(function (response) {
+          thisIns.$http.post(location.origin + '/api/citys', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -476,16 +471,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('name', thisIns.city.name);
           thisIns.DataEdit.append('shipping_amount', thisIns.city.shipping_amount);
           thisIns.DataEdit.append('state_id', thisIns.city.state_id.id);
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post(location.origin + '/api/citys/' + thisIns.cityId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post(location.origin + '/api/citys/' + thisIns.cityId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

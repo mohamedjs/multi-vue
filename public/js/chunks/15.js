@@ -145,15 +145,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('name', thisIns.country.name);
           thisIns.data.append('code', thisIns.country.code);
           thisIns.data.append('phonecode', thisIns.country.phonecode);
-          thisIns.$http.post('api/countrys', thisIns.data, config).then(function (response) {
+          thisIns.$http.post('api/countrys', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -449,16 +444,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('name', thisIns.country.name);
           thisIns.DataEdit.append('code', thisIns.country.code);
           thisIns.DataEdit.append('phonecode', thisIns.country.phonecode);
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('api/countrys/' + thisIns.countryId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('api/countrys/' + thisIns.countryId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

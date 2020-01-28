@@ -204,8 +204,6 @@ router.beforeEach((to, from, next) => {
   if (!accessToken && to.path !== '/login') {
     router.push({ path: '/login', query: { to:to.path } }).catch(() => {})
   }
-  else{
-      next()
-  }
+  next()
 })
 export default router

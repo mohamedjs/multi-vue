@@ -81,11 +81,10 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.data.append('title' , thisIns.category.title)
           thisIns.data.append('coding' , thisIns.category.coding)
           thisIns.data.append('parent_id' , thisIns.category.parent_id.id)
-          thisIns.$http.post('/api/categorys', thisIns.data ,config)
+          thisIns.$http.post('/api/categorys', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

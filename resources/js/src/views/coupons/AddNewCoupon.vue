@@ -84,12 +84,11 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.data.append('value' , thisIns.coupon.value)
           thisIns.data.append('number' , thisIns.coupon.number)
           thisIns.data.append('expire_date' , new Date(thisIns.coupon.expire_date).toISOString().slice(0,10))
           //console.log();
-          thisIns.$http.post('api/coupons', thisIns.data ,config)
+          thisIns.$http.post('api/coupons', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

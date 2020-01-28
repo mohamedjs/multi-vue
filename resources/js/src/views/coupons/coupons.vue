@@ -221,12 +221,11 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.DataEdit.append('number' , thisIns.coupon.number)
           thisIns.DataEdit.append('value' , thisIns.coupon.value)
           thisIns.DataEdit.append('expire_date' , new Date(thisIns.coupon.expire_date).toISOString().slice(0,10))
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post('api/coupons/'+thisIns.couponId, thisIns.DataEdit ,config)
+          thisIns.$http.post('api/coupons/'+thisIns.couponId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

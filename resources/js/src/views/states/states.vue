@@ -215,11 +215,10 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.DataEdit.append('name' , thisIns.state.name)
           thisIns.DataEdit.append('country_id' , thisIns.state.country_id.id)
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post(location.origin+'/api/states/'+thisIns.stateId, thisIns.DataEdit ,config)
+          thisIns.$http.post(location.origin+'/api/states/'+thisIns.stateId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

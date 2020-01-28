@@ -448,11 +448,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
       var _this = this;
 
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      };
       this.DataEdit.append('name', this.data_local.name);
       this.DataEdit.append('email', this.data_local.email);
       this.DataEdit.append('website', this.data_local.website);
@@ -464,7 +459,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.DataEdit.append('verified', this.verified(this.data_local.verified));
       this.DataEdit.append('gender', this.data_local.gender == 'male' ? '1' : '2');
       this.DataEdit.append('_method', 'patch');
-      this.$http.post('/api/users/' + _this.$route.params.userId, this.DataEdit, config).then(function (response) {
+      this.$http.post('/api/users/' + _this.$route.params.userId, this.DataEdit).then(function (response) {
         _this.er_active = false;
         _this.errorActive = false;
         _this.popupActive = false;

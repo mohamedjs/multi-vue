@@ -144,14 +144,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('name', thisIns.state.name);
           thisIns.data.append('country_id', thisIns.state.country_id.id);
-          thisIns.$http.post(location.origin + '/api/states', thisIns.data, config).then(function (response) {
+          thisIns.$http.post(location.origin + '/api/states', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -465,15 +460,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('name', thisIns.state.name);
           thisIns.DataEdit.append('country_id', thisIns.state.country_id.id);
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post(location.origin + '/api/states/' + thisIns.stateId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post(location.origin + '/api/states/' + thisIns.stateId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

@@ -142,12 +142,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
-
           for (var _i = 0, _Object$entries = Object.entries(thisIns.brand.title); _i < _Object$entries.length; _i++) {
             var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
                 key = _Object$entries$_i[0],
@@ -156,7 +150,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             thisIns.data.append('title' + '[' + key + ']', thisIns.brand.title[key]);
           }
 
-          thisIns.$http.post('api/brands', thisIns.data, config).then(function (response) {
+          thisIns.$http.post('api/brands', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -471,12 +465,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
-
           for (var _i = 0, _Object$entries = Object.entries(thisIns.brand.title); _i < _Object$entries.length; _i++) {
             var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
                 key = _Object$entries$_i[0],
@@ -486,7 +474,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('api/brands/' + thisIns.brandId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('api/brands/' + thisIns.brandId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

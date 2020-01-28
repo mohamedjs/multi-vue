@@ -114,13 +114,12 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.data.append('key' , thisIns.setting.key)
           thisIns.data.append('type_id' , thisIns.setting.type_id.id)
           if(!thisIns.data.has('value')){
             thisIns.data.append('value' , thisIns.setting.value)
           }
-          thisIns.$http.post(location.origin+'/api/settings', thisIns.data ,config)
+          thisIns.$http.post(location.origin+'/api/settings', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

@@ -1,13 +1,13 @@
 <?php
 
-use App\ClientRate;
+use App\Models\ClientRate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\DeleteAll ;
-use App\Events\Notifications;
-use App\RouteModel ;
-use App\Notification;
+use App\Models\DeleteAll ;
+use App\Models\Events\Notifications;
+use App\Models\RouteModel ;
+use App\Models\Notification;
 function delete_multiselect(Request $request) // select many contract from index table and delete them
 {
     $selected_list =  explode(",",$request['selected_list']);
@@ -59,9 +59,9 @@ Route::get('/test','DashboardController@test');
     Route::get('/','DashboardController@index');
 
     Route::group(['middleware'=> 'auth'],function(){
-    Route::resource('static_translation','\App\Http\Controllers\StaticTranslationController');
+    Route::resource('static_translation','\App\Models\Http\Controllers\StaticTranslationController');
     Route::get('read_notify',function(){
-        \App\Notification::where('notified_id',\Auth::id())->update([
+        \App\Models\Notification::where('notified_id',\Auth::id())->update([
             'seen' => 1
         ]);
     });
@@ -212,15 +212,15 @@ function dynamic_routes($route_model,$found_roles)
  }
 
  function categorys(){
-     $categorys = \App\Category::whereNull('parent_id')->get();
+     $categorys = \App\Models\Category::whereNull('parent_id')->get();
      return $categorys;
  }
 function brands(){
-    $brands = \App\Brand::all();
+    $brands = \App\Models\Brand::all();
     return $brands;
 }
  function sub_cat_from_brand($brand_id){
-    $cats   =  \App\Category::select('categories.*')->join('products','products.category_id','=','categories.id')
+    $cats   =  \App\Models\Category::select('categories.*')->join('products','products.category_id','=','categories.id')
               ->join('brands','products.brand_id','=','brands.id')
               ->where('products.brand_id',$brand_id)
               ->groupBy('categories.id')
@@ -231,8 +231,8 @@ function brands(){
 
  function getCode() {
 
-    //$code = App::getLocale();
-    $code = setting('lang');
+    $code = App::getLocale();
+    //$code = setting('lang');
     return $code;
 }
 
@@ -245,7 +245,7 @@ function setting($key){
 }
 
 function setting_2($key){
-   return  \App\StaticTranslation::getBodyByKeyWord($key,getCode());
+   return  \App\Models\StaticTranslation::getBodyByKeyWord($key,getCode());
 }
 
 function count_session_cart()
@@ -259,7 +259,7 @@ function count_session_cart()
 }
 
 function product($id){
-    return \App\Product::find($id);
+    return \App\Models\Product::find($id);
 }
 
 function all_notify()
@@ -270,7 +270,7 @@ function all_notify()
 }
 
 function send_notification($message,$user_id,$data){
-        $user = \App\User::find(1);
+        $user = \App\Models\User::find(1);
         $link = url('order/'.$data->id);
         Notification::create([
             'notifier_id' => $user_id,
@@ -303,7 +303,7 @@ function dir_ar_en()
 
  function is_buy($p_id){
     if(\Auth::guard('client')->check()){
-    $order=\App\Models\Order::join('order_details','orders.id','=','order_details.order_id')
+    $order=\App\Models\Models\Order::join('order_details','orders.id','=','order_details.order_id')
     ->join('products','products.id','=','order_details.product_id')
     ->where('orders.user_id',\Auth::guard('client')->user()->id)
     ->where('orders.status',3)
@@ -325,11 +325,11 @@ function is_not_rate($p_id){
 }
 
 function ads(){
-    $ads = \App\Advertisement::all();
+    $ads = \App\Models\Advertisement::all();
     return $ads;
 }
 
 function last_price($price){
-    $coupons = \App\Coupon::where('user_id',\Auth::guard('client')->user()->id)->where('used',1)->sum('value');
+    $coupons = \App\Models\Coupon::where('user_id',\Auth::guard('client')->user()->id)->where('used',1)->sum('value');
     return $price-$coupons;
 }

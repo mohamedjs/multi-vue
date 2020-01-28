@@ -154,16 +154,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.data.append('value', thisIns.coupon.value);
           thisIns.data.append('number', thisIns.coupon.number);
           thisIns.data.append('expire_date', new Date(thisIns.coupon.expire_date).toISOString().slice(0, 10)); //console.log();
 
-          thisIns.$http.post('api/coupons', thisIns.data, config).then(function (response) {
+          thisIns.$http.post('api/coupons', thisIns.data).then(function (response) {
             if (response.data.status == "success") thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.SError = [];
@@ -466,16 +461,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
           thisIns.DataEdit.append('number', thisIns.coupon.number);
           thisIns.DataEdit.append('value', thisIns.coupon.value);
           thisIns.DataEdit.append('expire_date', new Date(thisIns.coupon.expire_date).toISOString().slice(0, 10));
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('api/coupons/' + thisIns.couponId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('api/coupons/' + thisIns.couponId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

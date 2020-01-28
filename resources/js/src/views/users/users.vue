@@ -243,14 +243,13 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.DataEdit.append('name' , thisIns.user.name)
           thisIns.DataEdit.append('email' , thisIns.user.email)
           thisIns.DataEdit.append('phone' , thisIns.user.phone)
           thisIns.DataEdit.append('password' , thisIns.user.password)
           thisIns.DataEdit.append('password_confirmation' , thisIns.user.password_confirmation)
           thisIns.DataEdit.append('_method' , 'patch')
-          thisIns.$http.post('api/users/'+thisIns.userId, thisIns.DataEdit ,config)
+          thisIns.$http.post('api/users/'+thisIns.userId, thisIns.DataEdit)
             .then(function (response){
                 thisIns.er_active   = false
                 thisIns.errorActive = false

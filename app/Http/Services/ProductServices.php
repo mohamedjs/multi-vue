@@ -41,10 +41,10 @@ class ProductServices
 
         if($request->file('main_image')){
           $img = $this->uploaderService->upload($request->main_image, "product") ;
-          $product->image = $img;
+          $product->main_image = $img;
         }
 
-        $product->fill($request->excep('main_image','images'));
+        $product->fill($request->except('main_image','images'));
 
         $product->save();
 

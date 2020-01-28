@@ -88,13 +88,12 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.data.append('name' , thisIns.user.name)
           thisIns.data.append('email' , thisIns.user.email)
           thisIns.data.append('phone' , thisIns.user.phone)
           thisIns.data.append('password' , thisIns.user.password)
           thisIns.data.append('password_confirmation' , thisIns.user.password_confirmation)
-          thisIns.$http.post('api/users', thisIns.data ,config)
+          thisIns.$http.post('api/users', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

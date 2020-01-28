@@ -1,9 +1,12 @@
 // axios
 import axios from 'axios'
 
-const domain = ""
+const domain = window.location.origin
 
 export default axios.create({
-  domain
-  // You can add your headers here
+  domain,
+  headers: {
+    'X-localization': localStorage.getItem("lang") ? localStorage.getItem("lang") :'en',
+    'content-type': 'multipart/form-data'
+  }
 })

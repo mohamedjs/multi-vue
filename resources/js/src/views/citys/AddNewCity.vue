@@ -77,11 +77,10 @@ export default {
       var thisIns=this;
       this.$validator.validateAll().then(result => {
         if(result) {
-          const config = {  headers: { 'content-type': 'multipart/form-data' } }
           thisIns.data.append('name' , thisIns.city.name)
           thisIns.data.append('shipping_amount' , thisIns.city.shipping_amount)
           thisIns.data.append('state_id' , thisIns.city.state_id.id)
-          thisIns.$http.post(location.origin+'/api/citys', thisIns.data ,config)
+          thisIns.$http.post(location.origin+'/api/citys', thisIns.data)
             .then(function (response){
               if(response.data.status == "success")
                 thisIns.er_active   = false

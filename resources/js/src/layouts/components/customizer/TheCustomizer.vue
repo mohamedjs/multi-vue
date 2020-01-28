@@ -265,7 +265,7 @@ export default {
   computed: {
     footerTypeLocal: {
       get()    { return this.footerType; },
-      set(val) { this.$emit('updateFooter', val) }
+      set(val) { this.$emit('updateFooter', val); localStorage.setItem('footer',val)}
     },
     hideScrollToTopLocal: {
       get()    { return this.hideScrollToTop },
@@ -287,6 +287,7 @@ export default {
       set(val) {
         if (this.navbarType == 'static') return
         this.$emit('updateNavbarColor', val)
+        localStorage.setItem('nav_color',val)
       }
     },
     navbarTypeLocal: {
@@ -299,7 +300,7 @@ export default {
     },
     primaryColor: {
       get()    { return this.$store.state.themePrimaryColor },
-      set(val) { this.$store.commit('UPDATE_PRIMARY_COLOR', val) }
+      set(val) { this.$store.commit('UPDATE_PRIMARY_COLOR', val); localStorage.setItem('color',val)}
     },
     reduced_sidebar: {
       get()    { return this.$store.state.reduceButton },
@@ -325,6 +326,7 @@ export default {
     updatePrimaryColor(color) {
       this.primaryColor = color;
       this.$vs.theme({ primary: color });
+      localStorage.setItem('color',color)
     }
   },
   components: {

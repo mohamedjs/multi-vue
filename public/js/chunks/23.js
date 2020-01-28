@@ -54,6 +54,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/views/ServerError.vue */ "./resources/js/src/views/ServerError.vue");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -210,9 +212,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ServerError: _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ServerError: _views_ServerError_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    'v-select': vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     var _ref;
@@ -297,12 +301,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var thisIns = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
-          var config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
-
           for (var _i = 0, _Object$entries = Object.entries(thisIns.product.title); _i < _Object$entries.length; _i++) {
             var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
                 key = _Object$entries$_i[0],
@@ -312,7 +310,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           thisIns.DataEdit.append('_method', 'patch');
-          thisIns.$http.post('api/products/' + thisIns.productId, thisIns.DataEdit, config).then(function (response) {
+          thisIns.$http.post('api/products/' + thisIns.productId, thisIns.DataEdit).then(function (response) {
             thisIns.er_active = false;
             thisIns.errorActive = false;
             thisIns.popupActive = false;

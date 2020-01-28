@@ -52,7 +52,7 @@ class SettingRequest extends FormRequest
       }
     }
 
-    protected function formatValidationErrors(Validator $validator)
+    protected function formatErrors(Validator $validator)
     {
         return $validator->errors()->all();
     }
