@@ -3,10 +3,10 @@
 namespace App\Models;
 //use Illuminate\Database\Eloquent\ForceDeletes;
 use Illuminate\Database\Eloquent\Model;
-//use App\Traits\Translatable;
+use App\Traits\Translatable;
 class Product extends Model
 {
-    //use Translatable;
+    use Translatable;
     protected $table="products";
   //use ForceDeletes;
   protected $fillable = ['title','main_image','price','special_price_type','special_price',
