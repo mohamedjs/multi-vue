@@ -127,8 +127,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   watch: {
     activeTab: function activeTab() {
-      if (this.$route.params.productId) {
-        this.fetch_product_data(this.$route.params.productId);
+      if (this.$route.params.productId) {//this.fetch_product_data(this.$route.params.productId)
       }
     }
   },
@@ -372,6 +371,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -393,6 +393,18 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('uploadGallery', files[i]);
       }
     },
+    showGallery: function showGallery() {
+      for (var i = 0; i < this.$store.state.product.product.gallery.length; i++) {
+        this.$refs.fileUpload.srcs.push({
+          src: this.$store.state.product.product.gallery[i].image,
+          orientation: 'm',
+          type: 'image',
+          percent: null,
+          error: false,
+          remove: null
+        });
+      }
+    },
     update_avatar: function update_avatar(input) {
       var _this2 = this;
 
@@ -407,6 +419,45 @@ __webpack_require__.r(__webpack_exports__);
 
         reader.readAsDataURL(input.target.files[0]);
         this.$emit('uploadMimg', input.target.files[0]);
+      }
+    },
+    deleteImage: function deleteImage($event) {
+      console.log(this.$refs.fileUpload.srcs);
+      console.log($event);
+      console.log(this.itemRemove);
+      var src = $event.src;
+      var form = new FormData();
+
+      for (var i = 0; i < this.$store.state.product.product.gallery.length; i++) {
+        if (this.$store.state.product.product.gallery[i].image === src) {
+          this.$http.post('/api/delete_image/' + this.$store.state.product.product.gallery[i].id).then(function (response) {
+            if (response.data.status === 'success') {
+              _this.$vs.notify({
+                title: 'Success',
+                text: response.data.message,
+                color: 'success',
+                iconPack: 'feather',
+                icon: 'icon-alert-circle'
+              });
+            } else {
+              _this.$vs.notify({
+                title: 'Error',
+                text: response.data.message,
+                color: 'danger',
+                iconPack: 'feather',
+                icon: 'icon-alert-circle'
+              });
+            }
+          }).catch(function (error) {
+            _this.$vs.notify({
+              title: 'Error',
+              text: error,
+              color: 'danger',
+              iconPack: 'feather',
+              icon: 'icon-alert-circle'
+            });
+          });
+        }
       }
     }
   }
@@ -1211,11 +1262,27 @@ var render = function() {
           text: "Upload Gallery"
         },
         on: {
+          "on-delete": function($event) {
+            return _vm.deleteImage($event)
+          },
           change: function($event) {
             return _vm.uploadGallerys()
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "vs-button",
+        {
+          staticClass: "ml-auto mt-2",
+          on: {
+            click: function($event) {
+              return _vm.showGallery()
+            }
+          }
+        },
+        [_vm._v("Show Image Gallery")]
+      )
     ],
     1
   )

@@ -62,7 +62,7 @@ export default {
   watch: {
     activeTab() {
       if(this.$route.params.productId){
-        this.fetch_product_data(this.$route.params.productId)
+        //this.fetch_product_data(this.$route.params.productId)
       }
     }
   },

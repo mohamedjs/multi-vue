@@ -69,7 +69,7 @@ export default {
     this.$store.dispatch('fetchBrand')
     .then(res => { this.brandOptions = res.data })
     .catch(err => { console.error(err) })
-    
+
   },
   components: {
     'v-select': vSelect,

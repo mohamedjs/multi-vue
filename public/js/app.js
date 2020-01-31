@@ -117201,7 +117201,8 @@ __webpack_require__.r(__webpack_exports__);
     'category_id': '',
     'brand_id': '',
     'stock': '',
-    'min_stock': ''
+    'min_stock': '',
+    'gallery': ''
   }
 });
 

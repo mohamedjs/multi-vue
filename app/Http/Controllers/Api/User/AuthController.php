@@ -39,7 +39,7 @@ class AuthController extends Controller
       $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => $request->password,
+        'password' => \Hash::make($request->password),
         'user_type' => 4
       ]);
       $api_token = $user->createToken('Personal Access Token');
@@ -89,7 +89,7 @@ class AuthController extends Controller
       }
 
       $user = Auth::user();
-      if($user->type != 4){
+      if($user->user_type !== 'User'){
         return response()->json([
           'message' => 'unauthorized user!' ,
           'status' => 'faild' ,
@@ -99,7 +99,7 @@ class AuthController extends Controller
       $api_token = $user->createToken('Personal Access Token');
       $api_token->token->expires_at = Carbon::now()->addWeeks(1);
       $data['token']       = $api_token->accessToken;
-      return response()->json(['message' => 'authorized user!' , 'status' => 'success' , 'data' => $data])->withCookie($cookie);
+      return response()->json(['message' => 'authorized user!' , 'status' => 'success' , 'data' => $data]);
     }
 
     /**
@@ -121,14 +121,5 @@ class AuthController extends Controller
     public function user()
     {
         return response()->json(['message' => 'Successfully created user!' , 'status' => 'ok' , 'data' => Auth::user()]);
-    }
-
-    private function getCookie($token)
-    {
-      return cookie(
-            env('AUTH_COOKIE_NAME'),
-            $token,
-            45000
-        );
     }
 }

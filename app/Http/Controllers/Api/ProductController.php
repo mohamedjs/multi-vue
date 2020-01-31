@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Http\Requests\Api\ProductRequest;
 use App\Http\Repository\ProductRepository;
 use App\Http\Services\ProductServices;
@@ -57,5 +58,15 @@ class ProductController extends Controller
   {
     $product = Product::find($id)->delete();
     return response()->json(['status' => 'success' , 'data' => (object)[] , 'message' => 'Delete Product SuccessFully']);
+  }
+
+  public function deleteImage($id)
+  {
+    $image = ProductImage::find($id);
+    if(!$image){
+      return response()->json(['status' => 'error' , 'data' => (object)[] , 'message' => 'Delete Product SuccessFully']);
+    }
+    $image->delete();
+    return response()->json(['status' => 'success' , 'data' => (object)[] , 'message' => 'Delete Gallery Image SuccessFully']);
   }
 }

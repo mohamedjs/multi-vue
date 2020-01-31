@@ -1,7 +1,7 @@
 export default {
   SET_PRODUCT(state, product) {
     state.product = product
-    state.product.brand_id     = {id:product.brand.id , label :product.brand.title }
+    state.product.brand_id        = {id:product.brand.id , label :product.brand.title }
     state.product.category_id     = {id:product.category.id , label :product.category.title }
   },
   RESET_PRODUCT(state){

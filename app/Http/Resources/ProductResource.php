@@ -40,7 +40,7 @@ class ProductResource extends JsonResource
           'main_image' => $this->main_image,
           'brand' => new BrandResource($this->brand),
           'category' => new CategoryResource($this->category),
-          'gallerys' => $this->gallerys
+          'gallery' => $this->gallery
       ];
       $tlng = [];
       $dlng = [];

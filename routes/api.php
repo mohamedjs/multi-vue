@@ -29,13 +29,28 @@ Route::middleware(['api_cookie'])->group(function () {
   Route::resource('brands','Api\BrandController');
   Route::resource('languages','Api\LanguageController');
   Route::resource('products','Api\ProductController');
+  Route::post('delete_image','Api\ProductController@deleteImage');
   Route::get('all_country', function()
   {
     return \App\Models\Country::select('id','name as label')->get();
   });
-  Route::get('all_state', function()
+  Route::get('all_state', function(Request $request)
   {
-    return \App\Models\State::select('id','name as label')->get();
+    $state =  \App\Models\State::query();
+    if($request->has('country_id')){
+      $state = $state->where('country_id',$request->country_id);
+    }
+    $state = $state->select('id','name as label')->get();
+    return $state;
+  });
+  Route::get('all_city', function(Request $request)
+  {
+    $city =  \App\Models\City::query();
+    if($request->has('state_id')){
+      $city = $city->where('state_id',$request->country_id);
+    }
+    $city = $city->select('id','name as label')->get();
+    return $city;
   });
   Route::get('all_category', function()
   {
@@ -123,7 +138,13 @@ Route::get('items',function(){
 Route::prefix('user')->group(function () {
 Route::post('register', 'Api\User\AuthController@signup');
 Route::post('login', 'Api\User\AuthController@login');
-  //Route::middleware(['auth:api'])->group(function () {
-    Route::get('index', 'Api\User\HomeController@index');
-  //})
+Route::get('index', 'Api\User\HomeController@index');
+Route::get('products', 'Api\User\HomeController@products');
+Route::get('show/{id}', 'Api\User\HomeController@show');
+  Route::middleware(['auth:api'])->group(function () {
+    Route::post('checkout', 'Api\User\HomeController@make_order');
+    Route::post('add_rate', 'Api\User\HomeController@add_rate');
+    Route::post('add_address', 'Api\User\HomeController@add_address');
+    Route::post('update_address', 'Api\User\HomeController@update_address');
+  });
 });

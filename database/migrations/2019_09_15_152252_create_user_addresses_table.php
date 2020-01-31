@@ -15,8 +15,7 @@ class CreateUserAddressesTable extends Migration {
 		Schema::create('user_addresses', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('address', 191);
-			$table->text('details', 65535);
+			$table->text('address', 65535);
 			$table->integer('city_id')->unsigned()->index('user_addresses_city_id_foreign');
 			$table->integer('user_id')->unsigned()->index('user_addresses_user_id_foreign');
 			$table->timestamps();
