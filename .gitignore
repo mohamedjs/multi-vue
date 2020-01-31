@@ -2,7 +2,6 @@
 /public/hot
 /vendor
 /public/uploads
-.env
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

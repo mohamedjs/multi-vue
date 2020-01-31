@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\Language::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\cors::class,
+        \App\Http\Middleware\HttpsProtocol::class,
     ];
 
     /**
@@ -38,6 +39,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\Language::class,
+            \App\Http\Middleware\HttpsProtocol::class,
         ],
 
         'api' => [
