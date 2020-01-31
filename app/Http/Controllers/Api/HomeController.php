@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Product;
 use App\Models\Contact;
-use App\Models\User;
+use App\User;
 use App\Models\UserAddress;
 use App\Models\UserRate;
 use App\Models\State;
