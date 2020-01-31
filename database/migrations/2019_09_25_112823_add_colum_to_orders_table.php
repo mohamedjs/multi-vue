@@ -14,7 +14,7 @@ class AddColumToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->char('lang',4)->after('address_id');
+            $table->char('lang',4)->nullable()->after('address_id');
             $table->tinyInteger('payment')->comment('1-cash , 2-visa , 3-visa in cash')->after('lang');
         });
     }
