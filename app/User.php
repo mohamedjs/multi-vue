@@ -66,7 +66,7 @@ class User extends Authenticatable
     public function cities()
     {
         return $this->belongsToMany('App\Models\City','user_addresses','user_id','city_id')
-        ->withPivot('id','address','details')->withTimestamps();
+        ->withPivot('id','address')->withTimestamps();
     }
 
     public function rates()
