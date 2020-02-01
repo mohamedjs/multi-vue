@@ -231,7 +231,7 @@ function brands(){
 
  function getCode() {
 
-    $code = App::getLocale();
+    $code = \App::getLocale();
     //$code = setting('lang');
     return $code;
 }
