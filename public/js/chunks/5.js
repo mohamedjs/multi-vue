@@ -421,44 +421,8 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('uploadMimg', input.target.files[0]);
       }
     },
-    deleteImage: function deleteImage($event) {
-      console.log(this.$refs.fileUpload.srcs);
-      console.log($event);
-      console.log(this.itemRemove);
-      var src = $event.src;
-      var form = new FormData();
-
-      for (var i = 0; i < this.$store.state.product.product.gallery.length; i++) {
-        if (this.$store.state.product.product.gallery[i].image === src) {
-          this.$http.post('/api/delete_image/' + this.$store.state.product.product.gallery[i].id).then(function (response) {
-            if (response.data.status === 'success') {
-              _this.$vs.notify({
-                title: 'Success',
-                text: response.data.message,
-                color: 'success',
-                iconPack: 'feather',
-                icon: 'icon-alert-circle'
-              });
-            } else {
-              _this.$vs.notify({
-                title: 'Error',
-                text: response.data.message,
-                color: 'danger',
-                iconPack: 'feather',
-                icon: 'icon-alert-circle'
-              });
-            }
-          }).catch(function (error) {
-            _this.$vs.notify({
-              title: 'Error',
-              text: error,
-              color: 'danger',
-              iconPack: 'feather',
-              icon: 'icon-alert-circle'
-            });
-          });
-        }
-      }
+    deleteImage: function deleteImage(index) {
+      console.log(index);
     }
   }
 });
@@ -1263,7 +1227,7 @@ var render = function() {
         },
         on: {
           "on-delete": function($event) {
-            return _vm.deleteImage($event)
+            return _vm.deleteImage()
           },
           change: function($event) {
             return _vm.uploadGallerys()

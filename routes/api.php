@@ -29,7 +29,7 @@ Route::middleware(['api_cookie'])->group(function () {
   Route::resource('brands','Api\BrandController');
   Route::resource('languages','Api\LanguageController');
   Route::resource('products','Api\ProductController');
-  Route::post('delete_image','Api\ProductController@deleteImage');
+  Route::post('delete_image/{id}','Api\ProductController@deleteImage');
   Route::get('all_country', function()
   {
     return \App\Models\Country::select('id','name as label')->get();

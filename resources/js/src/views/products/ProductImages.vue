@@ -8,7 +8,7 @@
         <p class="text-sm mt-2">Allowed JPG, GIF or PNG. Max size of 800kB</p>
       </div>
     </div>
-    <vs-upload multiple :show-upload-button="false" text="Upload Gallery" class="img-upload" @on-delete = "deleteImage($event)"  ref="fileUpload"  @change="uploadGallerys()"  />
+    <vs-upload multiple :show-upload-button="false" text="Upload Gallery" class="img-upload" @on-delete = "deleteImage()"  ref="fileUpload"  @change="uploadGallerys()"  />
     <vs-button class="ml-auto mt-2" @click="showGallery()" >Show Image Gallery</vs-button>
   </vx-card>
 </template>
@@ -50,44 +50,8 @@ export default {
         this.$emit('uploadMimg',input.target.files[0]);
       }
     },
-    deleteImage($event){
-      console.log(this.$refs.fileUpload.srcs);
-      console.log($event);
-      console.log(this.itemRemove);
-      var src = $event.src
-      var form = new FormData()
-      for (var i = 0; i < this.$store.state.product.product.gallery.length; i++) {
-        if(this.$store.state.product.product.gallery[i].image === src){
-          this.$http.post('/api/delete_image/'+ this.$store.state.product.product.gallery[i].id)
-          .then(function (response){
-              if(response.data.status === 'success')
-              {
-                _this.$vs.notify({
-                  title:'Success',
-                  text: response.data.message,
-                  color:'success',
-                  iconPack: 'feather',
-                  icon:'icon-alert-circle'})
-              }
-              else
-              {
-                _this.$vs.notify({
-                    title:'Error',
-                    text: response.data.message,
-                    color:'danger',
-                    iconPack: 'feather',
-                    icon:'icon-alert-circle'})
-              }
-            }).catch(function (error) {
-              _this.$vs.notify({
-                  title:'Error',
-                  text: error,
-                  color:'danger',
-                  iconPack: 'feather',
-                  icon:'icon-alert-circle'})
-            });
-        }
-      }
+    deleteImage(index){
+      console.log(index);
     }
   }
 }
