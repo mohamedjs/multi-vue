@@ -12,7 +12,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, ".back-to-top-fade-enter-active, \n.back-to-top-fade-leave-active {\n  -webkit-transition: opacity .7s;\n  transition: opacity .7s;\n}\n.back-to-top-fade-enter, \n.back-to-top-fade-leave-to {\n  opacity: 0;\n}\n.vue-back-to-top {\n  position: fixed;\n  z-index: 1000;\n}\n[dir] .vue-back-to-top {\n  cursor:pointer;\n}\n.vue-back-to-top .default {\n  color: #ffffff;\n  height: 30px;\n  line-height: 30px;\n  width: 160px;\n}\n[dir] .vue-back-to-top .default {\n  background-color: #f5c85c;\n  border-radius: 3px;\n  text-align: center;\n}\n.vue-back-to-top .default span{\n  color:#ffffff;\n}\n.vue-back-to-top--is-footer {\n  bottom: 50% !important;\n  position: absolute;\n}\n[dir] .vue-back-to-top--is-footer {\n  -webkit-transform: translateY(50%);\n          transform: translateY(50%);\n}", ""]);
+exports.push([module.i, ".back-to-top-fade-enter-active, \n.back-to-top-fade-leave-active {\n  transition: opacity .7s;\n}\n.back-to-top-fade-enter, \n.back-to-top-fade-leave-to {\n  opacity: 0;\n}\n.vue-back-to-top {\n  position: fixed;\n  z-index: 1000;\n}\n[dir] .vue-back-to-top {\n  cursor:pointer;\n}\n.vue-back-to-top .default {\n  color: #ffffff;\n  height: 30px;\n  line-height: 30px;\n  width: 160px;\n}\n[dir] .vue-back-to-top .default {\n  background-color: #f5c85c;\n  border-radius: 3px;\n  text-align: center;\n}\n.vue-back-to-top .default span{\n  color:#ffffff;\n}\n.vue-back-to-top--is-footer {\n  bottom: 50% !important;\n  position: absolute;\n}\n[dir] .vue-back-to-top--is-footer {\n  transform: translateY(50%);\n}", ""]);
 
 // exports
 
