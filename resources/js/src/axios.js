@@ -7,6 +7,7 @@ export default axios.create({
   domain,
   headers: {
     'X-localization': localStorage.getItem("lang") ? localStorage.getItem("lang") :'en',
-    'content-type': 'multipart/form-data'
+    'content-type': 'application/json',
+    'accept'      : 'application/json'
   }
 })

@@ -11,9 +11,3 @@
 |
 */
 Route::get('/{any?}', 'ApplicationController')->where('any', '.*')->fallback();
-// Route::prefix('admin/v1')->group(function () {
-//     Route::middleware(['auth'])->group(function () {
-//         Route::get('/{any?}', 'ApplicationController')->where('any', '.*')->fallback();
-//     });
-// });
-// Auth::routes();

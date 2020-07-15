@@ -42,11 +42,6 @@ const router = new Router({
             component: () => import('./views/Home.vue'),
           },
           {
-            path: '/users',
-            name: 'users',
-            component: () => import('./views/users/users.vue'),
-          },
-          {
               path: '/user',
               name: 'app-user-list',
               component: () => import('@/views/user/user-list/UserList.vue'),
@@ -87,72 +82,7 @@ const router = new Router({
                   pageTitle: 'User Edit',
                 //  rule: 'editor'
               },
-          },
-          {
-            path: '/countrys',
-            name: 'countrys',
-            component: () => import('./views/countries/countrys.vue'),
-          },
-          {
-            path: '/countrys_states/:id',
-            name: 'countrys-states',
-            component: () => import('./views/states/states.vue'),
-          },
-          {
-            path: '/countrys_citys/:id',
-            name: 'countrys-citys',
-            component: () => import('./views/citys/citys.vue'),
-          },
-          {
-            path: 'advertisments',
-            name: 'advertisments',
-            component: () => import('./views/advertisments/advertisments.vue'),
-          },
-          {
-            path: 'categorys',
-            name: 'categorys',
-            component: () => import('./views/categorys/categorys.vue'),
-          },
-          {
-            path: 'categorys/:id',
-            name: 'categorys-subs',
-            component: () => import('./views/categorys/categorys.vue'),
-          },
-          {
-            path: 'coupons',
-            name: 'coupons',
-            component: () => import('./views/coupons/coupons.vue'),
-          },
-          {
-            path: 'settings',
-            name: 'settings',
-            component: () => import('./views/settings/settings.vue'),
-          },
-          {
-            path: 'brands',
-            name: 'brands',
-            component: () => import('./views/brands/brands.vue'),
-          },
-          {
-            path: 'languages',
-            name: 'languages',
-            component: () => import('./views/languages/languages.vue'),
-          },
-          {
-            path: 'products',
-            name: 'products',
-            component: () => import('./views/products/Products.vue'),
-          },
-          {
-            path: 'products-create',
-            name: 'product-add',
-            component: () => import('./views/products/ProductForm.vue'),
-          },
-          {
-            path: 'products-update/:productId',
-            name: 'product-update',
-            component: () => import('./views/products/ProductForm.vue'),
-          }
+          } 
         ]
       },
       // =============================================================================

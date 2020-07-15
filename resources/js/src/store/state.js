@@ -18,16 +18,22 @@ import colors from "@/../themeConfig.js"
 // *From Auth - Data will be received from auth provider
 const userDefaults = {
   id         : 0,          // From Auth
-  name : "John Doe", // From Auth
+  name : "John Doe",       // From Auth
   email : '',
-  //about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
   image    : require("@assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
-  roles    : [],
   phone : '',
   created_at : '',
-  updated_at : ''
-  //status      : "online",
-  //userRole    : "admin"
+  updated_at : '',
+  user_name: "Mahmoud",
+  bod: null,
+  website: null,
+  home_phone: null,
+  status: 1,
+  verified: 0,
+  gender: null,
+  user_type: 1,
+  api_token: "",
+  expired_token: ""
 }
 
 const userInfoLocalStorage = localStorage.getItem("userInfo") || {}

@@ -21,7 +21,7 @@
 import axios from 'axios'
 import Vue from 'vue'
 var data = [];
-axios.get("/api/items").then(function(response){
+axios.get("/api/v1/items").then(function(response){
   for (var i = 0; i < response.data.length; i++) {
     data.push(response.data[i])
   }

@@ -27,7 +27,9 @@ class CreateUsersTable extends Migration {
 			$table->integer('status')->nullable()->comment('1-Active 2-Block 3-Deactive')->default('1');
 			$table->integer('verified')->nullable()->comment('0-no 1-yes')->default('0');
 			$table->integer('gender')->nullable()->comment('1-Male 2-Female');
-			$table->integer('user_type')->nullable()->comment('1-SuperAdmin 2-Admin 3-Staff 4-User');
+			$table->integer('user_type')->nullable()->comment('1-SuperAdmin 2-Admin 3-Staff 4-Client');
+			$table->string('api_token')->nullable();
+			$table->date('expired_token')->nullable();
 			$table->string('remember_token', 100)->nullable();
 			$table->timestamps();
 		});

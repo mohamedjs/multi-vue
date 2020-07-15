@@ -19,13 +19,6 @@ Vue.use(Vuesax)
 // axios
 import axios from "./axios.js"
 Vue.prototype.$http = axios
-axios.interceptors.request.use(config => {
-  config.headers['X-localization'] = localStorage.getItem("lang") ? localStorage.getItem("lang") :'en';
-  return config;
-});
-
-// API Calls
-//import "./http/requests"
 
 // mock
 import "./fake-db/index.js"
@@ -33,17 +26,8 @@ import "./fake-db/index.js"
 // Theme Configurations
 import '../themeConfig.js'
 
-// Firebase
-//import '@/firebase/firebaseConfig'
-
-
-// Auth0 Plugin
-// import AuthPlugin from "./plugins/auth"
-// Vue.use(AuthPlugin);
-
-
 // ACL
-//import acl from './acl/acl'
+// import acl from './acl/acl'
 
 // Globally Registered Components
 import './globalComponents.js'
@@ -79,16 +63,6 @@ Vue.use(VeeValidate,{
   dictionary
 });
 
-//directive can
-Vue.directive('can', function (el, binding) {
-  const permissions = localStorage.getItem("permissions")
-  return (permissions && permissions.indexOf(binding) !== -1 ) ? True : False;
-})
-//directive is
-Vue.directive('is', function (el, binding) {
-  const roles = localStorage.getItem("roles")
-  return (roles && roles.indexOf(binding) !== -1 ) ? True : False;
-})
 // Google Maps
 import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {

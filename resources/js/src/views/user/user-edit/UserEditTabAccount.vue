@@ -12,8 +12,6 @@
     <vs-alert color="success" title="Success" v-show="alertActive" @click="alertActive=false" closable icon-pack="feather"  close-icon="icon-x-circle">
         {{alertSuccess}}.
     </vs-alert>
-    <server-error v-show="errorActive" :alertActi="er_active" :data="SError" />
-    <br><br>
     <!-- Avatar Row -->
     <div class="vx-row">
       <div class="vx-col w-full">
@@ -143,12 +141,10 @@
 import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
-import ServerError from '@/views/ServerError.vue';
 export default {
   components: {
     vSelect,
-    flatPickr,
-    ServerError
+    flatPickr, 
   },
   props: {
     data: {

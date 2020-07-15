@@ -5,7 +5,7 @@
         <feather-icon icon="XIcon" @click.stop="isSidebarActiveLocal = false" class="cursor-pointer"></feather-icon>
     </div>
     <vs-divider class="mb-0"></vs-divider>
-    <server-error v-show="errorActive" :alertActi="er_active" :data="SError" />
+    
     <br>
     <VuePerfectScrollbar class="scroll-area--data-list-add-new pt-4 pb-6" :settings="settings">
       <div class="p-6">
@@ -39,7 +39,6 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import ServerError from '@/views/ServerError.vue';
 
 export default {
   props: {
@@ -152,7 +151,6 @@ export default {
   },
   components: {
     VuePerfectScrollbar,
-    ServerError
   }
 }
 </script>

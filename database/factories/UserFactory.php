@@ -1,5 +1,10 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Constants\UserTypes;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 /*
@@ -13,12 +18,14 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'user_name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => \Str::random(10),
-        'user_type' => $faker->randomElement([2,3,4]),
+        'phone' => $faker->phoneNumber,
+        'user_type' => $faker->randomElement(array_keys(UserTypes::getList())),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'remember_token' => Str::random(10),
     ];
 });

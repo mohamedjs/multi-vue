@@ -81,27 +81,20 @@ export default {
   },
   methods: {
     logout() {
-
-        // if user is logged in via auth0
-        //if (this.$auth.profile) this.$auth.logOut();
-
-        // if user is logged in via firebase
-        // const firebaseCurrentUser = firebase.auth().currentUser
-        //
-        // if (firebaseCurrentUser) {
-        //     firebase.auth().signOut().then(() => {
-        //         this.$router.push('/pages/login').catch(() => {})
-        //     })
-        // }
-        // If JWT login
-        if(localStorage.getItem("userInfo")) {
-          localStorage.removeItem("userInfo")
-          this.$router.push('/login').catch(() => {})
-        }
-
-        // Change role on logout. Same value as initialRole of acj.js
         //this.$acl.change('admin')
         localStorage.removeItem('userInfo')
+
+        // logut out foreget token 
+        this.$store.dispatch('auth/logOut')
+        .then(() => { 
+          this.$vs.notify({
+              title:'Success',
+              text: 'LogOut Succes!',
+              color:'success',
+              iconPack: 'feather',
+              icon:'icon-alert-circle'
+          })
+        })
 
         // This is just for demo Purpose. If user clicks on logout -> redirect
         this.$router.push('/login').catch(() => {})
