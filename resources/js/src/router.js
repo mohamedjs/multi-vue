@@ -39,11 +39,13 @@ const router = new Router({
           {
             path: '/',
             name: 'home',
+            secure: true,
             component: () => import('./views/Home.vue'),
           },
           {
               path: '/user',
               name: 'app-user-list',
+              secure: true,
               component: () => import('@/views/user/user-list/UserList.vue'),
               meta: {
                   breadcrumb: [
@@ -58,6 +60,7 @@ const router = new Router({
           {
               path: '/user-view/:userId',
               name: 'app-user-view',
+              secure: true,
               component: () => import('@/views/user/UserView.vue'),
               meta: {
                   breadcrumb: [
@@ -72,6 +75,7 @@ const router = new Router({
           {
               path: '/user-edit/:userId',
               name: 'app-user-edit',
+              secure: true,
               component: () => import('@/views/user/user-edit/UserEdit.vue'),
               meta: {
                   breadcrumb: [
@@ -98,16 +102,25 @@ const router = new Router({
           {
             path: '/login',
             name: 'Login',
+            secure: false,
             component: () => import('@/views/pages/login/Login.vue')
           },
           {
-            path: '/register',
-            name: 'Register',
-            component: () => import('@/views/pages/register/Register.vue')
+            path: '/pages/forgot-password',
+            name: 'ForgotPassword',
+            secure: false,
+            component: () => import('@/views/pages/ForgotPassword.vue')
+          },
+          {
+            path: '/password/reset/:token',
+            name: 'ResetPassword',
+            secure: false,
+            component: () => import('@/views/pages/ResetPassword.vue')
           },
           {
             path: '/pages/error-404',
             name: 'pageError404',
+            secure: false,
             component: () => import('@/views/pages/Error404.vue')
           },
         ]
@@ -131,7 +144,8 @@ router.afterEach(() => {
 router.beforeEach((to, from, next) => {
   // Remove initial loading
   const accessToken = localStorage.getItem("userInfo")
-  if (!accessToken && to.path !== '/login') {
+
+  if (!accessToken && to.secure) {
     router.push({ path: '/login', query: { to:to.path } }).catch(() => {})
   }
   next()

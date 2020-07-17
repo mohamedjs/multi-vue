@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 Route::prefix('v1')->namespace('Api\Admin')->group(function(){
   Route::post('register', 'AuthController@signup');
   Route::post('login', 'AuthController@login');
-  Route::post('delete_all','Api\HomeController@delete_all');
+  Route::post('forget/password', 'AuthController@forgetPassword');
+  Route::post('reset/password', 'AuthController@resetPassword');
   Route::get('items',function(){
     $array = [];
     $data['url'] = '/';
@@ -32,7 +33,7 @@ Route::prefix('v1')->namespace('Api\Admin')->group(function(){
     array_push($array,(object)$data);
     return $array;
   });
-  Route::middleware('api_cookie')->group(function () {
+  Route::middleware(['auth:api','api_cookie'])->group(function () {
     Route::resource('home','HomeController');
     Route::resource('user','UserController');
     Route::post('logout', 'AuthController@logout');

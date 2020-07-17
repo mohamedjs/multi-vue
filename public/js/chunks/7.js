@@ -125,6 +125,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -406,6 +408,9 @@ var render = function() {
           "data-vv-validate-on": "blur",
           name: "email",
           "icon-no-border": "",
+          danger:
+            _vm.errors.has("email") ||
+            (_vm.res_credentials && !_vm.errors.has("email")),
           icon: "icon icon-user",
           "icon-pack": "feather",
           "label-placeholder": "Email"
@@ -453,6 +458,9 @@ var render = function() {
           "data-vv-validate-on": "blur",
           type: "password",
           name: "password",
+          danger:
+            _vm.errors.has("password") ||
+            (_vm.res_credentials && !_vm.errors.has("email")),
           "icon-no-border": "",
           icon: "icon icon-lock",
           "icon-pack": "feather",
@@ -629,15 +637,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************!*\
   !*** ./resources/js/src/views/pages/login/LoginJWT.vue ***!
   \*********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LoginJWT_vue_vue_type_template_id_3715eed9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginJWT.vue?vue&type=template&id=3715eed9& */ "./resources/js/src/views/pages/login/LoginJWT.vue?vue&type=template&id=3715eed9&");
 /* harmony import */ var _LoginJWT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginJWT.vue?vue&type=script&lang=js& */ "./resources/js/src/views/pages/login/LoginJWT.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _LoginJWT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _LoginJWT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -667,7 +674,7 @@ component.options.__file = "resources/js/src/views/pages/login/LoginJWT.vue"
 /*!**********************************************************************************!*\
   !*** ./resources/js/src/views/pages/login/LoginJWT.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

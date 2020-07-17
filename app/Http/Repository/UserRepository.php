@@ -1,23 +1,19 @@
 <?php
 namespace App\Http\Repository;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserRepository
 {
-    public function UserWithFiltration(Request $request)
+    public function search(Request $request)
     {
-      $users = User::with(['cities.state.country'])->latest('created_at');
-      $per_page  = 10;
-      if($request->has('per_page')){
-        $per_page = $request->per_page;
+      $users = User::query();
+
+      if($request->has('email') && $request->email != ''){
+        $users = $users->where('email',$request->email);
       }
-      if($request->has('search') && $request->search != ''){
-        $users = $users->whereLike(['name', 'email' ,'phone'],$request->search);
-      }
-      $users = $users->get();
-      //$users->appends($request->all());
+      
       return $users;
     }
 }

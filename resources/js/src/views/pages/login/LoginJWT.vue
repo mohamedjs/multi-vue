@@ -5,6 +5,7 @@
         data-vv-validate-on="blur"
         name="email"
         icon-no-border
+        :danger="errors.has('email') || (res_credentials && !errors.has('email')) "
         icon="icon icon-user"
         icon-pack="feather"
         label-placeholder="Email"
@@ -18,6 +19,7 @@
         v-validate="'required|min:6|max:10'"
         type="password"
         name="password"
+        :danger="errors.has('password') || (res_credentials && !errors.has('email')) "
         icon-no-border
         icon="icon icon-lock"
         icon-pack="feather"

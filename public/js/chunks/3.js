@@ -629,7 +629,7 @@ __webpack_require__.r(__webpack_exports__);
     exportToExcel: function exportToExcel() {
       var _this2 = this;
 
-      Promise.all(/*! import() */[__webpack_require__.e(11), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! @/vendor/Export2Excel */ "./resources/js/src/vendor/Export2Excel.js")).then(function (excel) {
+      Promise.all(/*! import() */[__webpack_require__.e(12), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! @/vendor/Export2Excel */ "./resources/js/src/vendor/Export2Excel.js")).then(function (excel) {
         var list = _this2.gridApi.getSelectedRows();
 
         var data = _this2.formatJson(_this2.headerVal, list);

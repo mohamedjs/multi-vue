@@ -11,3 +11,4 @@
 |
 */
 Route::get('/{any?}', 'ApplicationController')->where('any', '.*')->fallback();
+Auth::routes();

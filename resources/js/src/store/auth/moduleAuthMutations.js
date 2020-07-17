@@ -12,7 +12,6 @@ export default {
 
     SET_USER_DATA(state, result) {
       localStorage.setItem("userInfo", result.data.userData)
-      console.log(result.data.userData);
       state.AppActiveUser = result.data.userData
     },
 

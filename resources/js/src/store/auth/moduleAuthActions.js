@@ -31,4 +31,25 @@ export default {
           .catch((error) => { reject(error) })
       })
     },
+
+    forgotPassword({ commit } , payload){
+      return new Promise((resolve,reject) => {
+        axios.post('/api/v1/forget/password',payload)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+      })
+    },
+
+    resetPassword({ commit } , payload){
+      return new Promise((resolve,reject) => {
+        axios.post('/api/v1/reset/password',payload)
+        .then((response) => {
+          commit('SET_USER_DATA', response.data)
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+      })
+    }
 }

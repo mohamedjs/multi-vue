@@ -2,8 +2,13 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Requests\Api\Admin\LoginAttemptRequest;
+use App\Http\Requests\Api\Admin\ForgetPasswordRequest;
+use App\Http\Requests\Api\Admin\ResetPasswordRequest;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Mail\Message;
 use App\Http\Controllers\Api\APIController;
 use App\Http\Services\AuthService;
+use App\Http\Repository\UserRepository;
 use Carbon\Carbon;
 use App\User;
 class AuthController extends APIController
@@ -12,14 +17,19 @@ class AuthController extends APIController
      * @var AuthService
      */
     private $authService;
+     /**
+     * @var userRepository
+     */
+    private $userRepository;
 
     /**
      * AuthController constructor.
      * @param AuthService $authService
      */
-    public function __construct(AuthService $authService)
+    public function __construct(AuthService $authService, UserRepository $userRepository)
     {
         $this->authService = $authService;
+        $this->userRepository = $userRepository;
     }
     /**
      * Login user and create token
@@ -59,10 +69,24 @@ class AuthController extends APIController
      */
     public function logout()
     {
-        return \Auth::user();
-        \Auth::user()->update(['api_token' => '' , 'expired_token' => '']);
-        \Auth::user()->logout();
+        auth()->user()->update(['api_token' => '' , 'expired_token' => null]);
+        cookie()->forget(env("AUTH_COOKIE_NAME"));
         return $this->OK('logout successfull!');
+    }
+
+    public function forgetPassword(ForgetPasswordRequest $request)
+    {
+      $user           = $this->userRepository->search($request)->first();
+      $token          = \Str::random(80);
+      $user->sendPasswordResetNotification($token);
+      return $this->OK([],'Reset Password Link Send To Email Successfully');
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+      $user           = $this->userRepository->search($request)->first();
+      $attempt        = $this->authService->resetPassword($user,$request);
+      return $this->Login($attempt);
     }
 
     private function getCookie($token,$time)
