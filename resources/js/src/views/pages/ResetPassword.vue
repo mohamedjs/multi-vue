@@ -59,7 +59,7 @@
                                     class="w-full mb-8" />
                                 <span class="text-danger w-full text-sm">{{ errors.first('password_confirmation') }}</span>
                                 <div class="flex flex-wrap justify-between flex-col-reverse sm:flex-row">
-                                    <vs-button type="border" to="/pages/login" class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto">Go Back To Login</vs-button>
+                                    <vs-button type="border" to="/login" class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto">Go Back To Login</vs-button>
                                     <vs-button class="w-full sm:w-auto" :disabled="!validateForm" @click="resetPassword">Reset</vs-button>
                                 </div>
 
@@ -76,8 +76,8 @@
 export default {
     data() {
         return {
-            email: this.$route.query.email,
-            token: this.$route.params.token,
+            email: '',
+            token: '',
             password: '',
             password_confirmation: '',
             success_flag: false,
@@ -137,6 +137,10 @@ export default {
                 }
             })
         }
+    },
+    created() {
+        this.email = this.$route.query.email
+        this.token = this.$route.params.token
     },
 }
 </script>

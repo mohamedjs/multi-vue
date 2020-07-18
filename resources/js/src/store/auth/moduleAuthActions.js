@@ -46,10 +46,25 @@ export default {
       return new Promise((resolve,reject) => {
         axios.post('/api/v1/reset/password',payload)
         .then((response) => {
-          commit('SET_USER_DATA', response.data)
+          commit('SET_USER_DATA', response.data.data.userData)
           resolve(response)
         })
         .catch((error) => { reject(error) })
       })
-    }
+    },
+
+    updateUserKey({ commit } , payload){
+      commit('CHANGE_USER_KEY',payload)
+    },
+
+    updateUserData({ commit } , state){
+      return new Promise((resolve,reject) => {
+        axios.post('/api/v1/update/auth/user',state.user)
+        .then((response) => {
+          commit('UPDATE_USER_DATA', response.data.data)
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+      })
+    },
 }

@@ -57,26 +57,7 @@ const actions = {
 
       // Change userInfo in localStorage and store
       dispatch('updateUserInfo', {userRole: payload.userRole})
-    },
-
-    fetchCategory({ commit }) {
-      return new Promise((resolve, reject) => {
-      axios.get('/api/all_category')
-        .then((response) => {
-          resolve(response)
-        })
-        .catch((error) => { console.log(error) ;reject(error) })
-      })
-    },
-    fetchBrand({ commit }) {
-      return new Promise((resolve, reject) => {
-      axios.get('/api/all_brand')
-        .then((response) => {
-          resolve(response)
-        })
-        .catch((error) => { console.log(error) ;reject(error) })
-      })
-    },
+    }
 }
 
 export default actions

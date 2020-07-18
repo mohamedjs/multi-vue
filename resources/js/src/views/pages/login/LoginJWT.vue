@@ -31,7 +31,7 @@
     <div class="flex flex-wrap justify-between my-5">
         <vs-checkbox v-model="checkbox_remember_me" class="mb-3">Remember Me</vs-checkbox>
         <span class="text-danger text-sm">{{ errors.first('checkbox_remember_me') }}</span>
-        <router-link to="/pages/forgot-password">Forgot Password?</router-link>
+        <router-link to="/forgot-password">Forgot Password?</router-link>
     </div>
     <div class="flex flex-wrap justify-between mb-3">
       <vs-button :disabled="!validateForm" @click="loginJWT">Login</vs-button>
@@ -88,7 +88,7 @@ export default {
       }
 
       this.$store.dispatch('auth/Login', payload)
-        .then(() => { 
+        .then((res) => { 
           this.$vs.loading.close()
 
           this.$vs.notify({
@@ -99,12 +99,12 @@ export default {
               icon:'icon-alert-circle'
           })
 
-          redirect_after_login = this.$route.query.to ? this.$route.query.to : '/'
+          this.$store.state.AppActiveUser = res.data.data.userData
           
-          this.$router.push(redirect_after_login).catch(() => {}) 
+          this.$router.push('/').catch(() => {}) 
         })
         .catch(error => 
-        { 
+        {
           this.$vs.loading.close() 
 
           this.$vs.notify({

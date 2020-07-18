@@ -21,6 +21,7 @@
           <div>
             <p class="text-lg font-medium mb-2 mt-4 sm:mt-0">{{ data.name  }}</p>
             <input type="file" class="hidden" ref="update_avatar_input" @change="update_avatar" accept="image/*">
+            
 
             <!-- Toggle comment of below buttons as one for actual flow & currently shown is only for demo -->
             <!-- <vs-button class="mr-4 mb-4">Change Avatar</vs-button> -->

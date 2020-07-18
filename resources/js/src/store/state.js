@@ -36,13 +36,13 @@ const userDefaults = {
   expired_token: ""
 }
 
-const userInfoLocalStorage = localStorage.getItem("userInfo") || {}
+const userInfoLocalStorage = JSON.parse(localStorage.getItem("userInfo")) || {}
 
 // Set default values for active-user
 // More data can be added by auth provider or other plugins/packages
 const getUserInfo = () => {
   let userInfo = {}
-
+  
   // Update property in user
   Object.keys(userDefaults).forEach((key) => {
     // If property is defined in localStorage => Use that
@@ -53,7 +53,7 @@ const getUserInfo = () => {
   Object.keys(userInfoLocalStorage).forEach((key) => {
     if(userInfo[key] == undefined && userInfoLocalStorage[key] != null) userInfo[key] = userInfoLocalStorage[key]
   })
-
+  
   return userInfo
 }
 

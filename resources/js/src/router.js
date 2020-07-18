@@ -41,6 +41,27 @@ const router = new Router({
             name: 'home',
             secure: true,
             component: () => import('./views/Home.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home' },
+              ],
+              pageTitle: 'Home',
+              //rule: 'editor'
+          },
+          },
+          {
+            path: '/profile',
+            name: 'profile',
+            secure: true,
+            component: () => import('@/views/pages/user-settings/UserSettings.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Profile' , active: true},
+              ],
+              pageTitle: 'Profile',
+              //rule: 'editor'
+          },
           },
           {
               path: '/user',
@@ -106,7 +127,7 @@ const router = new Router({
             component: () => import('@/views/pages/login/Login.vue')
           },
           {
-            path: '/pages/forgot-password',
+            path: '/forgot-password',
             name: 'ForgotPassword',
             secure: false,
             component: () => import('@/views/pages/ForgotPassword.vue')

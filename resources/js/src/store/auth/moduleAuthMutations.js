@@ -11,8 +11,11 @@
 export default {
 
     SET_USER_DATA(state, result) {
-      localStorage.setItem("userInfo", result.data.userData)
-      state.AppActiveUser = result.data.userData
+      localStorage.setItem("userInfo",  JSON.stringify(result))
+    },
+
+    CHANGE_USER_KEY(state,payload){
+      state.user[payload.key] = payload.value
     },
 
 }

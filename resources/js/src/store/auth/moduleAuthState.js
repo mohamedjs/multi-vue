@@ -9,5 +9,5 @@
 
 
 export default {
-    user:[]
+    user: JSON.parse(localStorage.getItem('userInfo'))
 }

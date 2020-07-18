@@ -10,5 +10,5 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('password/reset/{token}','App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.reset');
 Route::get('/{any?}', 'ApplicationController')->where('any', '.*')->fallback();
-Auth::routes();
