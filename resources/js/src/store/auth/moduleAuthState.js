@@ -9,5 +9,6 @@
 
 
 export default {
-    user: JSON.parse(localStorage.getItem('userInfo'))
+    user: JSON.parse(localStorage.getItem('userInfo')),
+    formData: new FormData()
 }

@@ -18,4 +18,10 @@ export default {
       state.user[payload.key] = payload.value
     },
 
+    FILL_FORM_DATA(state){
+      for ( var key in state.user ) {
+        state.formData.append(key, state.user[key]);
+      }
+    }
+
 }

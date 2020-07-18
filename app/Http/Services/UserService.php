@@ -8,7 +8,7 @@
 
 namespace App\Http\Services;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserService
@@ -27,20 +27,27 @@ class UserService
         $this->uploaderService = $uploaderService;
     }
 
-    public function fillUserFromRequest(Request $request, User $user = null)
+    public function fill(Request $request, User $user = null)
     {
         if (!$user) {
             $user = new User();
         }
-        $data = $request->all();
-        if($request->hasFile('image')){
-          $img = $this->uploaderService->upload($request->image, "users") ;
-          $data = $request->except(['image']);
-          $data['image'] = $img;
-        }
-        $user->fill($data);
+        
+        $user->fill($request->all());
+
         $user->save();
 
+        if($request->hasFile('image')){
+            $this->updatePhoto($request, $user);
+        }
+
         return $user;
+    }
+
+    public function updatePhoto(Request $request, User $user) {
+        $user->image = $this->uploaderService->upload($request->file("image"), "users");
+        $user->save();
+
+        return true;
     }
 }

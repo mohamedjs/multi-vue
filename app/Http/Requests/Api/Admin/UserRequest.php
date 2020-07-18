@@ -2,7 +2,7 @@
 namespace App\Http\Requests\Api\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
-use App\User;
+use App\Models\User;
 class UserRequest extends FormRequest
 {
     /**
@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
               'name' => 'required|string|max:255',
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required|string|min:6|confirmed',
-              'image' => 'required',
+              'image' => '',
               'phone' => 'unique:users'
             ];
           }

@@ -117,7 +117,14 @@ export default {
 
           if(error.response.status == 422) //validation error
           {
-            this.errors.setErrors(error.response.data.data)
+            // Add errors to VeeValidate Error Bag
+            var entries = Object.entries(error.response.data.data);
+            entries.forEach(function(item, index) {
+                _this.errors.add({
+                    field: item[0],
+                    msg: item[1][0]
+                });
+            });
           }
 
           if(error.response.status == 417) //unauthorized

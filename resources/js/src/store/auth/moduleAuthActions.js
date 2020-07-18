@@ -15,7 +15,8 @@ export default {
       return new Promise((resolve, reject) => {
         axios.post("/api/v1/login", payload)
           .then((response) => {
-            commit('SET_USER_DATA', response.data)
+            console.log(response.data.data.userData)
+            commit('SET_USER_DATA', response.data.data.userData)
             resolve(response)
           })
           .catch((error) => { reject(error) })
@@ -57,11 +58,12 @@ export default {
       commit('CHANGE_USER_KEY',payload)
     },
 
-    updateUserData({ commit } , state){
+    updateUserData({ commit, state }){
       return new Promise((resolve,reject) => {
-        axios.post('/api/v1/update/auth/user',state.user)
+        commit('FILL_FORM_DATA')
+        axios.patch('/api/v1/user/'+state.user.id,state.formData)
         .then((response) => {
-          commit('UPDATE_USER_DATA', response.data.data)
+          commit('SET_USER_DATA', response.data.data)
           resolve(response)
         })
         .catch((error) => { reject(error) })

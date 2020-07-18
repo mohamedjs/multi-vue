@@ -1,42 +1,42 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\User;
-use App\Http\Requests\Api\UserRequest;
+use App\Models\User;
+use App\Http\Requests\Api\Admin\UserRequest;
 use App\Http\Repository\UserRepository;
-use App\Http\Services\UserServices;
+use App\Http\Services\UserService;
 
 class UserController extends Controller
 {
   /**
-   * @var userServices
+   * @var userService
    */
-  private $userServices;
+  private $userService;
   /**
    * @var userRepository
    */
   private $userRepository;
 
-  public function __construct(UserRepository $userRepository ,UserServices $userServices)
+  public function __construct(UserRepository $userRepository ,UserService $userService)
   {
       $this->userRepository = $userRepository  ;
-      $this->userServices   = $userServices    ;
+      $this->userService   = $userService    ;
   }
 
   public function index(Request $request)
   {
-    $users = $this->userRepository->UserWithFiltration(request());
+    $users = $this->userRepository->search(request());
     $data['users'] = $users;
     return response()->json(['status' => 'success' , 'data' => $data , 'message' => 'Get All User']);
   }
 
   public function store(UserRequest $request)
   {
-    $user = $this->userServices->fillUserFromRequest($request);
+    $user = $this->userService->fill($request);
     return response()->json(['data' => $user , 'status' => 'success' , 'message' => 'User Added Successfully']);
   }
 
@@ -48,7 +48,7 @@ class UserController extends Controller
 
   public function update(UserRequest $request,User $user)
   {
-    $user = $this->userServices->fillUserFromRequest($request,$user);
+    $user = $this->userService->fill($request,$user);
     return response()->json(['status' => 'success' , 'data' => $user , 'message' => 'Update User SuccessFully']);
   }
 

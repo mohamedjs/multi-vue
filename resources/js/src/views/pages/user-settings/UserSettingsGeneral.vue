@@ -14,10 +14,36 @@
     </div>
 
     <!-- Info -->
-    <vs-input class="w-full mb-base" @keyup="updateValue('user_name',$event)" label-placeholder="Username" v-model="authUser.user_name"></vs-input>
-    <vs-input class="w-full mb-base" @keyup="updateValue('name',$event)" label-placeholder="Name" v-model="authUser.name"></vs-input>
-    <vs-input class="w-full"         @keyup="updateValue('email',$event)" label-placeholder="Email" v-model="authUser.email"></vs-input>
-
+    <vs-input class="w-full mb-base"
+      v-validate="'required|min:3'"
+      data-vv-validate-on="blur"
+      name="user_name"
+      :danger="errors.has('user_name')"
+      :success="success_flag"
+      @keyup="updateValue('user_name',$event)" 
+      label-placeholder="Username" 
+      v-model="authUser.user_name" />
+    <span class="text-danger text-sm">{{ errors.first('user_name') }}</span>
+    <vs-input class="w-full mb-base"
+      v-validate="'required|min:3'"
+      data-vv-validate-on="blur"
+      name="name"
+      :success="success_flag"
+      :danger="errors.has('name')"
+      @keyup="updateValue('name',$event)" 
+      label-placeholder="Name" 
+      v-model="authUser.name" />
+    <span class="text-danger text-sm">{{ errors.first('name') }}</span>
+    <vs-input class="w-full"
+      v-validate="'required|email|min:3'"
+      data-vv-validate-on="blur"
+      name="email"
+      :success="success_flag"
+      :danger="errors.has('email')"
+      @keyup="updateValue('email',$event)" 
+      label-placeholder="Email" 
+      v-model="authUser.email" />
+    <span class="text-danger text-sm">{{ errors.first('email') }}</span>
     <vs-alert icon-pack="feather" icon="icon-info" class="h-full my-4" color="warning">
       <span>Your account is not verified. <a href="#" class="hover:underline">Resend Confirmation</a></span>
     </vs-alert>
@@ -34,7 +60,8 @@
 export default {
   data() {
     return {
-      authUser: this.$store.state.AppActiveUser
+      authUser: this.$store.state.AppActiveUser,
+      success_flag:false
     }
   },
   methods:{
@@ -61,10 +88,10 @@ export default {
       this.$store.dispatch('auth/updateUserKey',payload)
     },
     updateUserInfo(){
+      var _this = this
       this.$store.dispatch('auth/updateUserData') 
         .then((response) => { 
             this.success_flag = true
-            this.message = response.data.message; 
             this.$vs.notify({
                 title:'Success',
                 text: response.data.message,
@@ -75,6 +102,7 @@ export default {
         })
         .catch(error => 
         { 
+          console.log(error);
             this.$vs.notify({
                 title:'Error',
                 text: error.response.data.message,
@@ -95,6 +123,11 @@ export default {
                     });
                 });
             }
+
+             if(error.response.status == 417) //unauthorized error
+             {
+               this.success_flag = false
+             }
         })
     },
     resetUserInfo(){
