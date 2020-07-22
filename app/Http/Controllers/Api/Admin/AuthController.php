@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Requests\Api\Admin\LoginAttemptRequest;
 use App\Http\Requests\Api\Admin\ForgetPasswordRequest;
 use App\Http\Requests\Api\Admin\ResetPasswordRequest;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Mail\Message;
+use App\Http\Requests\Api\Admin\VerifyRequest;
 use App\Http\Controllers\Api\APIController;
 use App\Http\Services\AuthService;
 use App\Http\Repository\UserRepository;
-use Carbon\Carbon;
-use App\User;
+use App\Http\Resources\UserResource;
+
 class AuthController extends APIController
 {
      /**
@@ -56,7 +55,7 @@ class AuthController extends APIController
       $user = auth()->user();
       $user = $this->authService->generateApiToken($user,$expired_token);
       $cookie = $this->getCookie($user->api_token,$expired_token);
-      $data['userData']       = $user;
+      $data['userData']       = new UserResource($user);
       $data['expaired_token'] = $user->expired_token;
 
       return response()->json(['data' => $data, 'message' => 'authorized user!', 'status' => true], 200)->withCookie($cookie);
@@ -87,6 +86,19 @@ class AuthController extends APIController
       $user           = $this->userRepository->search($request)->first();
       $attempt        = $this->authService->resetPassword($user,$request);
       return $this->Login($attempt);
+    }
+
+    public function sendVerifyEmail()
+    {
+      auth()->user()->sendEmailVerificationNotification();
+      return $this->OK([],'Verifycation Email Send SuccessFully');
+    }
+
+    public function verifyEmail(VerifyRequest $request)
+    {
+        auth()->user()->update(['email_verified_at' => now()]); 
+        $user= new UserResource(auth()->user());
+        return $this->OK($user,'Email Verified SuccessFully');
     }
 
     private function getCookie($token,$time)

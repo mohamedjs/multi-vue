@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 Route::prefix('v1')->namespace('Api\Admin')->group(function(){
-  Route::post('register', 'AuthController@signup');
-  Route::post('login', 'AuthController@login');
-  Route::post('forget/password', 'AuthController@forgetPassword');
-  Route::post('reset/password', 'AuthController@resetPassword');
+  Route::post('register', 'AuthController@signup')->name('api.admin.auth.register');
+  Route::post('login', 'AuthController@login')->name('api.admin.auth.login');
+  Route::post('forget/password', 'AuthController@forgetPassword')->name('api.admin.auth.forget.password');
+  Route::post('reset/password', 'AuthController@resetPassword')->name('api.admin.auth.reset.password');
+
   Route::get('items',function(){
     $array = [];
     $data['url'] = '/';
@@ -34,8 +35,10 @@ Route::prefix('v1')->namespace('Api\Admin')->group(function(){
     return $array;
   });
   Route::middleware(['auth:api','api_cookie'])->group(function () {
-    Route::resource('home','HomeController');
-    Route::resource('user','UserController');
-    Route::post('logout', 'AuthController@logout');
+    Route::resource('home','HomeController',['as' => 'admin']);
+    Route::resource('user','UserController',['as' => 'admin']);
+    Route::post('logout', 'AuthController@logout')->name('api.admin.logout');
+    Route::post('send/verify/email', 'AuthController@sendVerifyEmail')->name('api.admin.send.verify.email');
+    Route::post('verify/email', 'AuthController@verifyEmail')->name('api.admin.verify.email');
   });
 });

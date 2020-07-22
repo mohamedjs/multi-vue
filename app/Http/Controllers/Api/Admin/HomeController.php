@@ -1,26 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cookie;
-use App\Product;
-use App\Models\Contact;
 use App\User;
-use App\Models\UserAddress;
-use App\Models\UserRate;
-use App\Models\State;
-use App\Models\City;
 use App\Models\Cart;
-use App\Models\Category;
 use App\Models\Order;
 use App\Models\Coupon;
-use App\Models\OrderDetail;
-use App\Http\Middleware\Language;
-use Validator;
-use Mail;
-use Braintree_Gateway;
+
 class HomeController extends Controller
 {
   //api for home page to get analyticsData

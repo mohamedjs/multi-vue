@@ -21,39 +21,22 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-      switch($this->method())
-      {
-          case 'GET':
-          case 'DELETE':
-          {
-              return [];
-          }
-          case 'POST':
-          {
-            return [
-              'name' => 'required|string|max:255',
-              'email' => 'required|string|email|max:255|unique:users',
-              'password' => 'required|string|min:6|confirmed',
-              'image' => '',
-              'phone' => 'unique:users'
-            ];
-          }
-          case 'PUT':
-          case 'PATCH':
-          {
-              return [
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,'.$this->user->id,
-                'password' => '',
-                'image' => '',
-                'phone' => 'unique:users,phone,'.$this->user->id,
-              ];
-          }
-          default:break;
+      $rules = [
+        'name' => 'required|string|max:255',
+        'user_name' => 'required|string|max:255',
+        'image' => ''
+      ] ;
+
+      if ($this->isMethod('post')) {
+        $rules['email'] = "required|email|unique:users";
+        $rules['phone'] = 'unique:users';
       }
+      if ($this->isMethod('patch')) {
+        $rules['email'] = 'required|string|email|max:255|unique:users,email,'.$this->user->id;
+        $rules['phone'] = 'unique:users,phone,'.$this->user->id;
+      }
+
+      return $rules;
     }
-    protected function formatValidationErrors(Validator $validator)
-    {
-        return $validator->errors()->all();
-    }
+    
 }

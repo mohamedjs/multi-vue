@@ -19,21 +19,11 @@ import colors from "@/../themeConfig.js"
 const userDefaults = {
   id         : 0,          // From Auth
   name : "John Doe",       // From Auth
+  user_name: "Mahmoud",
   email : '',
   image    : require("@assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
   phone : '',
-  created_at : '',
-  updated_at : '',
-  user_name: "Mahmoud",
-  bod: null,
-  website: null,
-  home_phone: null,
-  status: 1,
-  verified: 0,
-  gender: null,
-  user_type: 1,
-  api_token: "",
-  expired_token: ""
+  email_verified_at : ''
 }
 
 const userInfoLocalStorage = JSON.parse(localStorage.getItem("userInfo")) || {}

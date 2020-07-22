@@ -60,8 +60,8 @@ export default {
 
     updateUserData({ commit, state }){
       return new Promise((resolve,reject) => {
-        commit('FILL_FORM_DATA')
-        axios.patch('/api/v1/user/'+state.user.id,state.formData)
+        commit('FILL_FORM_DATA','patch')
+        axios.post('/api/v1/user/'+state.user.id,state.formData)
         .then((response) => {
           commit('SET_USER_DATA', response.data.data)
           resolve(response)
@@ -69,4 +69,25 @@ export default {
         .catch((error) => { reject(error) })
       })
     },
+
+    sendVerifyEmail({ commit, state }){
+      return new Promise((resolve,reject) => {
+        axios.post('/api/v1/send/verify/email')
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+      }) 
+    },
+
+    checkVerifyEmail({ commit, state },payload){
+      return new Promise((resolve,reject) => {
+        axios.post('/api/v1/verify/email',payload)
+        .then((response) => {
+          commit('SET_USER_DATA', response.data.data)
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+      }) 
+    }
 }

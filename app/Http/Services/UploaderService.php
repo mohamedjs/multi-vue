@@ -25,7 +25,7 @@ class UploaderService
         $file_name = date('YmdHis').mt_rand().'_'.$folder.'.'.$file->getClientOriginalExtension();
 
         if ($file->move($path, $file_name)) {
-            return url('uploads/'.$folder.'/'.$date_path.$file_name);
+            return 'uploads/'.$folder.'/'.$date_path.$file_name;
         }
     }
 }

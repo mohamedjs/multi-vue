@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Requests\Api\Admin\UserRequest;
 use App\Http\Repository\UserRepository;
 use App\Http\Services\UserService;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -49,7 +50,7 @@ class UserController extends Controller
   public function update(UserRequest $request,User $user)
   {
     $user = $this->userService->fill($request,$user);
-    return response()->json(['status' => 'success' , 'data' => $user , 'message' => 'Update User SuccessFully']);
+    return response()->json(['status' => 'success' , 'data' => new UserResource($user) , 'message' => 'Update User SuccessFully']);
   }
 
   public function destroy($id)

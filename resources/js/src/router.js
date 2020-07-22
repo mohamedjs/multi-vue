@@ -61,7 +61,21 @@ const router = new Router({
               ],
               pageTitle: 'Profile',
               //rule: 'editor'
+           },
           },
+          {
+            path: '/email/verify/:userId/:email',
+            name: 'verifeEmail',
+            secure: true,
+            component: () => import('@/views/pages/user-settings/UserSettings.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Profile' , active: true},
+              ],
+              pageTitle: 'Profile',
+              //rule: 'editor'
+           },
           },
           {
               path: '/user',

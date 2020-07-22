@@ -1,15 +1,15 @@
 <template>
-  <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.name">
+  <div class="the-navbar__user-meta flex items-center" v-if="user.user_name">
 
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ activeUserInfo.name }}</p>
+      <p class="font-semibold">{{ user.user_name }}</p>
       <small>Available</small>
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
 
       <div class="con-img ml-3">
-        <img v-if="activeUserInfo.image" key="onlineImg" :src="activeUserInfo.image" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
+        <img v-if="user.image" key="onlineImg" :src="user.image" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
       </div>
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
@@ -37,19 +37,12 @@
 </template>
 
 <script>
-// import firebase from 'firebase/app'
-// import 'firebase/auth'
+// in full builds helpers are exposed as Vuex.mapState
+import { mapState } from 'vuex'
 
 export default {
-  data() {
-    return {
-
-    }
-  },
   computed: {
-    activeUserInfo() {
-      return this.$store.state.AppActiveUser
-    }
+    ...mapState('auth',['user'])
   },
   methods: {
     logout() {
