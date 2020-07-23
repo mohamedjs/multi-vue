@@ -22,12 +22,12 @@ export default {
     FILL_FORM_DATA(state,method){
       state.formData = new FormData()
       for ( var key in state.user ) {
-        if(key != 'email_verified_at')
+        if(key != 'email_verified_at' || key != 'gender')
           state.formData.append(key, state.user[key]);
       }
-      if(method && method != ''){
+      if(key == 'gender')
+        state.formData.append(key, state.user[key] == 'male' ? 1 : 2);
+      if(method && method != '')
         state.formData.append('_method', method);
-      }
     }
-
 }

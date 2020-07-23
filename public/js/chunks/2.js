@@ -103,17 +103,101 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       old_password: "",
-      new_password: "",
-      confirm_new_password: ""
+      password: "",
+      password_confirmation: "",
+      success_flag: false
     };
   },
   computed: {
-    activeUserInfo: function activeUserInfo() {
-      return this.$store.state.AppActiveUser;
+    validateForm: function validateForm() {
+      return !this.errors.any() && this.old_password != '' && this.password != '' && this.password_confirmation != '';
+    }
+  },
+  methods: {
+    updatePassword: function updatePassword() {
+      var _this2 = this;
+
+      var _this = this;
+
+      var payload = {
+        old_password: this.old_password,
+        password: this.password,
+        password_confirmation: this.password_confirmation
+      };
+      this.$store.dispatch('auth/updatePassword', payload).then(function (response) {
+        _this2.success_flag = true;
+
+        _this2.$vs.notify({
+          title: 'Success',
+          text: response.data.message,
+          color: 'success',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle'
+        });
+      }).catch(function (error) {
+        console.log(error);
+
+        _this2.$vs.notify({
+          title: 'Error',
+          text: error.response.data.message,
+          color: 'danger',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle'
+        });
+
+        if (error.response.status == 422) //validation error
+          {
+            _this2.success_flag = false; // Add errors to VeeValidate Error Bag
+
+            var entries = Object.entries(error.response.data.data);
+            entries.forEach(function (item, index) {
+              _this.errors.add({
+                field: item[0],
+                msg: item[1][0]
+              });
+            });
+          }
+
+        if (error.response.status == 417) //unauthorized error
+          {
+            _this2.success_flag = false;
+          }
+      });
     }
   }
 });
@@ -254,7 +338,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       defaultImage: '/images/portrait/small/avatar-s-11.jpg'
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['user'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['user'])), {}, {
+    validateForm: function validateForm() {
+      return !this.errors.any();
+    }
+  }),
   methods: {
     updateValue: function updateValue(key, $event) {
       var payload = {
@@ -456,6 +544,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -504,6 +599,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -514,14 +645,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      bio: this.$store.state.AppActiveUser.about,
-      dob: null,
-      country: "USA",
-      lang_known: ["English", "Russian"],
-      gender: "male",
-      mobile: "",
-      website: "",
-      // Options
+      success_flag: false,
       countryOptions: [{
         label: "Australia",
         value: "australia"
@@ -550,34 +674,90 @@ __webpack_require__.r(__webpack_exports__);
         label: "USA",
         value: "usa"
       }],
-      langOptions: [{
-        label: "English",
-        value: "english"
-      }, {
-        label: "Spanish",
-        value: "spanish"
-      }, {
-        label: "French",
-        value: "french"
-      }, {
-        label: "Russian",
-        value: "russian"
-      }, {
-        label: "German",
-        value: "german"
-      }, {
-        label: "Arabic",
-        value: "arabic"
-      }, {
-        label: "Sanskrit",
-        value: "sanskrit"
-      }]
+      dateConfig: {
+        dateFormat: 'd-m-Y',
+        weekNumbers: true,
+        //show week number
+        monthSelectorType: 'dropdown',
+        //can be static
+        maxDate: moment().format('d-m-Y'),
+        minDate: '01 january 1880',
+        enableTime: false,
+        defaultDate: moment().format('d-m-Y')
+      }
     };
   },
-  computed: {
-    activeUserInfo: function activeUserInfo() {
-      return this.$store.state.AppActiveUser;
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('auth', ['user'])), {}, {
+    validateForm: function validateForm() {
+      return !this.errors.any();
     }
+  }),
+  methods: {
+    updateValue: function updateValue(key, $event) {
+      var payload = {
+        key: key,
+        value: $event.target.value
+      };
+      this.$store.dispatch('auth/updateUserKey', payload);
+    },
+    changeDateValue: function changeDateValue(selectedDates, dateStr, instance) {
+      var payload = {
+        key: 'bod',
+        value: moment(dateStr).format("YYYY-MM-DD")
+      };
+      this.$store.dispatch('auth/updateUserKey', payload);
+    },
+    updateUserInfo: function updateUserInfo() {
+      var _this2 = this;
+
+      var _this = this;
+
+      this.$store.dispatch('auth/updateUserData').then(function (response) {
+        _this2.success_flag = true;
+
+        _this2.$vs.notify({
+          title: 'Success',
+          text: response.data.message,
+          color: 'success',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle'
+        });
+      }).catch(function (error) {
+        console.log(error);
+
+        _this2.$vs.notify({
+          title: 'Error',
+          text: error.response.data.message,
+          color: 'danger',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle'
+        });
+
+        if (error.response.status == 422) //validation error
+          {
+            _this2.success_flag = false; // Add errors to VeeValidate Error Bag
+
+            var entries = Object.entries(error.response.data.data);
+            entries.forEach(function (item, index) {
+              _this.errors.add({
+                field: item[0],
+                msg: item[1][0]
+              });
+            });
+          }
+
+        if (error.response.status == 417) //unauthorized error
+          {
+            _this2.success_flag = false;
+          }
+      });
+    },
+    resetUserInfo: function resetUserInfo() {
+      this.user = '';
+    }
+  },
+  created: function created() {
+    console.log(moment().format('d-m-Y'));
   }
 });
 
@@ -924,8 +1104,23 @@ var render = function() {
     { attrs: { "no-shadow": "" } },
     [
       _c("vs-input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required|min:6",
+            expression: "'required|min:6'"
+          }
+        ],
         staticClass: "w-full mb-base",
-        attrs: { "label-placeholder": "Old Password" },
+        attrs: {
+          "data-vv-validate-on": "blur",
+          name: "old_password",
+          success: _vm.success_flag,
+          danger: _vm.errors.has("old_password"),
+          type: "password",
+          "label-placeholder": "Old Password"
+        },
         model: {
           value: _vm.old_password,
           callback: function($$v) {
@@ -935,37 +1130,90 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _c("span", { staticClass: "text-danger w-full text-sm" }, [
+        _vm._v(_vm._s(_vm.errors.first("old_password")))
+      ]),
+      _vm._v(" "),
       _c("vs-input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required|min:6",
+            expression: "'required|min:6'"
+          }
+        ],
+        ref: "password",
         staticClass: "w-full mb-base",
-        attrs: { "label-placeholder": "New Password" },
+        attrs: {
+          "data-vv-validate-on": "blur",
+          name: "password",
+          success: _vm.success_flag,
+          danger: _vm.errors.has("password"),
+          type: "password",
+          "label-placeholder": "Password"
+        },
         model: {
-          value: _vm.new_password,
+          value: _vm.password,
           callback: function($$v) {
-            _vm.new_password = $$v
+            _vm.password = $$v
           },
-          expression: "new_password"
+          expression: "password"
         }
       }),
       _vm._v(" "),
+      _c("span", { staticClass: "text-danger w-full text-sm" }, [
+        _vm._v(_vm._s(_vm.errors.first("password")))
+      ]),
+      _vm._v(" "),
       _c("vs-input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required|min:6|confirmed:password",
+            expression: "'required|min:6|confirmed:password'"
+          }
+        ],
         staticClass: "w-full mb-base",
-        attrs: { "label-placeholder": "Confirm Password" },
+        attrs: {
+          "data-vv-validate-on": "blur",
+          name: "password_confirmation",
+          success: _vm.success_flag,
+          danger: _vm.errors.has("password_confirmation"),
+          type: "password",
+          "label-placeholder": "Confirm Password"
+        },
         model: {
-          value: _vm.confirm_new_password,
+          value: _vm.password_confirmation,
           callback: function($$v) {
-            _vm.confirm_new_password = $$v
+            _vm.password_confirmation = $$v
           },
-          expression: "confirm_new_password"
+          expression: "password_confirmation"
         }
       }),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-danger w-full text-sm" }, [
+        _vm._v(_vm._s(_vm.errors.first("password_confirmation")))
+      ]),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "flex flex-wrap items-center justify-end" },
         [
-          _c("vs-button", { staticClass: "ml-auto mt-2" }, [
-            _vm._v("Save Changes")
-          ]),
+          _c(
+            "vs-button",
+            {
+              staticClass: "ml-auto mt-2",
+              attrs: { disabled: !_vm.validateForm },
+              on: {
+                click: function($event) {
+                  return _vm.updatePassword()
+                }
+              }
+            },
+            [_vm._v("Save Changes")]
+          ),
           _vm._v(" "),
           _c(
             "vs-button",
@@ -1308,6 +1556,7 @@ var render = function() {
             "vs-button",
             {
               staticClass: "ml-auto mt-2",
+              attrs: { disabled: !_vm.validateForm },
               on: {
                 click: function($event) {
                   return _vm.updateUserInfo()
@@ -1363,17 +1612,6 @@ var render = function() {
     "vx-card",
     { attrs: { "no-shadow": "" } },
     [
-      _c("vs-textarea", {
-        attrs: { label: "Bio", placeholder: "Your bio..." },
-        model: {
-          value: _vm.bio,
-          callback: function($$v) {
-            _vm.bio = $$v
-          },
-          expression: "bio"
-        }
-      }),
-      _vm._v(" "),
       _c(
         "div",
         { staticClass: "mt-8" },
@@ -1381,91 +1619,145 @@ var render = function() {
           _c("label", { staticClass: "text-sm" }, [_vm._v("Birth Date")]),
           _vm._v(" "),
           _c("flat-pickr", {
+            directives: [
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required",
+                expression: "'required'"
+              }
+            ],
             staticClass: "w-full",
-            attrs: { config: { dateFormat: "d F Y" } },
-            model: {
-              value: _vm.dob,
-              callback: function($$v) {
-                _vm.dob = $$v
-              },
-              expression: "dob"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "mt-8" },
-        [
-          _c("label", { staticClass: "text-sm" }, [_vm._v("Country")]),
-          _vm._v(" "),
-          _c("v-select", {
             attrs: {
-              options: _vm.countryOptions,
-              dir: _vm.$vs.rtl ? "rtl" : "ltr"
+              "data-vv-validate-on": "blur",
+              name: "dob",
+              danger: _vm.errors.has("bod"),
+              success: _vm.success_flag,
+              config: _vm.dateConfig
             },
+            on: { "on-change": _vm.changeDateValue },
             model: {
-              value: _vm.country,
+              value: _vm.user.bod,
               callback: function($$v) {
-                _vm.country = $$v
+                _vm.$set(_vm.user, "bod", $$v)
               },
-              expression: "country"
+              expression: "user.bod"
             }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "mt-8" },
-        [
-          _c("label", { staticClass: "text-sm" }, [_vm._v("Languages")]),
+          }),
           _vm._v(" "),
-          _c("v-select", {
-            attrs: {
-              multiple: "",
-              closeOnSelect: false,
-              options: _vm.langOptions,
-              dir: _vm.$vs.rtl ? "rtl" : "ltr"
-            },
-            model: {
-              value: _vm.lang_known,
-              callback: function($$v) {
-                _vm.lang_known = $$v
-              },
-              expression: "lang_known"
-            }
-          })
+          _c("span", { staticClass: "text-danger text-sm" }, [
+            _vm._v(_vm._s(_vm.errors.first("dob")))
+          ])
         ],
         1
       ),
       _vm._v(" "),
       _c("vs-input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required|numeric|min:11",
+            expression: "'required|numeric|min:11'"
+          }
+        ],
         staticClass: "w-full mt-8",
-        attrs: { type: "number", "label-placeholder": "Mobile" },
+        attrs: {
+          "data-vv-validate-on": "blur",
+          name: "phone",
+          danger: _vm.errors.has("phone"),
+          success: _vm.success_flag,
+          type: "number",
+          "label-placeholder": "Mobile"
+        },
+        on: {
+          keyup: function($event) {
+            return _vm.updateValue("phone", $event)
+          }
+        },
         model: {
-          value: _vm.mobile,
+          value: _vm.user.phone,
           callback: function($$v) {
-            _vm.mobile = $$v
+            _vm.$set(_vm.user, "phone", $$v)
           },
-          expression: "mobile"
+          expression: "user.phone"
         }
       }),
       _vm._v(" "),
+      _c("span", { staticClass: "text-danger text-sm" }, [
+        _vm._v(_vm._s(_vm.errors.first("phone")))
+      ]),
+      _vm._v(" "),
       _c("vs-input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required|numeric|min:6",
+            expression: "'required|numeric|min:6'"
+          }
+        ],
         staticClass: "w-full mt-8",
-        attrs: { "label-placeholder": "Website" },
+        attrs: {
+          "data-vv-validate-on": "blur",
+          name: "home_phone",
+          danger: _vm.errors.has("home_phone"),
+          success: _vm.success_flag,
+          type: "number",
+          "label-placeholder": "Mobile"
+        },
+        on: {
+          keyup: function($event) {
+            return _vm.updateValue("home_phone", $event)
+          }
+        },
         model: {
-          value: _vm.website,
+          value: _vm.user.home_phone,
           callback: function($$v) {
-            _vm.website = $$v
+            _vm.$set(_vm.user, "home_phone", $$v)
           },
-          expression: "website"
+          expression: "user.home_phone"
         }
       }),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-danger text-sm" }, [
+        _vm._v(_vm._s(_vm.errors.first("home_phone")))
+      ]),
+      _vm._v(" "),
+      _c("vs-input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required|url",
+            expression: "'required|url'"
+          }
+        ],
+        staticClass: "w-full mt-8",
+        attrs: {
+          "data-vv-validate-on": "blur",
+          name: "website",
+          danger: _vm.errors.has("website"),
+          success: _vm.success_flag,
+          "label-placeholder": "Website"
+        },
+        on: {
+          keyup: function($event) {
+            return _vm.updateValue("website", $event)
+          }
+        },
+        model: {
+          value: _vm.user.website,
+          callback: function($$v) {
+            _vm.$set(_vm.user, "website", $$v)
+          },
+          expression: "user.website"
+        }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-danger text-sm" }, [
+        _vm._v(_vm._s(_vm.errors.first("website")))
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-8 mb-base" }, [
         _c("label", { staticClass: "text-sm" }, [_vm._v("Gender")]),
@@ -1480,11 +1772,11 @@ var render = function() {
                 staticClass: "mr-4",
                 attrs: { "vs-value": "male" },
                 model: {
-                  value: _vm.gender,
+                  value: _vm.user.gender,
                   callback: function($$v) {
-                    _vm.gender = $$v
+                    _vm.$set(_vm.user, "gender", $$v)
                   },
-                  expression: "gender"
+                  expression: "user.gender"
                 }
               },
               [_vm._v("Male")]
@@ -1496,29 +1788,14 @@ var render = function() {
                 staticClass: "mr-4",
                 attrs: { "vs-value": "female" },
                 model: {
-                  value: _vm.gender,
+                  value: _vm.user.gender,
                   callback: function($$v) {
-                    _vm.gender = $$v
+                    _vm.$set(_vm.user, "gender", $$v)
                   },
-                  expression: "gender"
+                  expression: "user.gender"
                 }
               },
               [_vm._v("Female")]
-            ),
-            _vm._v(" "),
-            _c(
-              "vs-radio",
-              {
-                attrs: { "vs-value": "other" },
-                model: {
-                  value: _vm.gender,
-                  callback: function($$v) {
-                    _vm.gender = $$v
-                  },
-                  expression: "gender"
-                }
-              },
-              [_vm._v("Other")]
             )
           ],
           1
@@ -1529,15 +1806,18 @@ var render = function() {
         "div",
         { staticClass: "flex flex-wrap items-center justify-end" },
         [
-          _c("vs-button", { staticClass: "ml-auto mt-2" }, [
-            _vm._v("Save Changes")
-          ]),
+          _c(
+            "vs-button",
+            { staticClass: "ml-auto mt-2", on: { click: _vm.updateUserInfo } },
+            [_vm._v("Save Changes")]
+          ),
           _vm._v(" "),
           _c(
             "vs-button",
             {
               staticClass: "ml-4 mt-2",
-              attrs: { type: "border", color: "warning" }
+              attrs: { type: "border", color: "warning" },
+              on: { click: _vm.resetUserInfo }
             },
             [_vm._v("Reset")]
           )

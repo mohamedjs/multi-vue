@@ -23,6 +23,10 @@ const userDefaults = {
   email : '',
   image    : require("@assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
   phone : '',
+  home_phone:'',
+  bod:'',
+  website:'',
+  gender:'',
   email_verified_at : ''
 }
 

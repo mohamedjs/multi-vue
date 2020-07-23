@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validateForm: function validateForm() {
-      return !this.errors.any() && this.email != '' && this.password != '';
+      return !this.errors.any() && this.email != '' && this.password != '' && this.password_confirmation != '';
     }
   },
   methods: {

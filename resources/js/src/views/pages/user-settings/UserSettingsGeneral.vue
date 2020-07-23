@@ -69,8 +69,8 @@ export default {
   },
   computed: {
     ...mapState('auth',['user']),
-     validateForm() {
-      return !this.errors.any() && this.email != '' && this.password != '';
+    validateForm() {
+      return !this.errors.any();
     }
   },
   methods:{

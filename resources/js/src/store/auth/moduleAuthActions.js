@@ -89,5 +89,15 @@ export default {
         })
         .catch((error) => { reject(error) })
       }) 
+    },
+
+    updatePassword({commit} , payload){
+      return new Promise((resolve,reject) => {
+        axios.post('api/v1/update/password',payload)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+      })
     }
 }
