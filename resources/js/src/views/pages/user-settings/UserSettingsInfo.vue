@@ -110,10 +110,10 @@ export default {
           dateFormat: 'd-m-Y',
           weekNumbers:true, //show week number
           monthSelectorType:'dropdown', //can be static
-          maxDate:moment().format('d-m-Y'),
-          minDate:'01 january 1880',
+          // maxDate:moment().format('d-m-Y'),
+          // minDate:'01-05-1991',
           enableTime : false,
-          defaultDate:moment().format('d-m-Y'),
+          // defaultDate:moment().format('d-m-Y'),
       }
     }
   },

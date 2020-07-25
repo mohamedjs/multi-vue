@@ -680,10 +680,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //show week number
         monthSelectorType: 'dropdown',
         //can be static
-        maxDate: moment().format('d-m-Y'),
-        minDate: '01 january 1880',
-        enableTime: false,
-        defaultDate: moment().format('d-m-Y')
+        // maxDate:moment().format('d-m-Y'),
+        // minDate:'01-05-1991',
+        enableTime: false // defaultDate:moment().format('d-m-Y'),
+
       }
     };
   },

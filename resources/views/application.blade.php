@@ -38,7 +38,7 @@
     </div>
 
     <!-- <script src="js/app.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset(mix('js/app.js')) }}"></script>
 
   </body>

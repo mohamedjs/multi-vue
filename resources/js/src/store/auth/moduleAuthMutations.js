@@ -22,7 +22,7 @@ export default {
     FILL_FORM_DATA(state,method){
       state.formData = new FormData()
       for ( var key in state.user ) {
-        if(key != 'email_verified_at' || key != 'gender')
+        if(key != 'email_verified_at')
           state.formData.append(key, state.user[key]);
       }
       if(key == 'gender')
