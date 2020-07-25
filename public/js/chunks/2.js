@@ -338,7 +338,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       defaultImage: '/images/portrait/small/avatar-s-11.jpg'
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['user'])), {}, {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['user']), {
     validateForm: function validateForm() {
       return !this.errors.any();
     }
@@ -675,7 +675,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: "usa"
       }],
       dateConfig: {
-        dateFormat: 'd-m-Y',
+        dateFormat: 'd F Y',
         weekNumbers: true,
         //show week number
         monthSelectorType: 'dropdown',
@@ -687,7 +687,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('auth', ['user'])), {}, {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('auth', ['user']), {
     validateForm: function validateForm() {
       return !this.errors.any();
     }
@@ -703,7 +703,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     changeDateValue: function changeDateValue(selectedDates, dateStr, instance) {
       var payload = {
         key: 'bod',
-        value: moment(dateStr).format("YYYY-MM-DD")
+        value: moment(dateStr).format("d M Y")
       };
       this.$store.dispatch('auth/updateUserKey', payload);
     },
@@ -1012,63 +1012,6 @@ var render = function() {
             "div",
             { staticClass: "tab-info md:ml-4 md:mt-0 mt-4 ml-0" },
             [_c("user-settings-info")],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "vs-tab",
-        {
-          attrs: {
-            "icon-pack": "feather",
-            icon: "icon-github",
-            label: !_vm.isSmallerScreen ? "Social Links" : ""
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "tab-social-links md:ml-4 md:mt-0 mt-4 ml-0" },
-            [_c("user-settings-social-links")],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "vs-tab",
-        {
-          attrs: {
-            "icon-pack": "feather",
-            icon: "icon-link-2",
-            label: !_vm.isSmallerScreen ? "Connections" : ""
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "tab-text md:ml-4 md:mt-0 mt-4 ml-0" },
-            [_c("user-settings-connections")],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "vs-tab",
-        {
-          attrs: {
-            "icon-pack": "feather",
-            icon: "icon-bell",
-            label: !_vm.isSmallerScreen ? "Notifications" : ""
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "tab-text md:ml-4 md:mt-0 mt-4 ml-0" },
-            [_c("user-settings-notifications")],
             1
           )
         ]

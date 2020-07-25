@@ -24,9 +24,9 @@ export default {
       for ( var key in state.user ) {
         if(key != 'email_verified_at')
           state.formData.append(key, state.user[key]);
+        if(key == 'gender')
+          state.formData.append(key, state.user[key] == 'male' ? 1 : 2);
       }
-      if(key == 'gender')
-        state.formData.append(key, state.user[key] == 'male' ? 1 : 2);
       if(method && method != '')
         state.formData.append('_method', method);
     }

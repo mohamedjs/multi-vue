@@ -125,6 +125,7 @@ class AuthController extends APIController
     public function verifyEmail(VerifyRequest $request)
     {
         $request->merge(['email_verified_at' => now()]);
+        $request->merge(['email' => auth()->user()->email]);
         $user = $this->userService->fill($request, auth()->user());
         return $this->OK(new UserResource($user), 'Email Verified SuccessFully');
     }

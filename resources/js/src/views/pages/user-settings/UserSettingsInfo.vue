@@ -107,7 +107,7 @@ export default {
         { label: "USA",        value: "usa"        },
       ],
       dateConfig:{
-          dateFormat: 'd-m-Y',
+          dateFormat: 'd F Y',
           weekNumbers:true, //show week number
           monthSelectorType:'dropdown', //can be static
           // maxDate:moment().format('d-m-Y'),
@@ -129,7 +129,7 @@ export default {
       this.$store.dispatch('auth/updateUserKey',payload)
     },
     changeDateValue(selectedDates, dateStr, instance){
-      const payload = {key:'bod', value:moment(dateStr).format("YYYY-MM-DD")}
+      const payload = {key:'bod', value:moment(dateStr).format("d M Y")}
       this.$store.dispatch('auth/updateUserKey',payload)
     },
     updateUserInfo(){

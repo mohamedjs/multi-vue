@@ -17,7 +17,7 @@
         <user-settings-info />
       </div>
     </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-github" :label="!isSmallerScreen ? 'Social Links' : ''">
+    <!-- <vs-tab icon-pack="feather" icon="icon-github" :label="!isSmallerScreen ? 'Social Links' : ''">
       <div class="tab-social-links md:ml-4 md:mt-0 mt-4 ml-0">
         <user-settings-social-links />
       </div>
@@ -31,7 +31,7 @@
       <div class="tab-text md:ml-4 md:mt-0 mt-4 ml-0">
         <user-settings-notifications />
       </div>
-    </vs-tab>
+    </vs-tab> -->
   </vs-tabs>
 </template>
 
