@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\Language::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\cors::class,
+        \App\Http\Middleware\InjectUserIdIfAuthenticated::class,
     ];
 
     /**
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \App\Http\Middleware\JsonifyHttpReponse::class,
         ],
     ];
 

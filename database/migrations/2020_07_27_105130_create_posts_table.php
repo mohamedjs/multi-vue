@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title')->unique();
             $table->text('body');
             $table->date('approved_at')->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->timestamps();
         });
     }

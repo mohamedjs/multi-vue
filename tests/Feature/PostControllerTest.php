@@ -1,0 +1,53 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Tests\TestCase;
+
+class PostControllerTest extends TestCase
+{    
+    /**
+     * is_should_return_a_redirect_if_validation_fails
+     *
+     * Check Error In Validation and check status id 422 and check that expected error in attrbuite body  (assertJsonValidationErrors)
+     * 
+     * @return void
+     */
+
+    /** @test */
+    public function is_should_return_a_redirect_if_validation_fails()
+    {
+        $this->post('api/posts', [
+            'title' => 'new title'
+        ])->assertStatus(422)->assertJsonValidationErrors([
+            'body'
+        ]);
+    }
+
+    /**
+     * is_should_create_post_with_user_id_associate_automaticaly_through_middlware
+     *
+     * create new post with user id about way add user id from middlware dynamic
+     * 
+     * @return void
+     */
+    
+    /** @test */
+    public function is_should_create_post_with_user_id_associate_automaticaly_through_middlware()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $this->post('api/posts', [
+            'title' => 'new title',
+            'body'  => 'new body'
+        ])->assertStatus(201);
+        
+        
+        $this->assertDatabaseHas('posts', [
+            'title' => 'new title',
+            'body'  => 'new body',
+            'user_id' => auth()->id()
+        ]);
+    }
+}

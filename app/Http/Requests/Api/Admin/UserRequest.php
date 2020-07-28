@@ -3,6 +3,8 @@ namespace App\Http\Requests\Api\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+
 class UserRequest extends FormRequest
 {
     /**
@@ -24,7 +26,10 @@ class UserRequest extends FormRequest
       $rules = [
         'name' => 'required|string|max:255',
         'user_name' => 'required|string|max:255',
-        'image' => ''
+        'image' => '',
+        'address'=> Rule::exists('address','id')->where(function(Builder $builder) {
+          return $builder->where('user_id',$this->user()->id);
+        })
       ] ;
 
       if ($this->isMethod('post')) {
@@ -39,4 +44,33 @@ class UserRequest extends FormRequest
       return $rules;
     }
     
+        
+    /**
+     * messages
+     *
+     * function can with it make custom message for validation
+     * 
+     * @return void
+     */
+    public function messages()
+    {
+      return [
+        'email.required' => 'You Should Enter Email'
+      ];
+    }
+    
+    
+    /**
+     * attributes
+     *
+     * function can with it custom attributes to show it like we want 
+     * 
+     * @return void
+     */
+    public function attributes()
+    {
+      return [
+        'user_name' => 'User Name'
+      ]
+    }
 }

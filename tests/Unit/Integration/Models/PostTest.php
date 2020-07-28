@@ -11,15 +11,25 @@ class PostTest extends TestCase
 {    
     /**
      * setUp
+     * 
      * to test first function after that refresh database to test second function to not repeate data
+     * 
      * @return void
      */
     public function setUp() : void
     {
         parent::setUp();
     }
+   
+    /**
+     * it_should_render_approved_posts_only
+     *
+     * create posts and check if approved posts is equel 4
+     * 
+     * @return void
+     */
 
-    /** @test */
+    /** @test */ 
     public function it_should_render_approved_posts_only()
     {
         factory(Post::class, 3)->create();
@@ -27,8 +37,16 @@ class PostTest extends TestCase
         $post = new Post;
         $this->assertCount(4, $post->approved()->get());
     }
+   
+    /**
+     * it_should_render_diss_approved_posts_only
+     *
+     * create posts and check if not approved is equal 3
+     * 
+     * @return void
+     */
 
-    /** @test */
+    /** @test */ 
     public function it_should_render_diss_approved_posts_only()
     {
         factory(Post::class, 3)->create();

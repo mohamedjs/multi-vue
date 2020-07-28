@@ -17,6 +17,10 @@ class UserController extends Controller
     {
         $userRepositry = new UserRepository(); //memory reserve one variable beacuse the name of instance of object like object name
         $user          = new UserRepository(); //memory reserve two variable
+        $this->middleware('auth',[
+            'except' => ['index'],
+            'only'   => ['store', 'update']
+        ]);
     }
     
     /**
