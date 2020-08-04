@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Traits\FetshesApprove;
+use App\Traits\CanBeFiltered;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {    
-    use FetshesApprove;
+    use FetshesApprove, CanBeFiltered;
     /**
      * fillable
      * for declar attrubuite in tables

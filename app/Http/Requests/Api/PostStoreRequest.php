@@ -14,7 +14,8 @@ class PostStoreRequest extends FormRequest
     {
         return [
             "title"=>'required',
-            "body" => "required"
+            "body" => "required",
+            "image" => "required"
         ];
     }
 }

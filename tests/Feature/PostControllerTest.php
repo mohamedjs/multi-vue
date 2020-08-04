@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
@@ -17,14 +18,14 @@ class PostControllerTest extends TestCase
      */
 
     /** @test */
-    public function is_should_return_a_redirect_if_validation_fails()
-    {
-        $this->post('api/posts', [
-            'title' => 'new title'
-        ])->assertStatus(422)->assertJsonValidationErrors([
-            'body'
-        ]);
-    }
+    // public function is_should_return_a_redirect_if_validation_fails()
+    // {
+    //     $this->post('api/posts', [
+    //         'title' => 'new title'
+    //     ])->assertStatus(422)->assertJsonValidationErrors([
+    //         'body'
+    //     ]);
+    // }
 
     /**
      * is_should_create_post_with_user_id_associate_automaticaly_through_middlware
@@ -35,23 +36,39 @@ class PostControllerTest extends TestCase
      */
     
     /** @test */
-    public function is_should_create_post_with_user_id_associate_automaticaly_through_middlware()
+    // public function is_should_create_post_with_user_id_associate_automaticaly_through_middlware()
+    // {
+    //     \Storage::fake('local');
+
+    //     $this->actingAs(factory(User::class)->create());
+
+    //     $this->post('api/posts', [
+    //         'title' => 'new title',
+    //         'body'  => 'new body',
+    //         'image' =>  UploadedFile::fake()->image('thread.png')
+    //     ])->assertStatus(201);
+        
+        
+    //     $this->assertDatabaseHas('posts', [
+    //         'title' => 'new title',
+    //         'body'  => 'new body',
+    //         'user_id' => auth()->id()
+    //     ]);
+    // }
+
+    /** @test */
+    public function is_should_return_approved_posts_of_specfic_title()
     {
-        \Storage::fake('local');
+       factory(Post::class, 4)->states('approved')->create([
+           'body' => 'title'
+       ]);
+       
+       factory(Post::class, 3)->states('approved')->create([
+           'body' => 'mohamed'
+       ]);
 
-        $this->actingAs(factory(User::class)->create());
+       $response = $this->get('api/posts?body=mohamed')->assertStatus(200);
 
-        $this->post('api/posts', [
-            'title' => 'new title',
-            'body'  => 'new body',
-            'image' =>  UploadedFile::fake()->image('thread.png')
-        ])->assertStatus(201);
-        
-        
-        $this->assertDatabaseHas('posts', [
-            'title' => 'new title',
-            'body'  => 'new body',
-            'user_id' => auth()->id()
-        ]);
+       $this->assertEquals(3,count($response->json()['posts']));
     }
 }

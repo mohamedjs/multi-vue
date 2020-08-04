@@ -27,12 +27,12 @@ class PostRepository
     /**
      * __call
      *
-     * @param  mixed $name
+     * @param  function $method
      * @param  mixed $arguments
-     * @return void
+     * @return func
      */
-    public function __call($name, $arguments)
+    public function __call($method, $args)
     {
-        $this->post->$name(...$arguments);
+        return call_user_func_array([$this->post, $method], $args);
     }
 }
