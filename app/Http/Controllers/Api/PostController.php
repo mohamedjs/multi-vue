@@ -10,6 +10,6 @@ class PostController extends Controller
 {
     public function store(PostStoreRequest $request)
     {
-        return app(PostStoreService::class)->handle($request->validated());
+        return app(PostStoreService::class)->handle($request->all());
     }
 }

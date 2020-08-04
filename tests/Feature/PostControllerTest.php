@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class PostControllerTest extends TestCase
@@ -36,11 +37,14 @@ class PostControllerTest extends TestCase
     /** @test */
     public function is_should_create_post_with_user_id_associate_automaticaly_through_middlware()
     {
+        \Storage::fake('local');
+
         $this->actingAs(factory(User::class)->create());
 
         $this->post('api/posts', [
             'title' => 'new title',
-            'body'  => 'new body'
+            'body'  => 'new body',
+            'image' =>  UploadedFile::fake()->image('thread.png')
         ])->assertStatus(201);
         
         

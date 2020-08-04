@@ -17,6 +17,7 @@ class Post extends Model
         'title',
         'body',
         'approved_at',
+        'image',
         'user_id'
     ];
     

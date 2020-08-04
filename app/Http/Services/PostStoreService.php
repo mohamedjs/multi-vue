@@ -6,6 +6,8 @@ use App\Http\Repositories\PostRepository;
 
 class PostStoreService
 {    
+    const IMAGE_PATH = "public/images" ;
+
     /**
      * posts
      *
@@ -34,7 +36,16 @@ class PostStoreService
      */
     public function handle($request)
     {
-        $this->posts->create($request);
+        $this->posts->create(
+            array_merge($request, [
+                'image' => $this->handleFileUpload($request['image'])->getFileName()
+            ])
+        );
         return response(null, 201);
+    }
+
+    protected function handleFileUpload($file)
+    {
+        return (new LocalFileUploadService($file))->save(self::IMAGE_PATH);
     }
 }
