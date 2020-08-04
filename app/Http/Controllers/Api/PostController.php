@@ -4,14 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\PostStoreRequest;
-use App\Models\Post;
+use App\Http\Services\PostStoreService;
 
 class PostController extends Controller
 {
     public function store(PostStoreRequest $request)
     {
-        Post::create($request->validated());
-
-        return response()->json(null,201);
+        return app(PostStoreService::class)->handle($request->validated());
     }
 }
