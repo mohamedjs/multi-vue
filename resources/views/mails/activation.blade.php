@@ -1,0 +1,1 @@
+<p> Your Activation Code is {{ $token }}</p>

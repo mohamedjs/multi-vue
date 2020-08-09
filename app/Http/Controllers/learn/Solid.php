@@ -4,7 +4,7 @@
 
 // S. Single Responsabilty Principle SRP
     // 1- in charge of one responsabilty and have one reason to change 
-    // 2- any function is responsabilty about one things not do alot of things in it like register function responseabilty about register user and return it not responsabilty about
+    // 2- any function is responsabilty about one things not do alot of things in it like register function responseabilty about register user and return it not     responsabilty about
     //    save it in database or validation it each of them has it's resposabilty , another example like model is resposabilty about attrubite in database and realtion not more */
 
 // o. Open/Closed Principle

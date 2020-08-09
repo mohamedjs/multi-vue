@@ -35,7 +35,7 @@ class PostTest extends TestCase
         factory(Post::class, 3)->create();
         factory(Post::class, 4)->states('approved')->create();
         $post = new Post;
-        $this->assertCount(4, $post->approved()->get());
+        $this->assertCount(3, $post->approved()->get());
     }
    
     /**

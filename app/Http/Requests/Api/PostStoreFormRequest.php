@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api;
 
 
-class PostStoreRequest extends FormRequest
+class PostStoreFormRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,8 +13,9 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "title"=>'required',
-            "body" => "required"
+            "title" => "required",
+            "body"  => "required",
+            'image' => "required|image"
         ];
     }
 }

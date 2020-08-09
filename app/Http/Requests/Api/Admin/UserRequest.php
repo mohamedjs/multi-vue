@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
         'name' => 'required|string|max:255',
         'user_name' => 'required|string|max:255',
         'image' => '',
-        'address'=> Rule::exists('address','id')->where(function(Builder $builder) {
+        'address'=> Rule::exists('addresses','id')->where(function(Builder $builder) {
           return $builder->where('user_id',$this->user()->id);
         })
       ] ;
