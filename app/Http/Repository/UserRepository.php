@@ -6,14 +6,28 @@ use Illuminate\Http\Request;
 
 class UserRepository
 {
-    public function search(Request $request)
+    private $user;
+    
+    /**
+     * __construct
+     *
+     * @param  User $user
+     * @return void
+     */
+    public function __construct(User $user)
     {
-      $users = User::query();
-
-      if($request->has('email') && $request->email != ''){
-        $users = $users->where('email',$request->email);
-      }
-      
-      return $users;
+        $this->user = $user;
+    }
+    
+    /**
+     * __call
+     *
+     * @param  function $method
+     * @param  mixed $arguments
+     * @return Closure
+     */
+    public function __call($method, $args)
+    {
+        return call_user_func_array([$this->user, $method], $args);
     }
 }

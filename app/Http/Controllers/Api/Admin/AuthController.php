@@ -88,7 +88,7 @@ class AuthController extends APIController
      */
     public function forgetPassword(ForgetPasswordRequest $request)
     {
-      $user           = $this->userRepository->search($request)->first();
+      $user           = $this->userRepository->filter($this->userFilters())->first();
       $token          = \Str::random(80);
       $user->sendPasswordResetNotification($token);
       return $this->OK([],'Reset Password Link Send To Email Successfully');
@@ -102,7 +102,7 @@ class AuthController extends APIController
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
-      $user           = $this->userRepository->search($request)->first();
+      $user           = $this->userRepository->filter($this->userFilters())->first();
       $attempt        = $this->authService->resetPassword($user,$request);
       return $this->Login($attempt);
     }  
@@ -126,7 +126,7 @@ class AuthController extends APIController
     {
         $request->merge(['email_verified_at' => now()]);
         $request->merge(['email' => auth()->user()->email]);
-        $user = $this->userService->fill($request, auth()->user());
+        $user = $this->userUpdateService->fill($request->validated(), auth()->user());
         return $this->OK(new UserResource($user), 'Email Verified SuccessFully');
     }
     /**
@@ -137,7 +137,7 @@ class AuthController extends APIController
      */
     public function updatePassword(UpdatePasswordRequest $request)
     {
-      $this->userService->fill($request, auth()->user());
+      $this->userUpdateService->handle($request->validated(), auth()->user());
       return $this->OK([],'Update Password SuccessFully');
     }
     /**

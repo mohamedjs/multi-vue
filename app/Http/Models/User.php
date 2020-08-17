@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\CanBeFiltered;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, CanBeFiltered;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','user_name','bod','status','gender' , 'user_type' , 'home_phone' ,'website' , 'verified' , 'email_verified_at' , 'api_token' , 'expired_token'
+        'name', 'email', 'password', 'phone', 'user_name', 'bod', 'status', 'gender', 'user_type', 'home_phone', 'website', 'verified', 'email_verified_at', 'api_token', 'expired_token'
     ];
 
     /**
