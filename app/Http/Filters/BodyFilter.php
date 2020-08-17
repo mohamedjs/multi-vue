@@ -11,7 +11,7 @@ class BodyFilter implements Filter
      *
      * @param  Builder $builder
      * @param  Array $value
-     * @return Buillder for this specifc search
+     * @return Buillder for this specific search
      */
     public function apply(Builder $builder, $value)
     {

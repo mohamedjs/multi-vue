@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
+use App\Filters\BodyFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\PostRepository;
-use App\Http\Filters\BodyFilter;
 use App\Http\Requests\Api\PostStoreFormRequest;
 use App\Http\Services\PostService;
 
@@ -47,6 +47,7 @@ class PostController extends Controller
      * if we want to call it without global scope just right function withoutGlobalScope('scope name may be class name or string') 
      * to avoid all scope just right withoutGlobalScope's'(can pass array here for some scopes that we want)
      * 
+     * i'm availabe at 8.00 pm and it's my pleasure that speak with you 
      * @return Json
      */
     public function index()
@@ -60,10 +61,15 @@ class PostController extends Controller
         ],201);
     }
 
-    public function filters()
+    /**
+     * function return array of filters that each value in it have instance of Filter interface
+     * 
+     * @return Array
+     */
+    protected function filters()
     {
         return [
             'body' => new BodyFilter
-        ]
+        ];
     }
 }

@@ -18,6 +18,13 @@ class UserRegisterController extends Controller
         $this->user = $user;
     }
 
+    /**
+     * when we call controller from  route this function work by default
+     * 
+     * @param UserRegisterFormRequest $request 
+     * @return Response
+     */
+
     public function __invoke(UserRegisterFormRequest $request)
     {
         $user = $this->user->create(

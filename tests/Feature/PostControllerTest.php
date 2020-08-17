@@ -89,7 +89,9 @@ class PostControllerTest extends TestCase
         $post = factory(Post::class)->create();
 
         dd($post->user->name);
+
         dd(optional($post->user)->name);
+        
         dd(optional($post->user,function($user){
             return $user->name;
         }));

@@ -28,8 +28,8 @@ class BaseFilter
     
     /**
      * apply
-     * apply function that have query builder that comming from model and filter that comming from query search that in Controller ofa search
-     * this function return Query Builder Depend on search Key and check tht it istance from filter interface
+     * apply function that have query builder that comming from model and filter that comming from query search that in Controller ofter search
+     * this function return Query Builder Depend on search Key and check tht it instance from filter interface
      * @param  Builder $builder
      * @param  Array $filters
      * @return Builder

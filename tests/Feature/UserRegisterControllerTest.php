@@ -53,7 +53,7 @@ class UserRegisterControllerTest extends TestCase
     {
         Event::fake();
 
-        $this->post('api/auth/user',$user = [
+        $resposne = $this->post('api/auth/user',$user = [
             'name'     => 'mohamed',
             'email'    => 'mh124404@gmail.com',
             'password' => 'secret'

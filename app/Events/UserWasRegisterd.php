@@ -10,7 +10,9 @@ class UserWasRegisterd
 {
     use Dispatchable, SerializesModels;
 
-    public $user, $token, $feedback;
+    public User $user;
+    public String $token;
+    public String $feedback;
 
     /**
      * Create a new event instance.

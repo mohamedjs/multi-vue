@@ -37,8 +37,10 @@ class Post extends Model
             return $query->whereNotNull('approved_at');
         });
 
+
+
         // we can define class and put function apply their and use it as globale scope and if we need to call it just right class name
-        // Static::addGlobalScope(new class approved implements scope {
+        // Static::addGlobalScope(Approved::class {
         //     public function apply(Builder $builder,Model $model)
         //     {
         //         return $query->whereNotNull('approved_at');
