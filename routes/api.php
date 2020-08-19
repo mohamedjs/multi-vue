@@ -35,12 +35,14 @@ Route::prefix('v1')->namespace('Api\Admin')->group(function(){
     return $array;
   });
   
+  Route::resource('user','UserController',['as' => 'admin']);
+
   Route::middleware(['auth:api','api_cookie'])->group(function () {
     Route::resource('home','HomeController',['as' => 'admin']);
-    Route::resource('user','UserController',['as' => 'admin']);
     Route::post('logout', 'AuthController@logout')->name('api.admin.logout');
     Route::post('send/verify/email', 'AuthController@sendVerifyEmail')->name('api.admin.send.verify.email');
     Route::post('verify/email', 'AuthController@verifyEmail')->name('api.admin.verify.email');
     Route::post('update/password', 'AuthController@updatePassword')->name('api.admin.update.passsword');
   });
+  
 });

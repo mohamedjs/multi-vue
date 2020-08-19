@@ -33,7 +33,7 @@ class UserUpdateService
     /**
      * handle function that make create for user
      * @param array $request 
-     * @return void
+     * @return Bool
      */
     public function handle($request, $user)
     {

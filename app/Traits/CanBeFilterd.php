@@ -10,7 +10,7 @@ trait CanBeFiltered
     /**
      * scopeFilter
      * this scope function return the final builder after make all querys in filters that come from search 
-     * and you can use this trait in any class that need search
+     * and you can use this trait in any model that needed search
      * @param  Builder $builder
      * @param  Array $filters
      * @return Builder

@@ -40,7 +40,7 @@ class AuthController extends APIController
     }
     /**
      * Login user and create token
-     * generate toen and put it in cookie with expired date and send it befor each request in middlware called:addAuthTokenHeader
+     * generate token and put it in cookie with expired date and send it befor each request in middlware called:addAuthTokenHeader
      * @param  [string] email
      * @param  [string] password
      * @param  [boolean] remember_me

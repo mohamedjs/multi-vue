@@ -24,8 +24,19 @@ $factory->define(User::class, function (Faker $faker) {
         'user_name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'phone' => $faker->phoneNumber,
-        'user_type' => $faker->randomElement(array_keys(UserTypes::getList())),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
+    ];
+});
+
+$factory->state(User::class, 'super', function(Faker $faker) {
+    return [
+        'user_type' => UserTypes::SUPERADMIN,
+    ];
+});
+
+$factory->state(User::class, 'admin', function(Faker $faker) {
+    return [
+        'user_type' => UserTypes::ADMIN,
     ];
 });
