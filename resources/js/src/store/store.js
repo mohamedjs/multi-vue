@@ -19,6 +19,7 @@ import actions from "./actions"
 Vue.use(Vuex)
 
 import moduleAuth from './auth/moduleAuth.js'
+import moduleUserManagement from './user-management/moduleUserManagement.js'
 
 export default new Vuex.Store({
     getters,
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     actions,
     modules: {
       auth: moduleAuth,
+      user: moduleUserManagement,
     },
     strict: false
 })

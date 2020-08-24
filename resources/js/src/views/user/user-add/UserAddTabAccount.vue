@@ -228,57 +228,6 @@ export default {
     },
     save_changes() {
       if(!this.validateForm) return
-      // Here will go your API call for updating data
-      // You can get data in "this.data_local"
-      var _this = this
-      this.DataEdit.append('name' , this.data_local.name)
-      this.DataEdit.append('email' , this.data_local.email)
-      this.DataEdit.append('website' , this.data_local.website)
-      this.DataEdit.append('user_name' , this.data_local.user_name)
-      this.DataEdit.append('phone' , this.data_local.phone)
-      this.DataEdit.append('bod' , this.data_local.bod)
-      this.DataEdit.append('status' , this.status(this.data_local.status))
-      this.DataEdit.append('user_type' , this.user_type(this.data_local.user_type))
-      this.DataEdit.append('verified' , this.verified(this.data_local.verified))
-      this.DataEdit.append('gender' , (this.data_local.gender == 'male') ? '1' : '2')
-      this.DataEdit.append('_method' , 'patch')
-      this.$http.post('/api/users/'+_this.$route.params.userId ,this.DataEdit)
-        .then(function (response){
-            _this.er_active   = false
-            _this.errorActive = false
-            _this.popupActive   = false
-            _this.SError=[]
-            _this.$vs.notify({
-              title:'Success',
-              text: response.data.status,
-              color:'success',
-              iconPack: 'feather',
-              icon:'icon-alert-circle'})
-              _this.alertActive= true
-              _this.alertSuccess = response.data.message
-          }).catch(function (error) {
-            if(error.response.status == 422)
-            {
-              _this.SError=[]
-              for (const [key, value] of Object.entries(error.response.data.errors)) {
-                  _this.SError.push(value)
-              }
-              _this.$vs.notify({
-                  title:'Error',
-                  text: error.response.data.message,
-                  color:'danger',
-                  iconPack: 'feather',
-                  icon:'icon-alert-circle'})
-              _this.er_active = true
-              _this.errorActive=true
-            }
-            _this.$vs.notify({
-                title:'Error',
-                text: error,
-                color:'danger',
-                iconPack: 'feather',
-                icon:'icon-alert-circle'})
-          });
     },
     reset_data() {
       this.data_local = JSON.parse(JSON.stringify(this.data))

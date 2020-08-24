@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\EmailFilter;
-use App\Filters\NameFilter;
+use App\Http\Filters\EmailFilter;
+use App\Http\Filters\NameFilter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -21,15 +21,6 @@ class Controller extends BaseController
 	    return [
 	      'name'  => new NameFilter,
 	      'email' => new EmailFilter,
-	      'phone' => new PhoneFilter,
-	      'user_name'=> new UserNamelFilter, 
-	      'bod'=> new BirthOfDateFilter, 
-	      'status'=> new StatusFilter, 
-	      'gender'=> new GenderFilter, 
-	      'user_type'=> new UserTypeFilter, 
-	      'home_phone'=> new HomePhoneFilter, 
-	      'website'=> new WebsiteFilter, 
-	      'email_verified_at'=> new VerifiedFilter, 
 	    ];
 	 }
 }

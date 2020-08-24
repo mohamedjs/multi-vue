@@ -41,10 +41,12 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-          \App\Http\Middleware\ApiLanguage::class,
             'throttle:60,1',
             'bindings',
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \App\Http\Middleware\ApiLanguage::class,
+            \App\Http\Middleware\JsonifyHttpReponse::class,
+            \App\Http\Middleware\InjectUserIdIfAuthenticated::class,
         ],
     ];
 

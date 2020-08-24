@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Filters\BaseFilter;
+use App\Http\Filters\BaseFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 trait CanBeFiltered

@@ -10,6 +10,7 @@ use App\Http\Repository\UserRepository;
 use App\Http\Services\UserStoreService;
 use App\Http\Services\UserUpdateService;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 
 class UserController extends Controller
 {
@@ -36,8 +37,7 @@ class UserController extends Controller
   public function index(Request $request)
   {
     $users = $this->userRepository->filter($this->userFilters())->paginate(request('per_page', 10));
-    $data['users'] = $users;
-    return response()->json(['status' => 'success' , 'data' => $data , 'message' => 'Get All User'], 201);
+    return response()->json(['status' => 'success' , 'data' => new UserCollection($users) , 'message' => 'Get All User'], 201);
   }
 
   public function store(UserStoreFormRequest $request)

@@ -12,8 +12,8 @@ final class ActiveStatus
     public static function getList()
     {
         return [
-            self::ACTIVE => "Active",
-            self::DISABLED => "Disabled",
+            self::ACTIVE => "active",
+            self::DISABLED => "disabled",
         ];
     }
 

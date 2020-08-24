@@ -14,7 +14,6 @@ import actions from './moduleUserManagementActions.js'
 import getters from './moduleUserManagementGetters.js'
 
 export default {
-  isRegistered: false,
   namespaced: true,
   state: state,
   mutations: mutations,
