@@ -37,7 +37,7 @@ class BaseFilter
     public function apply(Builder $builder, array $filters)
     {
         foreach ($this->getFilters($filters) as $key => $filter) {
-            if(!$filter instanceof Filter){
+            if(!$filter instanceof Filter || $this->request->get($key) == ''){
                 continue;
             }
             $filter->apply($builder, $this->request->get($key));

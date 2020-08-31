@@ -5,7 +5,7 @@ namespace App\Http\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use  App\Http\Filters\Filter;
 
-class BirthOfDateFilter implements Filter
+class GlobalSearch implements Filter
 {   
     public $seachColumn;
 

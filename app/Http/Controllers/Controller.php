@@ -22,7 +22,7 @@ class Controller extends BaseController
 	    return [
 	      'name'  => new NameFilter,
 	      'email' => new EmailFilter,
-	      'global_search' => new GlobalSearch(['phone', 'user_name', 'bod', 'status', 'gender', 'user_type', 'home_phone', 'website', 'name'])
+	      'global_search' => new GlobalSearch(['phone', 'user_name', 'bod', 'status', 'gender', 'user_type', 'home_phone', 'website', 'name', 'email'])
 	    ];
 	 }
 }
