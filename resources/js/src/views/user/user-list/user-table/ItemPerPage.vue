@@ -7,16 +7,16 @@
         <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
         <vs-dropdown-menu>
 
-          <vs-dropdown-item @click="itemsPerPage=10">
+          <vs-dropdown-item @click="setItemsPerPage(10)">
             <span>10</span>
           </vs-dropdown-item>
-          <vs-dropdown-item @click="itemsPerPage=25">
+          <vs-dropdown-item @click="setItemsPerPage(25)">
             <span>25</span>
           </vs-dropdown-item>
-          <vs-dropdown-item @click="itemsPerPage=50">
+          <vs-dropdown-item @click="setItemsPerPage(50)">
             <span>50</span>
           </vs-dropdown-item>
-          <vs-dropdown-item @click="itemsPerPage=100">
+          <vs-dropdown-item @click="setItemsPerPage(100)">
             <span>100</span>
           </vs-dropdown-item>
         </vs-dropdown-menu>
@@ -29,12 +29,11 @@ export default {
 	computed: {
     ...mapState('user',['users', 'total', 'currentPage', 'itemsPerPage']),
   },
-  watch:{
-    itemsPerPage:{
-      handler:function(itemsPerPage){
-      
-      }
-    },
+  methods: {
+    setItemsPerPage(perPage) {
+        const payload = {key:'per_page', value:perPage}
+        this.$store.dispatch("user/setSearchKey",payload)
+    }
   }
 }
 </script>

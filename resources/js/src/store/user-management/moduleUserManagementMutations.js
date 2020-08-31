@@ -11,8 +11,9 @@
 export default {
   SET_USERS(state, data) {
     state.users = data.users
-    state.total = data.total
+    state.total = data.total_pages
     state.currentPage = data.current_page
+    state.itemsPerPage = data.per_page
   },
   SET_USER(state, user) {
     state.user = user
@@ -21,4 +22,7 @@ export default {
       const userIndex = state.users.findIndex((u) => u.id == itemId)
       state.users.splice(userIndex, 1)
   },
+  SET_SEARCH_KEY(state, search) {
+    state.search[search.key] = search.value
+  }
 }

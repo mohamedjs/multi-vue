@@ -9,7 +9,7 @@
 
 export default {
   users  : [],
-  search : '',
+  search : {'per_page' : '', 'page' : '', 'global_search' : ''},
   user   : {},
   currentPage:1,
   itemsPerPage: 10,

@@ -1,50 +1,56 @@
 <template>
-	<vs-table ref="table" multiple v-model="selected"  :data="users">
-	    <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
-	        <div class="flex flex-wrap-reverse items-center">
-	          <!-- ACTION - DROPDOWN -->
-	          <table-action></table-action>
+	<div>
+		<vs-table ref="table" multiple v-model="selected"  :data="users">
+		    <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
+		        <div class="flex flex-wrap-reverse items-center">
+		          <!-- ACTION - DROPDOWN -->
+		          <table-action></table-action>
 
-	          <!-- ADD NEW -->
-	          <add-new-action></add-new-action>
-	        </div>
+		          <!-- ADD NEW -->
+		          <add-new-action></add-new-action>
+		        </div>
 
-	        <div class="flex flex-wrap-reverse items-center">
-	          <!-- Item Per Page -->
-	          <item-per-page></item-per-page>
+		        <div class="flex flex-wrap-reverse items-center">
+		          <!-- Item Per Page -->
+		          <item-per-page></item-per-page>
 
-	          <!-- Search Input -->
-	          <table-search></table-search>
-	        </div>
-	    </div>
-	    <template slot="thead">
-	        <vs-th>#</vs-th>
-	        <vs-th v-for = "(column, index) in columns" :key="index" :sort-key="column">{{column}}</vs-th>
-	        <vs-th>Action</vs-th>
-	    </template>
-	    <template slot-scope="{data}">
-	        <tbody>
-	          <vs-tr :data="user" :key="indexuser" v-for="(user, indexuser) in data">
-	            <vs-td>{{ indexuser+1 }}</vs-td>
-	            <template v-for="(column, index) in columns">
-	              <vs-chip :key="index" v-if="column == 'status'" class="ag-grid-cell-chip" :color="chipColor(user[column])">
-	                <span>{{ user[column] }}</span>
-	              </vs-chip>
-	              <vs-td :key="index" v-else-if="column == 'verified'">
-	                <feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor(user['email_verified_at'])]" />
-	              </vs-td>
-	              <vs-td :key="index" v-else>
-	                <p class="product-name font-medium">{{ user[column] }}</p>
-	              </vs-td>
-	            </template>
-	           	<user-action :user="user"></user-action>
-	          </vs-tr>
-	        </tbody>
-	     </template>
-    </vs-table>
-   	<div class="mt-5">
-         <vs-pagination :total="total" v-model="currentx" goto></vs-pagination>
-   	</div>
+		          <!-- Search Input -->
+		          <table-search></table-search>
+		        </div>
+		    </div>
+		    <template slot="thead">
+		        <vs-th>#</vs-th>
+		        <vs-th v-for = "(column, index) in columns" :key="index" :sort-key="column">{{index}}</vs-th>
+		        <vs-th>Action</vs-th>
+		    </template>
+		    <template slot-scope="{data}">
+		        <tbody>
+		          <vs-tr :data="user" :key="indexuser" v-for="(user, indexuser) in data">
+		            <vs-td>{{ indexuser+1 }}</vs-td>
+		            <template v-for="(column, index) in columns">
+			          <vs-td :key="index" v-if="column == 'status'">
+			              <vs-chip  class="ag-grid-cell-chip" :color="chipColor(user[column])">
+			                <span>{{ user[column] }}</span>
+			              </vs-chip>
+			          </vs-td>
+		              <vs-td :key="index" v-else-if="column == 'verified'">
+		                <feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor(user['email_verified_at'])]" />
+		              </vs-td>
+		              <vs-td :key="index" v-else>
+		                <p class="product-name font-medium">{{ user[column] }}</p>
+		              </vs-td>
+		            </template>
+		            <vs-td>
+		           		<user-action></user-action>
+		          	</vs-td>
+		          </vs-tr>
+		        </tbody>
+		     </template>
+	    </vs-table>
+	   	<div class="mt-5">
+	         <vs-pagination :total="total" v-model="currentx" goto></vs-pagination>
+	   	</div>
+    </div>
 </template>
 
 <script>
@@ -66,7 +72,8 @@ export default {
 	}, 
  	data() {
 	    return {
-			selected: [],
+			currentx: 1,
+			selected:[],
 	      	columns:{'Name':'name', 'Email':'email', 'Phone':'phone', 'UserName':'user_name', 'Status':'status', 'Gender':'gender', 'UserType':'user_type', 'IsVerified':'verified'},
 	    }
 	},
@@ -94,7 +101,8 @@ export default {
 	watch:{
 	    currentx:{
 	      handler:function(value){
-	      
+	      	const payload = {key:'page', value:value}
+        	this.$store.dispatch("user/setSearchKey",payload)
 	      }
     	},
   	},

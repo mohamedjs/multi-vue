@@ -343,9 +343,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['users', 'total', 'currentPage', 'itemsPerPage'])),
-  watch: {
-    itemsPerPage: {
-      handler: function handler(itemsPerPage) {}
+  methods: {
+    setItemsPerPage: function setItemsPerPage(perPage) {
+      var payload = {
+        key: 'per_page',
+        value: perPage
+      };
+      this.$store.dispatch("user/setSearchKey", payload);
     }
   }
 });
@@ -420,8 +424,16 @@ __webpack_require__.r(__webpack_exports__);
       searchx: ''
     };
   },
-  methods: {
-    handleSearch: function handleSearch() {}
+  watch: {
+    searchx: {
+      handler: function handler(value) {
+        var payload = {
+          key: 'global_search',
+          value: value
+        };
+        this.$store.dispatch("user/setSearchKey", payload);
+      }
+    }
   }
 });
 
@@ -443,23 +455,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    user: {
-      type: array,
-      required: true
+  methods: {
+    editRecord: function editRecord() {
+      console.log(this.params);
+      console.log(this.params.data.id); // this.$router.push("/apps/user/user-edit/" + 268).catch(() => {})
+
+      /*
+        Below line will be for actual product
+        Currently it's commented due to demo purpose - Above url is for demo purpose
+        this.$router.push("/apps/user/user-edit/" + this.params.data.id).catch(() => {})
+      */
+    },
+    confirmDeleteRecord: function confirmDeleteRecord() {
+      this.$vs.dialog({
+        type: 'confirm',
+        color: 'danger',
+        title: "Confirm Delete",
+        text: "You are about to delete \"".concat(this.params.data.username, "\""),
+        accept: this.deleteRecord,
+        acceptText: "Delete"
+      });
+    },
+    deleteRecord: function deleteRecord() {
+      /* Below two lines are just for demo purpose */
+      this.showDeleteSuccess();
+      /* UnComment below lines for enabling true flow if deleting user */
+      // this.$store.dispatch("userManagement/removeRecord", this.params.data.id)
+      //   .then(()   => { this.showDeleteSuccess() })
+      //   .catch(err => { console.error(err)       })
+    },
+    showDeleteSuccess: function showDeleteSuccess() {
+      this.$vs.notify({
+        color: 'success',
+        title: 'User Deleted',
+        text: 'The selected user was successfully deleted'
+      });
     }
-  },
-  data: function data() {
-    return {
-      user: {}
-    };
   }
 });
 
@@ -535,6 +567,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -551,6 +589,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
+      currentx: 1,
       selected: [],
       columns: {
         'Name': 'name',
@@ -585,7 +624,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['users', 'total', 'currentPage', 'itemsPerPage'])),
   watch: {
     currentx: {
-      handler: function handler(value) {}
+      handler: function handler(value) {
+        var payload = {
+          key: 'page',
+          value: value
+        };
+        this.$store.dispatch("user/setSearchKey", payload);
+      }
     }
   }
 });
@@ -604,7 +649,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "#data-list-thumb-view .vs-con-table .vs-table--header {\n  display: flex;\n  flex-wrap: wrap-reverse;\n}[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-left: 1.5rem;\n  margin-right: 1.5rem;\n}[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-right: 1.5rem;\n  margin-left: 1.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header > span {\n  display: flex;\n  flex-grow: 1;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search {\n  padding-top: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  font-size: 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  padding: 0.9rem 2.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  right: 1rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  right: 1rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table {\n  border-collapse: separate;\n  border-spacing: 0 1.3rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table {\n  padding: 0 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user {\n  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td {\n  padding: 10px;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container span {\n  display: flex;\n  justify-content: center;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container .product-img {\n  height: 110px;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td.td-check {\n  padding: 20px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th {\n  padding-top: 0;\n  padding-bottom: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--thead th .vs-table-text {\n  text-useransform: uppercase;\n  font-weight: 600;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th.td-check {\n  padding: 0 15px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead user {\n  background: none;\n  box-shadow: none;\n}\n#data-list-thumb-view .vs-con-table .vs-table--pagination {\n  justify-content: center;\n}", ""]);
+exports.push([module.i, "#data-list-thumb-view .vs-con-table .vs-table--header {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap-reverse;\n}[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-left: 1.5rem;\n  margin-right: 1.5rem;\n}[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-right: 1.5rem;\n  margin-left: 1.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header > span {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex-grow: 1;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search {\n  padding-top: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  font-size: 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  padding: 0.9rem 2.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  right: 1rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  right: 1rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table {\n  border-collapse: separate;\n  border-spacing: 0 1.3rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table {\n  padding: 0 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user {\n  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td {\n  padding: 10px;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container span {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container .product-img {\n  height: 110px;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td.td-check {\n  padding: 20px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th {\n  padding-top: 0;\n  padding-bottom: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--thead th .vs-table-text {\n  text-useransform: uppercase;\n  font-weight: 600;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th.td-check {\n  padding: 0 15px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead user {\n  background: none;\n  box-shadow: none;\n}\n#data-list-thumb-view .vs-con-table .vs-table--pagination {\n  -webkit-box-pack: center;\n          justify-content: center;\n}", ""]);
 
 // exports
 
@@ -1008,7 +1053,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  _vm.itemsPerPage = 10
+                  return _vm.setItemsPerPage(10)
                 }
               }
             },
@@ -1020,7 +1065,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  _vm.itemsPerPage = 25
+                  return _vm.setItemsPerPage(25)
                 }
               }
             },
@@ -1032,7 +1077,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  _vm.itemsPerPage = 50
+                  return _vm.setItemsPerPage(50)
                 }
               }
             },
@@ -1044,7 +1089,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  _vm.itemsPerPage = 100
+                  return _vm.setItemsPerPage(100)
                 }
               }
             },
@@ -1180,7 +1225,6 @@ var render = function() {
         attrs: { type: "text" },
         domProps: { value: _vm.searchx },
         on: {
-          keyup: _vm.handleSearch,
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -1213,8 +1257,35 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { style: { direction: _vm.$vs.rtl ? "rtl" : "ltr" } },
+    [
+      _c("feather-icon", {
+        attrs: {
+          icon: "Edit3Icon",
+          svgClasses: "h-5 w-5 mr-4 hover:text-primary cursor-pointer"
+        },
+        on: { click: _vm.editRecord }
+      }),
+      _vm._v(" "),
+      _c("feather-icon", {
+        attrs: {
+          icon: "Trash2Icon",
+          svgClasses: "h-5 w-5 hover:text-danger cursor-pointer"
+        },
+        on: { click: _vm.confirmDeleteRecord }
+      })
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -1231,8 +1302,178 @@ var staticRenderFns = []
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "vs-table",
+        {
+          ref: "table",
+          attrs: { multiple: "", data: _vm.users },
+          scopedSlots: _vm._u([
+            {
+              key: "default",
+              fn: function(ref) {
+                var data = ref.data
+                return [
+                  _c(
+                    "tbody",
+                    _vm._l(data, function(user, indexuser) {
+                      return _c(
+                        "vs-tr",
+                        { key: indexuser, attrs: { data: user } },
+                        [
+                          _c("vs-td", [_vm._v(_vm._s(indexuser + 1))]),
+                          _vm._v(" "),
+                          _vm._l(_vm.columns, function(column, index) {
+                            return [
+                              column == "status"
+                                ? _c(
+                                    "vs-td",
+                                    { key: index },
+                                    [
+                                      _c(
+                                        "vs-chip",
+                                        {
+                                          staticClass: "ag-grid-cell-chip",
+                                          attrs: {
+                                            color: _vm.chipColor(user[column])
+                                          }
+                                        },
+                                        [
+                                          _c("span", [
+                                            _vm._v(_vm._s(user[column]))
+                                          ])
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : column == "verified"
+                                ? _c(
+                                    "vs-td",
+                                    { key: index },
+                                    [
+                                      _c("feather-icon", {
+                                        attrs: {
+                                          icon: "CircleIcon",
+                                          svgClasses: [
+                                            "fill-current h-4 w-4",
+                                            _vm.textColor(
+                                              user["email_verified_at"]
+                                            )
+                                          ]
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _c("vs-td", { key: index }, [
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass: "product-name font-medium"
+                                      },
+                                      [_vm._v(_vm._s(user[column]))]
+                                    )
+                                  ])
+                            ]
+                          }),
+                          _vm._v(" "),
+                          _c("vs-td", [_c("user-action")], 1)
+                        ],
+                        2
+                      )
+                    }),
+                    1
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.selected,
+            callback: function($$v) {
+              _vm.selected = $$v
+            },
+            expression: "selected"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex flex-wrap-reverse items-center flex-grow justify-between",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "flex flex-wrap-reverse items-center" },
+                [_c("table-action"), _vm._v(" "), _c("add-new-action")],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex flex-wrap-reverse items-center" },
+                [_c("item-per-page"), _vm._v(" "), _c("table-search")],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "template",
+            { slot: "thead" },
+            [
+              _c("vs-th", [_vm._v("#")]),
+              _vm._v(" "),
+              _vm._l(_vm.columns, function(column, index) {
+                return _c(
+                  "vs-th",
+                  { key: index, attrs: { "sort-key": column } },
+                  [_vm._v(_vm._s(index))]
+                )
+              }),
+              _vm._v(" "),
+              _c("vs-th", [_vm._v("Action")])
+            ],
+            2
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c("vs-pagination", {
+            attrs: { total: _vm.total, goto: "" },
+            model: {
+              value: _vm.currentx,
+              callback: function($$v) {
+                _vm.currentx = $$v
+              },
+              expression: "currentx"
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 

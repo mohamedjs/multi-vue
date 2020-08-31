@@ -10,9 +10,9 @@
 import axios from "@/axios.js"
 
 export default {
-  fetchUsers({ commit }) {
+  fetchUsers({ commit, state }) {
     return new Promise((resolve, reject) => {
-      axios.get("/api/v1/users")
+      axios.get("/api/v1/users",{ params : state.search })
         .then((response) => {
           commit('SET_USERS', response.data.data)
           resolve(response)
@@ -39,5 +39,9 @@ export default {
         })
         .catch((error) => { reject(error) })
     })
-  }
+  },
+  setSearchKey({ commit, dispatch } , payload){
+    commit('SET_SEARCH_KEY',payload)
+    dispatch('fetchUsers');
+  },
 }
