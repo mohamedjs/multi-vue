@@ -11,4 +11,7 @@ export default {
   users  : [],
   search : '',
   user   : {},
+  currentPage:1,
+  itemsPerPage: 10,
+  total:0,
 }

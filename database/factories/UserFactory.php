@@ -3,6 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Constants\UserTypes;
+use App\Constants\GenderTypes;
+use App\Constants\ActiveStatus;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -24,8 +26,37 @@ $factory->define(User::class, function (Faker $faker) {
         'user_name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'phone' => $faker->phoneNumber,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => 'secret', // password
         'remember_token' => Str::random(10),
+    ];
+});
+
+$factory->state(User::class, 'male', function(Faker $faker) {
+    return [
+        'gender' => GenderTypes::MALE,
+    ];
+});
+$factory->state(User::class, 'female', function(Faker $faker) {
+    return [
+        'gender' => GenderTypes::FEMALE,
+    ];
+});
+
+$factory->state(User::class, 'verified', function(Faker $faker) {
+    return [
+        'email_verified_at' => date('Y-m-d H:i:s')
+    ];
+});
+
+$factory->state(User::class, 'active', function(Faker $faker) {
+    return [
+        'status' => ActiveStatus::ACTIVE,
+    ];
+});
+
+$factory->state(User::class, 'disabled', function(Faker $faker) {
+    return [
+        'status' => ActiveStatus::DISABLED,
     ];
 });
 
@@ -38,5 +69,15 @@ $factory->state(User::class, 'super', function(Faker $faker) {
 $factory->state(User::class, 'admin', function(Faker $faker) {
     return [
         'user_type' => UserTypes::ADMIN,
+    ];
+});
+$factory->state(User::class, 'staff', function(Faker $faker) {
+    return [
+        'user_type' => UserTypes::STAFF,
+    ];
+});
+$factory->state(User::class, 'client', function(Faker $faker) {
+    return [
+        'user_type' => UserTypes::CLIENT,
     ];
 });

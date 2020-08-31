@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Filters\EmailFilter;
-use App\Http\Filters\NameFilter;
+use App\Http\Filters\UserFilter\EmailFilter;
+use App\Http\Filters\UserFilter\NameFilter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;

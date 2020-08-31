@@ -14,8 +14,7 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get("/api/v1/users")
         .then((response) => {
-          console.log(response.data.data)
-          commit('SET_USERS', response.data.data.data)
+          commit('SET_USERS', response.data.data)
           resolve(response)
         })
         .catch((error) => { reject(error) })

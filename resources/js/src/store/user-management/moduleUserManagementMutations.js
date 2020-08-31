@@ -9,8 +9,10 @@
 
 
 export default {
-  SET_USERS(state, users) {
-    state.users = users
+  SET_USERS(state, data) {
+    state.users = data.users
+    state.total = data.total
+    state.currentPage = data.current_page
   },
   SET_USER(state, user) {
     state.user = user
