@@ -36,7 +36,9 @@ class UserController extends Controller
 
   public function index(Request $request)
   {
-    $users = $this->userRepository->filter($this->userFilters())->paginate(request('per_page', 10));
+    $users = $this->userRepository->filter($this->userFilters())
+            ->paginate(request('per_page', 10));
+            
     return response()->json(['status' => 'success' , 'data' => new UserCollection($users) , 'message' => 'Get All User'], 201);
   }
 

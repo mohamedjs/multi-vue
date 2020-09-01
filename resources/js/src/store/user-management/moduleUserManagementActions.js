@@ -40,8 +40,8 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  setSearchKey({ commit, dispatch } , payload){
-    commit('SET_SEARCH_KEY',payload)
-    dispatch('fetchUsers');
+  setSearchKey({ commit, dispatch } , search){
+    commit('SET_SEARCH_KEY', search)
+    if(search.value) { dispatch('fetchUsers'); }
   },
 }

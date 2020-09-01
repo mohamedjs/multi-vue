@@ -14,10 +14,16 @@ export default {
 	watch:{
 	    searchx:{
 	      handler:function(value){
+	      	// set search key in search state value 
 	      	const payload = {key:'global_search', value:value}
         	this.$store.dispatch("user/setSearchKey",payload)
 	      }
     	},
   	},
+  	created() {
+  		// init global search with empty value 
+  		const payload = {key:'global_search', value:''}
+        this.$store.dispatch("user/setSearchKey",payload)
+  	}
 }
 </script>

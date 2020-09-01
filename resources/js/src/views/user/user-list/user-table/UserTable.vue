@@ -41,7 +41,10 @@
 		              </vs-td>
 		            </template>
 		            <vs-td>
-		           		<user-action></user-action>
+		           		<div :style="{'direction': $vs.rtl ? 'rtl' : 'ltr'}">
+					      <feather-icon icon="Edit3Icon" svgClasses="h-5 w-5 mr-4 hover:text-primary cursor-pointer" @click="editRecord(user.id)" />
+					      <feather-icon icon="Trash2Icon" svgClasses="h-5 w-5 hover:text-danger cursor-pointer" @click="confirmDeleteRecord(user)" />
+					    </div>
 		          	</vs-td>
 		          </vs-tr>
 		        </tbody>
@@ -106,5 +109,35 @@ export default {
 	      }
     	},
   	},
+  	methods: {
+  		 editRecord(userId) {
+              this.$router.push("/apps/user/user-edit/" + id).catch(() => {})
+          },
+          confirmDeleteRecord(user) {
+            this.$vs.dialog({
+              type: 'confirm',
+              color: 'danger',
+              title: `Confirm Delete`,
+              text: `You are about to delete "${user.name}"`,
+              accept: this.deleteRecord(user.id),
+              acceptText: "Delete"
+            })
+          },
+          deleteRecord(userId) {
+            /* Below two lines are just for demo purpose */
+            this.showDeleteSuccess()
+            /* UnComment below lines for enabling true flow if deleting user */
+            this.$store.dispatch("userManagement/removeRecord", userId)
+              .then(()   => { this.showDeleteSuccess() })
+              .catch(err => { console.error(err)       })
+          },
+          showDeleteSuccess() {
+            this.$vs.notify({
+              color: 'success',
+              title: 'User Deleted',
+              text: 'The selected user was successfully deleted'
+            })
+          }
+  	}
 }
 </script>

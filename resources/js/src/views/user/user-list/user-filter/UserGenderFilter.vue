@@ -14,13 +14,22 @@ export default {
 	},
 	data() {
 		return {
-			genderFilter: { label: 'All', value: 'all' },
+			genderFilter: { label: 'All', value: '' },
 		    genderOptions: [
-		        { label: 'All', value: 'all' },
-		        { label: 'Male', value: 'male' },
-		        { label: 'Female', value: 'female' },
+		        { label: 'All', value: '' },
+		        { label: 'Male', value: 1 },
+		        { label: 'Female', value: 2 },
 		    ],
 		}
-	}
+	},
+	watch:{
+	    genderFilter:{
+	      handler:function(value){
+	      	// set search key in search state value 
+	      	const payload = {key:'global_search', value:value}
+        	this.$store.dispatch("user/setSearchKey",payload)
+	      }
+    	},
+  	},
 }
 </script>
