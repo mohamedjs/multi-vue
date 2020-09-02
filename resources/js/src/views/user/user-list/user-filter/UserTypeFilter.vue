@@ -14,14 +14,24 @@ export default {
 	},
 	data() {
 		return {
-			user_typeFilter: { label: 'All', value: 'all' },
+			user_typeFilter: { label: 'All', value: '' },
 		    user_typeOptions: [
-		        { label: 'All', value: 'all' },
-		        { label: 'Admin', value: 'admin' },
-		        { label: 'User', value: 'user' },
-		        { label: 'Staff', value: 'staff' },
+		        { label: 'All', value: '' },
+		        { label: 'SUPERADMIN', value: 1 },
+		        { label: 'ADMIN', value: 2  },
+		        { label: 'STAFF', value: 3  },
+		        { label: 'CLIENT', value: 4 },
 		    ],
 		}
-	}
+	},
+	watch:{
+	    user_typeFilter:{
+	      handler:function(type){
+	      	// set search key in search state value 
+	      	const payload = {key:'user_type', value:type.value}
+        	this.$store.dispatch("user/setSearchKey",payload)
+	      }
+    	},
+  	},
 }
 </script>

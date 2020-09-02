@@ -4,7 +4,7 @@
 		    <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
 		        <div class="flex flex-wrap-reverse items-center">
 		          <!-- ACTION - DROPDOWN -->
-		          <table-action></table-action>
+		          <table-action :selected="selected"></table-action>
 
 		          <!-- ADD NEW -->
 		          <add-new-action></add-new-action>
@@ -128,8 +128,8 @@ export default {
             this.showDeleteSuccess()
             /* UnComment below lines for enabling true flow if deleting user */
             this.$store.dispatch("userManagement/removeRecord", userId)
-              .then(()   => { this.showDeleteSuccess() })
-              .catch(err => { console.error(err)       })
+            .then(result => { this.showDeleteSuccess() })
+    		.catch(err => { console.log(err) })
           },
           showDeleteSuccess() {
             this.$vs.notify({

@@ -20,6 +20,7 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
+
   fetchUser({}, userId) {
     return new Promise((resolve, reject) => {
       axios.get(`/api/v1/users/${userId}/edit`)
@@ -30,6 +31,7 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
+
   removeRecord({ commit }, userId) {
     return new Promise((resolve, reject) => {
       axios.delete(`/api/v1/users/${userId}`)
@@ -40,8 +42,13 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
+
   setSearchKey({ commit, dispatch } , search){
     commit('SET_SEARCH_KEY', search)
     if(search.value) { dispatch('fetchUsers'); }
+  },
+
+  initSearchKey({ commit, dispatch }){
+    commit('INIT_SEARCH')
   },
 }

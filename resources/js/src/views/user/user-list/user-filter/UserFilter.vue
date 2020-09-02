@@ -1,5 +1,6 @@
 <template>
 	 <vx-card ref="filterCard" title="Filters" class="user-list-filters mb-8">
+	 <global-search-filter></global-search-filter>
       <div class="vx-row">
         <user-type-filter></user-type-filter>
        	<user-status-filter></user-status-filter>
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import GlobalSearchFilter from './GlobalSearchFilter.vue' 
 import UserTypeFilter from './UserTypeFilter.vue' 
 import UserStatusFilter from './UserStatusFilter.vue' 
 import UserVerifiedFilter from './UserVerifiedFilter.vue' 
@@ -20,6 +22,7 @@ export default {
 	    UserTypeFilter,
 	    UserStatusFilter,
 	    UserVerifiedFilter,
+	    GlobalSearchFilter,
 	    UserGenderFilter
 	}, 
 }

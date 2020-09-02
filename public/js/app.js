@@ -115588,7 +115588,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       name: 'app-user-list',
       secure: true,
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -116409,11 +116409,19 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
       });
     });
   },
-  setSearchKey: function setSearchKey(_ref4, payload) {
+  setSearchKey: function setSearchKey(_ref4, search) {
     var commit = _ref4.commit,
         dispatch = _ref4.dispatch;
-    commit('SET_SEARCH_KEY', payload);
-    dispatch('fetchUsers');
+    commit('SET_SEARCH_KEY', search);
+
+    if (search.value) {
+      dispatch('fetchUsers');
+    }
+  },
+  initSearchKey: function initSearchKey(_ref5) {
+    var commit = _ref5.commit,
+        dispatch = _ref5.dispatch;
+    commit('INIT_SEARCH');
   }
 });
 
@@ -116475,6 +116483,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   SET_SEARCH_KEY: function SET_SEARCH_KEY(state, search) {
     state.search[search.key] = search.value;
+  },
+  INIT_SEARCH: function INIT_SEARCH(state) {
+    state.search = {
+      'per_page': '',
+      'page': '',
+      'global_search': '',
+      'name': '',
+      'email': '',
+      'created_at': '',
+      'phone': '',
+      'user_name': ''
+    };
   }
 });
 
@@ -116502,7 +116522,12 @@ __webpack_require__.r(__webpack_exports__);
   search: {
     'per_page': '',
     'page': '',
-    'global_search': ''
+    'global_search': '',
+    'name': '',
+    'email': '',
+    'created_at': '',
+    'phone': '',
+    'user_name': ''
   },
   user: {},
   currentPage: 1,

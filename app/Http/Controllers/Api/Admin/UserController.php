@@ -39,7 +39,7 @@ class UserController extends Controller
     $users = $this->userRepository->filter($this->userFilters())
             ->paginate(request('per_page', 10));
             
-    return response()->json(['status' => 'success' , 'data' => new UserCollection($users) , 'message' => 'Get All User'], 201);
+    return response()->json(['status' => 'success' , 'data' => new UserCollection($users) , 'message' => 'Get All User'], 200);
   }
 
   public function store(UserStoreFormRequest $request)
@@ -51,7 +51,7 @@ class UserController extends Controller
   public function edit($id)
   {
     $user = $this->userRepository->find($id);
-    return response()->json(['status' => 'success' , 'data' => $user , 'message' => 'Get User For Edit Success'], 201);
+    return response()->json(['status' => 'success' , 'data' => $user , 'message' => 'Get User For Edit Success'], 200);
   }
 
   public function update(UserUpdateFormRequest $request,User $user)

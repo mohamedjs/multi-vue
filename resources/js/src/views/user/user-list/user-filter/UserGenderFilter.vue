@@ -24,9 +24,9 @@ export default {
 	},
 	watch:{
 	    genderFilter:{
-	      handler:function(value){
+	      handler:function(gender){
 	      	// set search key in search state value 
-	      	const payload = {key:'global_search', value:value}
+	      	const payload = {key:'gender', value:gender.value}
         	this.$store.dispatch("user/setSearchKey",payload)
 	      }
     	},

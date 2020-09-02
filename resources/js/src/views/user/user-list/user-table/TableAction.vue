@@ -28,9 +28,10 @@
 
 <script>
 export default {
+	props: ['selected'],
 	methods: {
 		deleteAll() {
-			console.log('Delete')
+			console.log(this.selected)
 		}
 	}
 }

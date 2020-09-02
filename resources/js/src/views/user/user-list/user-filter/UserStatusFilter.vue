@@ -1,7 +1,7 @@
 <template>
 	<div class="vx-col md:w-1/4 sm:w-1/2 w-full">
           <label class="text-sm opacity-75">Status</label>
-          <v-select :options="statusOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="statusFilter" class="mb-4 md:mb-0" />
+          <v-select :options="statusOptions" :clearable="false"  :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="statusFilter" class="mb-4 md:mb-0" />
     </div>
 </template>
 
@@ -14,14 +14,23 @@ export default {
 	},
 	data() {
 		return {
-			statusFilter: { label: 'All', value: 'all' },
+			statusFilter: { label: 'All', value: '' },
 		    statusOptions: [
-		        { label: 'All', value: 'all' },
-		        { label: 'Active', value: 'active' },
-		        { label: 'Deactivated', value: 'deactivated' },
-		        { label: 'Blocked', value: 'blocked' },
+		        { label: 'All', value: '' },
+		        { label: 'Active', value: 1},
+		        { label: 'Deactivated', value: 2 },
 		    ],
 		}
-	}
+	},
+	watch:{
+	    statusFilter:{
+	      handler:function(status){
+	      	// set search key in search state value 
+	      	if(status.value == 2) { status.value = 0 }
+	      	const payload = {key:'status', value:status.value}
+        	this.$store.dispatch("user/setSearchKey",payload)
+	      }
+    	},
+  	},
 }
 </script>
