@@ -115588,7 +115588,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       name: 'app-user-list',
       secure: true,
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/user/user-list/UserList.vue */ "./resources/js/src/views/user/user-list/UserList.vue"));
       },
       meta: {
         breadcrumb: [{

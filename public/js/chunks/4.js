@@ -70,6 +70,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/themes/airbnb.css */ "./node_modules/flatpickr/dist/themes/airbnb.css");
+/* harmony import */ var flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_3__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -96,6 +118,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
+
+ // localization is optional
+// import {Arabic} from 'flatpickr/dist/l10n/ar.js';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -125,17 +150,20 @@ __webpack_require__.r(__webpack_exports__);
         label: 'Phone',
         value: 'phone'
       }],
-      date: moment().format('d-m-Y'),
+      from: moment(new Date()).format('DD-MM-YYYY'),
+      to: moment(new Date()).format('DD-MM-YYYY'),
+      bod: moment(new Date()).format('DD-MM-YYYY'),
       dateConfig: {
-        dateFormat: 'd F Y',
-        weekNumbers: true,
+        dateFormat: 'd-m-Y',
+        weekNumbers: false,
         //show week number
         monthSelectorType: 'dropdown',
         //can be static
         // maxDate:moment().format('d-m-Y'),
         // minDate:'01-05-1991',
         enableTime: false,
-        defaultDate: moment().format('d-m-Y')
+        defaultDate: moment(new Date()).format('DD-MM-YYYY') // locale: Arabic, // locale for this instance only          
+
       }
     };
   },
@@ -152,10 +180,24 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    changeDateValue: function changeDateValue(selectedDates, dateStr, instance) {
+    changeFromValue: function changeFromValue(selectedDates, dateStr, instance) {
       var payload = {
-        key: 'created_at',
-        value: moment(dateStr).format("d M Y")
+        key: 'from',
+        value: moment(dateStr).format("DD-MMMM-YYYY")
+      };
+      this.$store.dispatch('user/setSearchKey', payload);
+    },
+    changeToValue: function changeToValue(selectedDates, dateStr, instance) {
+      var payload = {
+        key: 'to',
+        value: moment(dateStr).format("DD-MMMM-YYYY")
+      };
+      this.$store.dispatch('user/setSearchKey', payload);
+    },
+    changeBodValue: function changeBodValue(selectedDates, dateStr, instance) {
+      var payload = {
+        key: 'bod',
+        value: moment(dateStr).format("DD-MMMM-YYYY")
       };
       this.$store.dispatch('user/setSearchKey', payload);
     }
@@ -952,77 +994,125 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "vx-row" }, [
-    _c(
-      "div",
-      { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" },
-      [
-        _c("label", { staticClass: "text-sm opacity-75" }, [
-          _vm._v("Search Key")
-        ]),
+    _c("div", { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" }, [
+      _c("div", { staticClass: "vx-row" }, [
+        _c(
+          "div",
+          { staticClass: "vx-col md:w-1/2 sm:w-1/2 w-full" },
+          [
+            _c("label", { staticClass: "text-sm opacity-75" }, [
+              _vm._v("Search Key")
+            ]),
+            _vm._v(" "),
+            _c("v-select", {
+              attrs: {
+                options: _vm.globalSearchOptions,
+                clearable: false,
+                dir: _vm.$vs.rtl ? "rtl" : "ltr"
+              },
+              model: {
+                value: _vm.globalSearchFilter,
+                callback: function($$v) {
+                  _vm.globalSearchFilter = $$v
+                },
+                expression: "globalSearchFilter"
+              }
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("v-select", {
-          attrs: {
-            options: _vm.globalSearchOptions,
-            clearable: false,
-            dir: _vm.$vs.rtl ? "rtl" : "ltr"
-          },
-          model: {
-            value: _vm.globalSearchFilter,
-            callback: function($$v) {
-              _vm.globalSearchFilter = $$v
-            },
-            expression: "globalSearchFilter"
-          }
-        })
-      ],
-      1
-    ),
+        _c(
+          "div",
+          { staticClass: "vx-col md:w-1/2 sm:w-1/2 w-full" },
+          [
+            _c("vs-input", {
+              staticClass: "is-label-placeholder w-full",
+              attrs: {
+                "icon-pack": "feather",
+                icon: "icon-search",
+                "label-placeholder": "Search-Value"
+              },
+              model: {
+                value: _vm.search,
+                callback: function($$v) {
+                  _vm.search = $$v
+                },
+                expression: "search"
+              }
+            })
+          ],
+          1
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" }, [
-      _c(
-        "div",
-        { staticClass: "con-input-search vs-table--search cursor-pointer" },
-        [
-          _c("vs-input", {
-            staticClass: "w-full mt-4",
-            attrs: { label: "search" },
-            model: {
-              value: _vm.aearch,
-              callback: function($$v) {
-                _vm.aearch = $$v
-              },
-              expression: "aearch"
-            }
-          }),
-          _vm._v(" "),
-          _c("vs-icon", { attrs: { icon: "search" } })
-        ],
-        1
-      )
+      _c("div", { staticClass: "vx-row" }, [
+        _c(
+          "div",
+          { staticClass: "vx-col md:w-1/2 sm:w-1/2 w-full" },
+          [
+            _c("label", { staticClass: "text-sm" }, [_vm._v("From")]),
+            _vm._v(" "),
+            _c("flat-pickr", {
+              staticClass: "w-full",
+              attrs: { config: _vm.dateConfig },
+              on: { "on-change": _vm.changeFromValue },
+              model: {
+                value: _vm.from,
+                callback: function($$v) {
+                  _vm.from = $$v
+                },
+                expression: "from"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "vx-col md:w-1/2 sm:w-1/2 w-full" },
+          [
+            _c("label", { staticClass: "text-sm" }, [_vm._v("To")]),
+            _vm._v(" "),
+            _c("flat-pickr", {
+              staticClass: "w-full",
+              attrs: { config: _vm.dateConfig },
+              on: { "on-change": _vm.changeToValue },
+              model: {
+                value: _vm.to,
+                callback: function($$v) {
+                  _vm.to = $$v
+                },
+                expression: "to"
+              }
+            })
+          ],
+          1
+        )
+      ])
     ]),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" },
       [
-        _c("label", { staticClass: "text-sm" }, [_vm._v("Date")]),
+        _c("label", { staticClass: "text-sm" }, [_vm._v("Birth OF Date")]),
         _vm._v(" "),
         _c("flat-pickr", {
           staticClass: "w-full",
           attrs: { config: _vm.dateConfig },
-          on: { "on-change": _vm.changeDateValue },
+          on: { "on-change": _vm.changeBodValue },
           model: {
-            value: _vm.date,
+            value: _vm.bod,
             callback: function($$v) {
-              _vm.date = $$v
+              _vm.bod = $$v
             },
-            expression: "date"
+            expression: "bod"
           }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "text-danger text-sm" }, [
-          _vm._v(_vm._s(_vm.errors.first("dob")))
-        ])
+        })
       ],
       1
     )
