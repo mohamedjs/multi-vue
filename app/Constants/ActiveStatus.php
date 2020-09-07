@@ -7,7 +7,7 @@ namespace App\Constants;
 final class ActiveStatus
 {
     const ACTIVE = 1;
-    const DISABLED =0;
+    const DISABLED =2;
 
     public static function getList()
     {

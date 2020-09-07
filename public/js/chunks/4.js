@@ -276,11 +276,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       genderFilter: {
         label: 'All',
-        value: ''
+        value: 'All'
       },
       genderOptions: [{
         label: 'All',
-        value: ''
+        value: 'All'
       }, {
         label: 'Male',
         value: 1
@@ -294,11 +294,19 @@ __webpack_require__.r(__webpack_exports__);
     genderFilter: {
       handler: function handler(gender) {
         // set search key in search state value 
-        var payload = {
-          key: 'gender',
-          value: gender.value
-        };
-        this.$store.dispatch("user/setSearchKey", payload);
+        if (gender.value === 'All') {
+          var payload = {
+            key: 'gender',
+            value: ''
+          };
+          this.$store.dispatch("user/emptySpecificSearchKey", payload);
+        } else {
+          var _payload = {
+            key: 'gender',
+            value: gender.value
+          };
+          this.$store.dispatch("user/setSearchKey", _payload);
+        }
       }
     }
   }
@@ -333,11 +341,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       statusFilter: {
         label: 'All',
-        value: ''
+        value: 'All'
       },
       statusOptions: [{
         label: 'All',
-        value: ''
+        value: 'All'
       }, {
         label: 'Active',
         value: 1
@@ -351,15 +359,19 @@ __webpack_require__.r(__webpack_exports__);
     statusFilter: {
       handler: function handler(status) {
         // set search key in search state value 
-        if (status.value == 2) {
-          status.value = 0;
+        if (status.value === 'All') {
+          var payload = {
+            key: 'status',
+            value: ''
+          };
+          this.$store.dispatch("user/emptySpecificSearchKey", payload);
+        } else {
+          var _payload = {
+            key: 'status',
+            value: status.value
+          };
+          this.$store.dispatch("user/setSearchKey", _payload);
         }
-
-        var payload = {
-          key: 'status',
-          value: status.value
-        };
-        this.$store.dispatch("user/setSearchKey", payload);
       }
     }
   }
@@ -394,11 +406,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user_typeFilter: {
         label: 'All',
-        value: ''
+        value: 'All'
       },
       user_typeOptions: [{
         label: 'All',
-        value: ''
+        value: 'All'
       }, {
         label: 'SUPERADMIN',
         value: 1
@@ -418,11 +430,19 @@ __webpack_require__.r(__webpack_exports__);
     user_typeFilter: {
       handler: function handler(type) {
         // set search key in search state value 
-        var payload = {
-          key: 'user_type',
-          value: type.value
-        };
-        this.$store.dispatch("user/setSearchKey", payload);
+        if (type.value === 'All') {
+          var payload = {
+            key: 'user_type',
+            value: ''
+          };
+          this.$store.dispatch("user/emptySpecificSearchKey", payload);
+        } else {
+          var _payload = {
+            key: 'user_type',
+            value: type.value
+          };
+          this.$store.dispatch("user/setSearchKey", _payload);
+        }
       }
     }
   }
@@ -457,11 +477,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isVerifiedFilter: {
         label: 'All',
-        value: ''
+        value: 'All'
       },
       isVerifiedOptions: [{
         label: 'All',
-        value: ''
+        value: 'All'
       }, {
         label: 'Yes',
         value: 1
@@ -475,15 +495,19 @@ __webpack_require__.r(__webpack_exports__);
     isVerifiedFilter: {
       handler: function handler(verified) {
         // set search key in search state value 
-        if (verified.value == 2) {
-          verified.value = 0;
+        if (verified.value === 'All') {
+          var payload = {
+            key: 'email_verified_at',
+            value: ''
+          };
+          this.$store.dispatch("user/emptySpecificSearchKey", payload);
+        } else {
+          var _payload = {
+            key: 'email_verified_at',
+            value: verified.value
+          };
+          this.$store.dispatch("user/setSearchKey", _payload);
         }
-
-        var payload = {
-          key: 'email_verified_at',
-          value: verified.value
-        };
-        this.$store.dispatch("user/setSearchKey", payload);
       }
     }
   }
@@ -923,7 +947,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "#data-list-thumb-view .vs-con-table .vs-table--header {\n  display: flex;\n  flex-wrap: wrap-reverse;\n}[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-left: 1.5rem;\n  margin-right: 1.5rem;\n}[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-right: 1.5rem;\n  margin-left: 1.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header > span {\n  display: flex;\n  flex-grow: 1;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search {\n  padding-top: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  font-size: 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  padding: 0.9rem 2.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  right: 1rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  right: 1rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table {\n  border-collapse: separate;\n  border-spacing: 0 1.3rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table {\n  padding: 0 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user {\n  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td {\n  padding: 10px;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container span {\n  display: flex;\n  justify-content: center;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container .product-img {\n  height: 110px;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td.td-check {\n  padding: 20px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th {\n  padding-top: 0;\n  padding-bottom: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--thead th .vs-table-text {\n  text-useransform: uppercase;\n  font-weight: 600;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th.td-check {\n  padding: 0 15px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead user {\n  background: none;\n  box-shadow: none;\n}\n#data-list-thumb-view .vs-con-table .vs-table--pagination {\n  justify-content: center;\n}", ""]);
+exports.push([module.i, "#data-list-thumb-view .vs-con-table .vs-table--header {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap-reverse;\n}[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-left: 1.5rem;\n  margin-right: 1.5rem;\n}[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header {\n  margin-right: 1.5rem;\n  margin-left: 1.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header > span {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex-grow: 1;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search {\n  padding-top: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  font-size: 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input {\n  padding: 0.9rem 2.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input + i {\n  right: 1rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  left: 1rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table--header .vs-table--search .vs-table--search-input:focus + i {\n  right: 1rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table {\n  border-collapse: separate;\n  border-spacing: 0 1.3rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table {\n  padding: 0 1rem;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user {\n  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td {\n  padding: 10px;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:first-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=ltr] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-right-radius: 0.5rem;\n  border-bottom-right-radius: 0.5rem;\n}\n[dir=rtl] #data-list-thumb-view .vs-con-table .vs-table user td:last-child {\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container span {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n#data-list-thumb-view .vs-con-table .vs-table user td.img-container .product-img {\n  height: 110px;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table user td.td-check {\n  padding: 20px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th {\n  padding-top: 0;\n  padding-bottom: 0;\n}\n#data-list-thumb-view .vs-con-table .vs-table--thead th .vs-table-text {\n  text-useransform: uppercase;\n  font-weight: 600;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead th.td-check {\n  padding: 0 15px !important;\n}\n[dir] #data-list-thumb-view .vs-con-table .vs-table--thead user {\n  background: none;\n  box-shadow: none;\n}\n#data-list-thumb-view .vs-con-table .vs-table--pagination {\n  -webkit-box-pack: center;\n          justify-content: center;\n}", ""]);
 
 // exports
 

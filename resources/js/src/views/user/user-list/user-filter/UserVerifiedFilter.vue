@@ -14,9 +14,9 @@ export default {
 	},
 	data() {
 		return {
-			isVerifiedFilter: { label: 'All', value: '' },
+			isVerifiedFilter: { label: 'All', value: 'All' },
 		    isVerifiedOptions: [
-		        { label: 'All', value: '' },
+		        { label: 'All', value: 'All' },
 		        { label: 'Yes', value: 1 },
 		        { label: 'No', value: 2 },
 		    ],
@@ -26,9 +26,14 @@ export default {
 	    isVerifiedFilter:{
 	      handler:function(verified){
 	      	// set search key in search state value 
-	      	if(verified.value == 2) { verified.value = 0 }
-	      	const payload = {key:'email_verified_at', value:verified.value}
-        	this.$store.dispatch("user/setSearchKey",payload)
+	      	if(verified.value === 'All') { 
+		      	const payload = {key:'email_verified_at', value:''}
+	        	this.$store.dispatch("user/emptySpecificSearchKey",payload)
+	      	} else {
+	      		const payload = {key:'email_verified_at', value:verified.value}
+        		this.$store.dispatch("user/setSearchKey",payload)
+	      	}
+	      	
 	      }
     	},
   	},

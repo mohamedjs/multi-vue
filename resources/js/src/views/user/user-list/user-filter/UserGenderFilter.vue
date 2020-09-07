@@ -14,9 +14,9 @@ export default {
 	},
 	data() {
 		return {
-			genderFilter: { label: 'All', value: '' },
+			genderFilter: { label: 'All', value: 'All' },
 		    genderOptions: [
-		        { label: 'All', value: '' },
+		        { label: 'All', value: 'All' },
 		        { label: 'Male', value: 1 },
 		        { label: 'Female', value: 2 },
 		    ],
@@ -26,8 +26,14 @@ export default {
 	    genderFilter:{
 	      handler:function(gender){
 	      	// set search key in search state value 
-	      	const payload = {key:'gender', value:gender.value}
-        	this.$store.dispatch("user/setSearchKey",payload)
+	      	if(gender.value === 'All') { 
+		      	const payload = {key:'gender', value:''}
+	        	this.$store.dispatch("user/emptySpecificSearchKey",payload)
+	      	} else {
+	      		const payload = {key:'gender', value:gender.value}
+	        	this.$store.dispatch("user/setSearchKey",payload)
+	      	}
+
 	      }
     	},
   	},

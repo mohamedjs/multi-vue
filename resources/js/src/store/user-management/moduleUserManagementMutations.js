@@ -41,5 +41,9 @@ export default {
     for (var i = state.search.length - 1; i >= 0; i--) {
       state.search[i] = ''
     }
+  },
+  
+  EMPTY_SPECIFIC_SEARCH_KEY(state, search) {
+    state.search[search.key] = search.value
   }
 }

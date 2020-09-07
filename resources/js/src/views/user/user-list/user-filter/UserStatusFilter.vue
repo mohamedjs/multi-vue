@@ -14,9 +14,9 @@ export default {
 	},
 	data() {
 		return {
-			statusFilter: { label: 'All', value: '' },
+			statusFilter: { label: 'All', value: 'All' },
 		    statusOptions: [
-		        { label: 'All', value: '' },
+		        { label: 'All', value: 'All' },
 		        { label: 'Active', value: 1},
 		        { label: 'Deactivated', value: 2 },
 		    ],
@@ -26,9 +26,14 @@ export default {
 	    statusFilter:{
 	      handler:function(status){
 	      	// set search key in search state value 
-	      	if(status.value == 2) { status.value = 0 }
-	      	const payload = {key:'status', value:status.value}
-        	this.$store.dispatch("user/setSearchKey",payload)
+	      	if(status.value === 'All') { 
+		      	const payload = {key:'status', value:''}
+	        	this.$store.dispatch("user/emptySpecificSearchKey",payload)
+	      	} else {
+	      		const payload = {key:'status', value:status.value}
+        		this.$store.dispatch("user/setSearchKey",payload)
+	      	}
+	      	
 	      }
     	},
   	},

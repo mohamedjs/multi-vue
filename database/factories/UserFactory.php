@@ -36,6 +36,7 @@ $factory->state(User::class, 'male', function(Faker $faker) {
         'gender' => GenderTypes::MALE,
     ];
 });
+
 $factory->state(User::class, 'female', function(Faker $faker) {
     return [
         'gender' => GenderTypes::FEMALE,

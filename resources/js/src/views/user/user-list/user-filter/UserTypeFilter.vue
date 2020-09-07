@@ -14,9 +14,9 @@ export default {
 	},
 	data() {
 		return {
-			user_typeFilter: { label: 'All', value: '' },
+			user_typeFilter: { label: 'All', value: 'All' },
 		    user_typeOptions: [
-		        { label: 'All', value: '' },
+		        { label: 'All', value: 'All' },
 		        { label: 'SUPERADMIN', value: 1 },
 		        { label: 'ADMIN', value: 2  },
 		        { label: 'STAFF', value: 3  },
@@ -28,8 +28,14 @@ export default {
 	    user_typeFilter:{
 	      handler:function(type){
 	      	// set search key in search state value 
-	      	const payload = {key:'user_type', value:type.value}
-        	this.$store.dispatch("user/setSearchKey",payload)
+	      	if(type.value === 'All') { 
+		      	const payload = {key:'user_type', value:''}
+	        	this.$store.dispatch("user/emptySpecificSearchKey",payload)
+	      	} else {
+	      		const payload = {key:'user_type', value:type.value}
+        		this.$store.dispatch("user/setSearchKey",payload)
+	      	}
+	      
 	      }
     	},
   	},

@@ -16,6 +16,6 @@ class VerifiedFilter implements Filter
      */
     public function apply(Builder $builder, $value)
     {
-        return $value ? $builder->whereNotNull('email_verified_at') : $builder->whereNull('email_verified_at');
+        return $value == 1 ? $builder->whereNotNull('email_verified_at') : $builder->whereNull('email_verified_at');
     }
 }

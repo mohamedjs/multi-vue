@@ -21,10 +21,10 @@ class UsersTableSeeder extends Seeder
             "api_token" => "gftVCeSTKNypCvTLltAlpTWIqp8sqC9QUsRkguRSjfKlCqlbr6YagkCBAY9DRkNpkQULaFwDnmkKTuxT",
         ]);
 
-        factory(User::class, 3)->state('male')->state('active')->state('client')->create();
-        factory(User::class, 3)->state('female')->state('disabled')->state('client')->create();
-        factory(User::class, 3)->state('male')->state('disabled')->state('admin')->create();
-        factory(User::class, 3)->state('verified')->state('male')->state('active')->state('admin')->create();
-        factory(User::class, 3)->state('male')->state('active')->state('staff')->create();
+        factory(User::class, 3)->states('male','active','client')->create();
+        factory(User::class, 3)->states('female','disabled','client')->create();
+        factory(User::class, 3)->states('male','disabled','admin')->create();
+        factory(User::class, 3)->states('verified','male','active','admin')->create();
+        factory(User::class, 3)->states('male','active','staff')->create();
     }
 }

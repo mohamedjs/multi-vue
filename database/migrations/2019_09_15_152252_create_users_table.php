@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration {
 			$table->string('phone', 60)->nullable()->unique();
 			$table->string('home_phone', 60)->nullable()->unique();
 			$table->integer('status')->default(1)->comment('1-Active 2-Block 3-Deactive')->default('1');
-			$table->integer('verified')->default(1)->comment('0-no 1-yes')->default('0');
+			$table->integer('verified')->default(1)->comment('1-yes 2-no')->default('2');
 			$table->integer('gender')->default(1)->comment('1-Male 2-Female');
 			$table->integer('user_type')->default(1)->comment('1-SuperAdmin 2-Admin 3-Staff 4-Client');
 			$table->string('api_token')->nullable();
