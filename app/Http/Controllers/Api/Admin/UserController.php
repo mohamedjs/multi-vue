@@ -63,7 +63,12 @@ class UserController extends Controller
 
   public function destroy($id)
   {
-    $user = $this->userRepository->find($id)->delete();
+    if(gettype($id) == 'string' && strpos($id, ',') !== false) {
+      $user_ids = explode(',', $id);
+      $user = $this->userRepository->whereIn('id', $user_ids)->delete();
+    } else {
+      $user = $this->userRepository->find($id)->delete();
+    }
     return response()->json(['status' => 'success' , 'data' => (object)[] , 'message' => 'Delete User SuccessFully'] ,201);
   }
 }

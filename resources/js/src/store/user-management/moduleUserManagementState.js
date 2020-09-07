@@ -9,7 +9,9 @@
 
 export default {
   users  : [],
-  search : {'per_page' : '', 'page' : '', 'global_search' : '', 'name' : '', 'email' : '', 'created_at' : '', 'phone' : '', 'user_name' : ''},
+  search : {'per_page' : '', 'page' : '', 'global_search' : '', 'name' : '', 'email' : '',
+           'bod' : '', 'phone' : '', 'user_name' : '' , 'from' : '', 'to' : '' , 'status' : '' ,
+           'gender' : '' ,'email_verified_at' : ''},
   user   : {},
   currentPage:1,
   itemsPerPage: 10,

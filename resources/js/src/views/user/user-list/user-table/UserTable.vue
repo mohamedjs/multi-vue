@@ -111,7 +111,7 @@ export default {
   	},
   	methods: {
   		 editRecord(userId) {
-              this.$router.push("/apps/user/user-edit/" + id).catch(() => {})
+              this.$router.push("/apps/user/user-edit/" + userId).catch(() => {})
           },
           confirmDeleteRecord(user) {
             this.$vs.dialog({
@@ -124,10 +124,8 @@ export default {
             })
           },
           deleteRecord(userId) {
-            /* Below two lines are just for demo purpose */
-            this.showDeleteSuccess()
             /* UnComment below lines for enabling true flow if deleting user */
-            this.$store.dispatch("userManagement/removeRecord", userId)
+            this.$store.dispatch("user/removeRecord", userId)
             .then(result => { this.showDeleteSuccess() })
     		.catch(err => { console.log(err) })
           },

@@ -36,7 +36,11 @@ export default {
     return new Promise((resolve, reject) => {
       axios.delete(`/api/v1/users/${userId}`)
         .then((response) => {
-          commit('REMOVE_RECORD', userId)
+          if (typeof(userId) == 'string') {
+            commit('REMOVE_MULTI_RECORD', userId)
+          } else {
+            commit('REMOVE_RECORD', userId)
+          }
           resolve(response)
         })
         .catch((error) => { reject(error) })

@@ -8,6 +8,11 @@ use App\Http\Filters\UserFilter\StatusFilter;
 use App\Http\Filters\UserFilter\GenderFilter;
 use App\Http\Filters\UserFilter\VerifiedFilter;
 use App\Http\Filters\UserFilter\UserTypeFilter;
+use App\Http\Filters\UserFilter\BirthOfDateFilter;
+use App\Http\Filters\UserFilter\UserNameFilter;
+use App\Http\Filters\UserFilter\PhoneFilter;
+use App\Http\Filters\FromDateSearch;
+use App\Http\Filters\ToDateSearch;
 use App\Http\Filters\GlobalSearch;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -28,9 +33,15 @@ class Controller extends BaseController
 	      'email' => new EmailFilter,
 	      'status' => new StatusFilter,
 	      'gender' => new GenderFilter,
+	      'phone' => new PhoneFilter,
+	      'user_name' => new UserNameFilter,
 	      'email_verified_at' => new VerifiedFilter,
-	      'user_type'  => new UserTypeFilter,
-	      'global_search' => new GlobalSearch(['phone', 'user_name', 'bod', 'status', 'gender', 'user_type', 'home_phone', 'website', 'name', 'email'])
+	      'user_type' => new UserTypeFilter,
+	      'bod'  => new BirthOfDateFilter,
+	      'from' => new FromDateSearch,
+	      'to'  => new ToDateSearch,
+	      'global_search' => new GlobalSearch(['phone', 'user_name', 'bod', 'status', 'gender', 'user_type',
+	      					 				   'home_phone', 'website', 'name', 'email'])
 	    ];
 	 }
 }

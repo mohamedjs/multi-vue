@@ -16,6 +16,6 @@ class BirthOfDateFilter implements Filter
      */
     public function apply(Builder $builder, $value)
     {
-        return $builder->where('bod', $value);
+        $builder->where('bod', '=', date('Y-m-d',strtotime($value)));
     }
 }

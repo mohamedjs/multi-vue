@@ -31,8 +31,19 @@ export default {
 	props: ['selected'],
 	methods: {
 		deleteAll() {
-			console.log(this.selected)
-		}
+			let result = this.selected.map(user => user.id);
+			result = result.join(',')
+      		this.$store.dispatch("user/removeRecord", result)
+            .then(result => { this.showDeleteSuccess() })
+    		.catch(err => { console.log(err) })
+		},
+		showDeleteSuccess() {
+            this.$vs.notify({
+              color: 'success',
+              title: 'User Deleted',
+              text: 'The selected user was successfully deleted'
+            })
+        }
 	}
 }
 </script>

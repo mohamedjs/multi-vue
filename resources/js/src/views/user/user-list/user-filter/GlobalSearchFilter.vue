@@ -92,15 +92,15 @@ export default {
   	},
   	methods: {
   		changeFromValue(selectedDates, dateStr, instance){
-	      const payload = {key:'from', value:moment(dateStr).format("DD-MMMM-YYYY")}
+	      const payload = {key:'from', value:dateStr }
 	      this.$store.dispatch('user/setSearchKey',payload)
 	    },
 	    changeToValue(selectedDates, dateStr, instance){
-	      const payload = {key:'to', value:moment(dateStr).format("DD-MMMM-YYYY")}
+	      const payload = {key:'to', value:dateStr }
 	      this.$store.dispatch('user/setSearchKey',payload)
 	    },
 	    changeBodValue(selectedDates, dateStr, instance){
-	      const payload = {key:'bod', value:moment(dateStr).format("DD-MMMM-YYYY")}
+	      const payload = {key:'bod', value:dateStr }
 	      this.$store.dispatch('user/setSearchKey',payload)
 	    },
   	}

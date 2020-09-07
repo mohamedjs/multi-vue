@@ -21,8 +21,16 @@ export default {
   },
 
   REMOVE_RECORD(state, itemId) {
-      const userIndex = state.users.findIndex((u) => u.id == itemId)
+    const userIndex = state.users.findIndex((u) => u.id == itemId)
+    state.users.splice(userIndex, 1)
+  },  
+
+  REMOVE_MULTI_RECORD(state, itemId) {
+    let itemIds = itemId.split(',')
+    for (var i = itemIds.length - 1; i >= 0; i--) {
+      const userIndex = state.users.findIndex((u) => u.id == itemIds[i])
       state.users.splice(userIndex, 1)
+    }
   },
 
   SET_SEARCH_KEY(state, search) {
@@ -30,6 +38,8 @@ export default {
   },
 
   INIT_SEARCH(state) {
-    state.search = {'per_page' : '', 'page' : '', 'global_search' : '', 'name' : '', 'email' : '', 'created_at' : '', 'phone' : '', 'user_name' : ''}
+    for (var i = state.search.length - 1; i >= 0; i--) {
+      state.search[i] = ''
+    }
   }
 }
