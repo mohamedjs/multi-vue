@@ -57,10 +57,10 @@ export default {
 	},
 	data() {
 		return {
-			globalSearchFilter: { label: 'All', value: '' },
+			globalSearchFilter: { label: 'All', value: 'All' },
 			search:'',
 		    globalSearchOptions: [
-		        { label: 'All', value: '' },
+		        { label: 'All', value: 'All' },
 		        { label: 'Name', value: 'name'},
 		        { label: 'Email', value: 'email' },
 		        { label: 'UserName', value: 'user_name' },
@@ -85,8 +85,13 @@ export default {
 	    search:{
 	      handler:function(value){
 	      	// set search key in search state value 
-	      	const payload = {key:this.globalSearchFilter.value, value:value}
-        	this.$store.dispatch("user/setSearchKey",payload)
+	      	if(this.globalSearchFilter.value === 'All') {
+		      	const payload = {key:'global_search', value:value}
+	        	this.$store.dispatch("user/setSearchKey",payload)
+	      	} else {
+		      	const payload = {key:this.globalSearchFilter.value, value:value}
+	        	this.$store.dispatch("user/setSearchKey",payload)
+	      	}
 	      }
     	},
   	},
