@@ -83,15 +83,18 @@ export default {
 	},
 	watch:{
 	    search:{
-	      handler:function(value){
+	      handler:function(value) {
 	      	// set search key in search state value 
+	      	var payload = {key:this.globalSearchFilter.value, value:value}
+
 	      	if(this.globalSearchFilter.value === 'All') {
-		      	const payload = {key:'global_search', value:value}
-	        	this.$store.dispatch("user/setSearchKey",payload)
-	      	} else {
-		      	const payload = {key:this.globalSearchFilter.value, value:value}
-	        	this.$store.dispatch("user/setSearchKey",payload)
+		    	payload = {key:'global_search', value:value}	
 	      	}
+	      	
+	      	if(value != '')
+	      		this.$store.dispatch("user/setSearchKey",payload)
+	      	else
+	      		this.$store.dispatch("user/emptySpecificSearchKey",payload)
 	      }
     	},
   	},

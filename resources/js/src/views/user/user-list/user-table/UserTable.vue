@@ -34,7 +34,12 @@
 			              </vs-chip>
 			          </vs-td>
 		              <vs-td :key="index" v-else-if="column == 'verified'">
-		                <feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor(user['email_verified_at'])]" />
+		              	<feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor(user['email_verified_at'])]" />
+		              </vs-td>
+		              <vs-td :key="index" v-else-if="column == 'name'">
+		              	<router-link :to="{name:'app-user-view', params:{userId: user.id} }" >
+		                	<p class="product-name font-medium">{{ user[column] }}</p>
+		                </router-link>
 		              </vs-td>
 		              <vs-td :key="index" v-else>
 		                <p class="product-name font-medium">{{ user[column] }}</p>

@@ -338,7 +338,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       defaultImage: '/images/portrait/small/avatar-s-11.jpg'
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['user']), {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['user'])), {}, {
     validateForm: function validateForm() {
       return !this.errors.any();
     }
@@ -687,7 +687,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('auth', ['user']), {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('auth', ['user'])), {}, {
     validateForm: function validateForm() {
       return !this.errors.any();
     }
