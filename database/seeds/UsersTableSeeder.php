@@ -26,5 +26,6 @@ class UsersTableSeeder extends Seeder
         factory(User::class, 3)->states('male','disabled','admin')->create();
         factory(User::class, 3)->states('verified','male','active','admin')->create();
         factory(User::class, 3)->states('male','active','staff')->create();
+        factory(User::class, 50)->states('male','active','staff')->create();
     }
 }

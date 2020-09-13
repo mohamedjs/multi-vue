@@ -38,12 +38,48 @@ export default {
   },
 
   INIT_SEARCH(state) {
-    for (var i = state.search.length - 1; i >= 0; i--) {
-      state.search[i] = ''
-    }
+      state.search ={'per_page' : '', 'page' : '', 'global_search' : '', 'name' : '', 'email' : '',
+           'bod' : '', 'phone' : '', 'user_name' : '' , 'from' : '', 'to' : '' , 'status' : '' ,
+           'gender' : '' ,'email_verified_at' : ''}
+  },  
+  
+  INIT_USER(state) {
+      state.user = {'name' : '', 'image' : '', 'email' : '', 'password' : '', 'phone' : '', 'user_name' : '', 'bod' : '', 'status' : '', 'gender' : '', 'user_type' : '', 'home_phone' : '', 'website' : ''}
   },
   
   EMPTY_SPECIFIC_SEARCH_KEY(state, search) {
     state.search[search.key] = search.value
+  },
+
+  SET_USER_DATA(state, result) {
+    state.user = result
+  },
+
+  CHANGE_USER_KEY(state,payload){
+    state.user[payload.key] = payload.value
+  },
+
+  FILL_FORM_DATA(state,method){
+    state.formData = new FormData()
+    for ( var key in state.user ) {
+      if(key != 'email_verified_at')
+        state.formData.append(key, state.user[key]);
+      if(key === 'gender')
+        state.formData.append(key, state.user[key] === 'male' ? 1 : 2);
+      if (key === 'user_type') {
+        var type = 4;
+        if (state.user.user_type === 'SuperAdmin') { type = 1 }
+        if (state.user.user_type === "Admin") { type = 2 }
+        if (state.user.user_type === 'Staff') { type = 3 }
+        if (state.user.user_type === 'Client') { type = 4 }
+        state.formData.append(key, type);
+      }
+      if (key === 'status') {
+        var status = state.user.status === 'active' ? 1 : 0;
+        state.formData.append(key, status);
+      }
+    }
+    if(method && method != '')
+      state.formData.append('_method', method);
   }
 }

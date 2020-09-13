@@ -21,7 +21,7 @@ export default {
     })
   },
 
-  fetchUser({}, userId) {
+  fetchUser({commit}, userId) {
     return new Promise((resolve, reject) => {
       axios.get(`/api/v1/users/${userId}/edit`)
         .then((response) => {
@@ -30,6 +30,33 @@ export default {
         })
         .catch((error) => { reject(error) })
     })
+  },
+
+  updateUserData({ commit, state }){
+    return new Promise((resolve,reject) => {
+      commit('FILL_FORM_DATA','patch')
+      axios.post('/api/v1/users/'+state.user.id,state.formData)
+      .then((response) => {
+        commit('SET_USER_DATA', response.data.data)
+        resolve(response)
+      })
+      .catch((error) => { reject(error) })
+    })
+  },  
+  addUserData({ commit, state }){
+    return new Promise((resolve,reject) => {
+      commit('FILL_FORM_DATA','')
+      axios.post('/api/v1/users/',state.formData)
+      .then((response) => {
+        commit('SET_USER_DATA', response.data.data)
+        resolve(response)
+      })
+      .catch((error) => { reject(error) })
+    })
+  },
+
+  updateUserKey({ commit } , payload){
+    commit('CHANGE_USER_KEY',payload)
   },
 
   removeRecord({ commit }, userId) {

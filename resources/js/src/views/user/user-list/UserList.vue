@@ -27,13 +27,12 @@ export default {
 
   },
   created() {
-    this.$store.dispatch("user/initSearchKey")
-    
     this.$store.dispatch("user/fetchUsers")
     .then(result => { console.log(result) })
     .catch(err => { console.log(err) })
   },
   mounted() {
+    this.$store.commit("user/INIT_SEARCH")
     this.isMounted = true;
   }
 }

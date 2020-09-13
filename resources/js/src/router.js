@@ -111,7 +111,7 @@ const router = new Router({
               path: '/user-edit/:userId',
               name: 'app-user-edit',
               secure: true,
-              component: () => import('@/views/user/user-edit/UserEdit.vue'),
+              component: () => import('@/views/user/user-form/UserForm.vue'),
               meta: {
                   breadcrumb: [
                       { title: 'Home', url: '/' },
@@ -121,7 +121,22 @@ const router = new Router({
                   pageTitle: 'User Edit',
                 //  rule: 'editor'
               },
-          } 
+          },
+          {
+              path: '/user-add',
+              name: 'app-user-add',
+              secure: true,
+              component: () => import('@/views/user/user-form/UserForm.vue'),
+              meta: {
+                  breadcrumb: [
+                      { title: 'Home', url: '/' },
+                      { title: 'User' },
+                      { title: 'Add', active: true },
+                  ],
+                  pageTitle: 'User Add',
+                //  rule: 'editor'
+              },
+          },
         ]
       },
       // =============================================================================

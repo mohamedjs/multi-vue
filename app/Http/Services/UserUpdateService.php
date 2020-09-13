@@ -37,7 +37,7 @@ class UserUpdateService
      */
     public function handle($request, $user)
     {
-        if(isset($request['image'])) {
+        if( isset($request['image']) && is_file($request['image'])) {
             array_merge($request, [
                 'image' => $this->handleFile($request['image'])
             ]);
@@ -51,7 +51,7 @@ class UserUpdateService
      */
     public function handleFile($file) 
     {
-        return $this->uploaderService->upload($file, IMAGE_PATH);
+        return $this->uploaderService->upload($file, self::IMAGE_PATH);
     }
 
 }

@@ -3,7 +3,7 @@ namespace App\Http\Requests\Api\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
 use App\Models\User;
-class UserRequest extends FormRequest
+class UserStoreFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

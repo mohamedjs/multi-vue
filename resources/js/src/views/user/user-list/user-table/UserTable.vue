@@ -38,7 +38,10 @@
 		              </vs-td>
 		              <vs-td :key="index" v-else-if="column == 'name'">
 		              	<router-link :to="{name:'app-user-view', params:{userId: user.id} }" >
-		                	<p class="product-name font-medium">{{ user[column] }}</p>
+		              		<vs-chip  class="w-full" color="success">
+						        <vs-avatar :src="user.image"/>
+						        {{ user[column] }}
+						    </vs-chip >
 		                </router-link>
 		              </vs-td>
 		              <vs-td :key="index" v-else>
@@ -116,7 +119,7 @@ export default {
   	},
   	methods: {
   		 editRecord(userId) {
-              this.$router.push("/apps/user/user-edit/" + userId).catch(() => {})
+              this.$router.push({ name: 'app-user-edit', params: { userId: userId } }).catch(() => {})
           },
           confirmDeleteRecord(user) {
             this.$vs.dialog({

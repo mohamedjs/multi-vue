@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Requests\Api\Admin\UserRequest;
+use App\Http\Requests\Api\Admin\UserUpdateFormRequest;
+use App\Http\Requests\Api\Admin\UserStoreFormRequest;
 use App\Http\Repository\UserRepository;
 use App\Http\Services\UserStoreService;
 use App\Http\Services\UserUpdateService;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -48,10 +50,12 @@ class UserController extends Controller
     return response()->json(['data' => '' , 'status' => 'success' , 'message' => 'User Added Successfully'], 204);
   }
 
-  public function edit($id)
+  public function edit(User $user)
   {
-    $user = $this->userRepository->find($id);
-    return response()->json(['status' => 'success' , 'data' => $user , 'message' => 'Get User For Edit Success'], 200);
+    if(!$user) {
+      return response()->json(['status' => 'error' , 'data' => (object)[] , 'message' => 'Not ound User'], 404);
+    }
+    return response()->json(['status' => 'success' , 'data' => new UserResource($user) , 'message' => 'Get User For Edit Success'], 200);
   }
 
   public function update(UserUpdateFormRequest $request,User $user)
