@@ -43,6 +43,7 @@ export default {
       .catch((error) => { reject(error) })
     })
   },  
+  
   addUserData({ commit, state }){
     return new Promise((resolve,reject) => {
       commit('FILL_FORM_DATA','')

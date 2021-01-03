@@ -26,7 +26,13 @@ class UserStoreFormRequest extends FormRequest
         'user_name' => 'required|string|max:255',
         'email' => "required|email|unique:users",
         'phone' => 'unique:users',
-        'image' => ''
+        'password' => ['required', 'min:6', 'confirmed'],
+        'image' => '',
+        'bod' => '',
+        'gender' => '',
+        'user_type' => '',
+        'website' => '',
+        'status' => ''
       ];
       
       return $rules;

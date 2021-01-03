@@ -35,21 +35,38 @@ class UserController extends Controller
       $this->userStoreService   = $userStoreService    ;
       $this->userUpdateService  = $userUpdateService    ;
   }
-
-  public function index(Request $request)
+  
+  /**
+   * get all user with paginate
+   *
+   * @return void
+   */
+  public function index()
   {
     $users = $this->userRepository->filter($this->userFilters())
             ->paginate(request('per_page', 10));
             
     return response()->json(['status' => 'success' , 'data' => new UserCollection($users) , 'message' => 'Get All User'], 200);
   }
-
+  
+  /**
+   * store
+   *
+   * @param  UserStoreFormRequest $request
+   * @return Response
+   */
   public function store(UserStoreFormRequest $request)
   {
     $user = $this->userStoreService->handle($request->validated());
     return response()->json(['data' => '' , 'status' => 'success' , 'message' => 'User Added Successfully'], 204);
   }
-
+  
+  /**
+   * edit
+   *
+   * @param  User $user
+   * @return Response
+   */
   public function edit(User $user)
   {
     if(!$user) {
@@ -57,14 +74,26 @@ class UserController extends Controller
     }
     return response()->json(['status' => 'success' , 'data' => new UserResource($user) , 'message' => 'Get User For Edit Success'], 200);
   }
-
+  
+  /**
+   * update
+   *
+   * @param  UserUpdateFormRequest $request
+   * @param  User $user
+   * @return Response
+   */
   public function update(UserUpdateFormRequest $request,User $user)
   {
-    $this->userUpdateService->handle($request->validated(),$user);
-    $user = $this->userRepository->find($user->id);
+    $user = $this->userUpdateService->handle($request->validated(),$user);
     return response()->json(['status' => 'success' , 'data' => new UserResource($user) , 'message' => 'Update User SuccessFully'], 204);
   }
-
+  
+  /**
+   * destroy
+   *
+   * @param  Integer|String $id
+   * @return Response
+   */
   public function destroy($id)
   {
     if(gettype($id) == 'string' && strpos($id, ',') !== false) {

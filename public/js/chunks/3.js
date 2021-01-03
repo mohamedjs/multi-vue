@@ -10,8 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserFormTabAccount_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserFormTabAccount.vue */ "./resources/js/src/views/user/user-form/UserFormTabAccount.vue");
-/* harmony import */ var _store_user_management_moduleUserManagement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/store/user-management/moduleUserManagement.js */ "./resources/js/src/store/user-management/moduleUserManagement.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -65,8 +64,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
- // Store Module
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -79,12 +76,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       activeTab: 0
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('user', ['user'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('user', ['user'])),
   methods: {
     fetch_user: function fetch_user(userId) {
       var _this = this;
 
-      this.$store.dispatch("userManagement/fetchUser", userId).then(function (res) {}).catch(function (err) {
+      this.$store.dispatch("user/fetchUser", userId).then(function (res) {}).catch(function (err) {
         if (err.response.status === 404) {
           _this.user_not_found = true;
           return;
@@ -95,14 +92,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    // Register Module UserManagement Module
-    if (!_store_user_management_moduleUserManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"].isRegistered) {
-      this.$store.registerModule('userManagement', _store_user_management_moduleUserManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-      _store_user_management_moduleUserManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"].isRegistered = true;
-    }
-
     if (this.$route.params.userId) {
       this.fetch_user(this.$route.params.userId);
+    } else {
+      this.$store.commit("user/INIT_USER");
     }
   }
 });
@@ -323,6 +316,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -336,6 +354,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       success_flag: false,
+      password: '',
+      password_confirmation: '',
       defaultImage: '/images/portrait/small/avatar-s-11.jpg',
       statusOptions: [{
         label: 'Active',
@@ -432,6 +452,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: key,
         value: $event.target.value
       };
+      console.log(payload);
       this.$store.dispatch('user/updateUserKey', payload);
     },
     updateAvatar: function updateAvatar(input) {
@@ -471,10 +492,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var _this = this;
 
+      var action_type = 'add';
       var action = 'user/addUserData';
 
       if (this.$route.params.userId) {
         action = 'user/updateUserData';
+        action_type = "update";
       }
 
       this.$store.dispatch(action).then(function (response) {
@@ -487,9 +510,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           iconPack: 'feather',
           icon: 'icon-alert-circle'
         });
-      }).catch(function (error) {
-        console.log(error);
 
+        _this3.$router.push({
+          name: 'app-user-list',
+          query: {
+            'action_type': action_type
+          }
+        }).catch(function () {});
+      }).catch(function (error) {
         _this3.$vs.notify({
           title: 'Error',
           text: error.response.data.message,
@@ -885,7 +913,80 @@ var render = function() {
               staticClass: "text-danger text-sm"
             },
             [_vm._v(_vm._s(_vm.errors.first("phone")))]
-          )
+          ),
+          _vm._v(" "),
+          _c("vs-input", {
+            directives: [
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required|min:6",
+                expression: "'required|min:6'"
+              }
+            ],
+            ref: "password",
+            staticClass: "w-full mb-base",
+            attrs: {
+              "data-vv-validate-on": "blur",
+              name: "password",
+              success: _vm.success_flag,
+              danger: _vm.errors.has("password"),
+              type: "password",
+              "label-placeholder": "Password"
+            },
+            on: {
+              keyup: function($event) {
+                return _vm.updateValue("password", $event)
+              }
+            },
+            model: {
+              value: _vm.password,
+              callback: function($$v) {
+                _vm.password = $$v
+              },
+              expression: "password"
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger w-full text-sm" }, [
+            _vm._v(_vm._s(_vm.errors.first("password")))
+          ]),
+          _vm._v(" "),
+          _c("vs-input", {
+            directives: [
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required|min:6|confirmed:password",
+                expression: "'required|min:6|confirmed:password'"
+              }
+            ],
+            staticClass: "w-full mb-base",
+            attrs: {
+              "data-vv-validate-on": "blur",
+              name: "password_confirmation",
+              success: _vm.success_flag,
+              danger: _vm.errors.has("password_confirmation"),
+              type: "password",
+              "label-placeholder": "Confirm Password"
+            },
+            on: {
+              keyup: function($event) {
+                return _vm.updateValue("password_confirmation", $event)
+              }
+            },
+            model: {
+              value: _vm.password_confirmation,
+              callback: function($$v) {
+                _vm.password_confirmation = $$v
+              },
+              expression: "password_confirmation"
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger w-full text-sm" }, [
+            _vm._v(_vm._s(_vm.errors.first("password_confirmation")))
+          ])
         ],
         1
       ),

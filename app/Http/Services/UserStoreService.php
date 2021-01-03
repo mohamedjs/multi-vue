@@ -37,11 +37,13 @@ class UserStoreService
      */
     public function handle($request)
     {
-    	$user = $this->userRepository->create(
-    		array_merge($request, [
-    			'image' => $this->handleFile($request['image'])
-    		])
-    	);
+        if(isset($request['image']) && is_file($request['image'])) {
+            array_merge($request, [
+                'image' => $this->handleFile($request['image'])
+            ]);
+        }
+
+    	$user = $this->userRepository->create($request);
 
     	return $user;
     }
@@ -52,7 +54,7 @@ class UserStoreService
      */
     public function handleFile($file) 
     {
-        return $this->uploaderService->upload($file, IMAGE_PATH);
+        return $this->uploaderService->upload($file, self::IMAGE_PATH);
     }
 
 }

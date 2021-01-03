@@ -25,6 +25,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -35,7 +40,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      isMounted: false
+      isMounted: false,
+      success: false,
+      action: ''
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['users'])),
@@ -48,6 +55,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   mounted: function mounted() {
+    if (this.$route.query.action_type) this.success = true;
+    this.action = this.$route.query.action_type; // init user search to set all null
+
     this.$store.commit("user/INIT_SEARCH");
     this.isMounted = true;
   }
@@ -1034,7 +1044,44 @@ var render = function() {
       staticClass: "data-list-container",
       attrs: { id: "data-list-thumb-view" }
     },
-    [_c("user-filter"), _vm._v(" "), _c("user-table")],
+    [
+      _c(
+        "div",
+        { staticClass: "centerx" },
+        [
+          _c(
+            "vs-alert",
+            {
+              attrs: {
+                title: "Success",
+                closable: "",
+                "close-icon": "close",
+                active: _vm.success,
+                color: "success",
+                icon: "sms"
+              },
+              on: {
+                "update:active": function($event) {
+                  _vm.success = $event
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n       You " +
+                  _vm._s(_vm.action) +
+                  " user data SuccessFully\n    "
+              )
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("user-filter"),
+      _vm._v(" "),
+      _c("user-table")
+    ],
     1
   )
 }

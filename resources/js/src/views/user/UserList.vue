@@ -1,5 +1,11 @@
 <template>
   <div id="data-list-thumb-view" class="data-list-container">
+    <div class="centerx">
+      <selected-icons icon="sms"/>
+      <vs-alert title="Success" closable close-icon="close" :active="success" color="success" icon="sms" >
+         You {{ action }} user data SuccessFully
+      </vs-alert>
+    </div>
     <vx-card ref="filterCard" title="Filters" class="user-list-filters mb-8">
       <div class="vx-row">
         <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
@@ -165,7 +171,8 @@ export default {
         { label: 'Male', value: 'male' },
         { label: 'Female', value: 'female' },
       ],
-
+      success:false,
+      action:''
       selected: [],
       columns:{'Name':'name', 'Email':'email', 'Phone':'phone', 'UserName':'user_name', 'Status':'status', 'Gender':'gender', 'UserType':'user_type', 'IsVerified':'verified'},
       searchable:['name', 'email'],
@@ -227,6 +234,8 @@ export default {
     .catch(err => { console.log(err) })
   },
   mounted() {
+    if(this.$route.query.action_type)
+      this.success = true
     this.isMounted = true;
   }
 }

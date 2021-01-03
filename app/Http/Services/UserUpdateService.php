@@ -22,14 +22,15 @@ class UserUpdateService
     private $userRepository;
 
     /**
-     * UserServices constructor.
-     * UserRepository constructor.
+     * @param UserServices constructor.
+     * @param UserRepository constructor.
      */
     public function __construct(UserRepository $userRepository, UploaderService $uploaderService)
     {
         $this->uploaderService = $uploaderService;
         $this->userRepository  = $userRepository;
     }
+
     /**
      * handle function that make create for user
      * @param array $request 
@@ -42,8 +43,12 @@ class UserUpdateService
                 'image' => $this->handleFile($request['image'])
             ]);
         }
-        return $this->userRepository->find($user->id)->update($request);
+        $user = tap($user, function($user) use($request) {
+            $this->userRepository->find($user->id)->update($request);
+        });
+        return $user;
     }
+
     /**
      * handle image file that return file path
      * @param File $file 

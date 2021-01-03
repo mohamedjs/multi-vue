@@ -26,7 +26,13 @@ class UserUpdateFormRequest extends FormRequest
         'user_name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users,email,'.$this->user->id,
         'phone' => 'unique:users,phone,'.$this->user->id,
-        'image' => ''
+        'password' => ['min:6', 'confirmed'],
+        'image' => '',
+        'bod' => '',
+        'gender' => '',
+        'user_type' => '',
+        'website' => '',
+        'status' => ''
       ];
       
       return $rules;

@@ -47,9 +47,6 @@
 
 <script>
 import UserFormTabAccount     from "./UserFormTabAccount.vue"
-
-// Store Module
-import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
 import { mapState } from 'vuex'
 
 export default {
@@ -67,7 +64,7 @@ export default {
   },
   methods: {
     fetch_user(userId) {
-      this.$store.dispatch("userManagement/fetchUser", userId)
+      this.$store.dispatch("user/fetchUser", userId)
         .then(res => { })
         .catch(err => {
           if(err.response.status === 404) {
@@ -78,15 +75,10 @@ export default {
     }
   },
   created() {
-    // Register Module UserManagement Module
-    if(!moduleUserManagement.isRegistered) {
-      this.$store.registerModule('userManagement', moduleUserManagement)
-      moduleUserManagement.isRegistered = true
-    }
     if (this.$route.params.userId) {
       this.fetch_user(this.$route.params.userId)
     } else {
-      this.$store.commit("userManagement/INIT_USER")
+      this.$store.commit("user/INIT_USER")
     }
     
   }

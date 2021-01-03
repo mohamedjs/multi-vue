@@ -70,6 +70,31 @@
           label-placeholder="Phone" 
           v-model="user.phone" />
         <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
+        <vs-input 
+          v-validate="'required|min:6'"
+          data-vv-validate-on="blur"
+          name="password"
+          ref="password"
+          :success="success_flag"
+          :danger="errors.has('password')"
+          type="password" 
+          @keyup="updateValue('password',$event)" 
+          label-placeholder="Password" 
+          v-model="password" 
+          class="w-full mb-base" />
+        <span class="text-danger w-full text-sm">{{ errors.first('password') }}</span>
+        <vs-input 
+          v-validate="'required|min:6|confirmed:password'"
+          data-vv-validate-on="blur"
+          name="password_confirmation"
+          :success="success_flag"
+          :danger="errors.has('password_confirmation')"
+          type="password" 
+          label-placeholder="Confirm Password" 
+          @keyup="updateValue('password_confirmation',$event)" 
+          v-model="password_confirmation" 
+          class="w-full mb-base" />
+        <span class="text-danger w-full text-sm">{{ errors.first('password_confirmation') }}</span>
       </div>
 
       <div class="vx-col md:w-1/2 w-full">
@@ -203,6 +228,8 @@ export default {
   data() {
     return {
       success_flag:false,
+      password:'',
+      password_confirmation : '',
       defaultImage :  '/images/portrait/small/avatar-s-11.jpg',
       statusOptions: [
         { label: 'Active', value: 1},
@@ -260,6 +287,7 @@ export default {
   methods: {
     updateValue(key,$event){
       const payload = {key:key, value:$event.target.value}
+      console.log(payload)
       this.$store.dispatch('user/updateUserKey',payload)
     },
     updateAvatar(input) {
@@ -282,9 +310,11 @@ export default {
     save(){
       if(!this.validateForm) return
       var _this = this
+      var action_type = 'add'
       var action = 'user/addUserData' 
       if (this.$route.params.userId) {
         action = 'user/updateUserData'
+        action_type="update"
       }
       this.$store.dispatch(action) 
         .then((response) => { 
@@ -296,7 +326,7 @@ export default {
                 iconPack: 'feather',
                 icon:'icon-alert-circle'
             })
-            this.$router.push({ name: 'app-user-list' }).catch(() => {})
+            this.$router.push({ name: 'app-user-list' , query: {'action_type' : action_type } }).catch(() => {})
         })
         .catch(error => 
         { 

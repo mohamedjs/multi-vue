@@ -12,6 +12,7 @@
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.4",
+        "kalnoy/nestedset": "^5.0",
         "laravel/framework": "^6.0",
         "laravel/passport": "^8.0",
         "laravel/tinker": "^1.0",

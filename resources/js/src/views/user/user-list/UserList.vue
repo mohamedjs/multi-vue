@@ -1,5 +1,10 @@
 <template>
   <div id="data-list-thumb-view" class="data-list-container">
+    <div class="centerx">
+      <vs-alert title="Success" closable close-icon="close" :active.sync="success" color="success" icon="sms" >
+         You {{ action }} user data SuccessFully
+      </vs-alert>
+    </div>
     <user-filter></user-filter>
     <user-table></user-table>
   </div>
@@ -18,6 +23,8 @@ export default {
   data() {
     return {
       isMounted: false,
+      success:false,
+      action:''
     }
   },
   computed: {
@@ -32,6 +39,10 @@ export default {
     .catch(err => { console.log(err) })
   },
   mounted() {
+    if(this.$route.query.action_type)
+      this.success = true
+      this.action  = this.$route.query.action_type
+    // init user search to set all null
     this.$store.commit("user/INIT_SEARCH")
     this.isMounted = true;
   }
