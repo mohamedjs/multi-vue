@@ -82,6 +82,7 @@ export default {
 
   initSearchKey({ commit, dispatch }){
     commit('INIT_SEARCH')
+    dispatch('fetchUsers');
   },
 
   emptySpecificSearchKey({ commit, dispatch } , search){

@@ -6,6 +6,7 @@
        	<user-status-filter></user-status-filter>
         <user-verified-filter></user-verified-filter>
         <user-gender-filter></user-gender-filter>
+        <init-search></init-search>
       </div>
     </vx-card>
 </template>
@@ -15,7 +16,8 @@ import GlobalSearchFilter from './GlobalSearchFilter.vue'
 import UserTypeFilter from './UserTypeFilter.vue' 
 import UserStatusFilter from './UserStatusFilter.vue' 
 import UserVerifiedFilter from './UserVerifiedFilter.vue' 
-import UserGenderFilter from './UserGenderFilter.vue' 
+import UserGenderFilter from './UserGenderFilter.vue'
+import InitSearch from './InitSearch.vue'
 
 export default {
 	components: {
@@ -23,7 +25,8 @@ export default {
 	    UserStatusFilter,
 	    UserVerifiedFilter,
 	    GlobalSearchFilter,
-	    UserGenderFilter
+	    UserGenderFilter,
+	    InitSearch
 	}, 
 }
 </script>

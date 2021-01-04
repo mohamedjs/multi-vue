@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
@@ -58,7 +59,7 @@ export default {
 	data() {
 		return {
 			globalSearchFilter: { label: 'All', value: 'All' },
-			search:'',
+			search: '',
 		    globalSearchOptions: [
 		        { label: 'All', value: 'All' },
 		        { label: 'Name', value: 'name'},
@@ -80,6 +81,9 @@ export default {
 	          // locale: Arabic, // locale for this instance only          
       		}
 		}
+	},
+	computed:{
+		...mapState('user',['search'])
 	},
 	watch:{
 	    search:{
