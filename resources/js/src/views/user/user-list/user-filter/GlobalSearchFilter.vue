@@ -1,17 +1,17 @@
 <template>
 	<div class="vx-row">
-		<div class="vx-col md:w-1/3 sm:w-1/2 w-full">
+		<div class="vx-col md:w-1/2 sm:w-1/2 w-full">
 			<div class="vx-row">
 				<div class="vx-col md:w-1/2 sm:w-1/2 w-full">
 		          <label class="text-sm opacity-75">Search Key</label>
 		          <v-select :options="globalSearchOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="globalSearchFilter" />
 		      	</div>
 		      	<div class="vx-col md:w-1/2 sm:w-1/2 w-full">
-		          <vs-input icon-pack="feather" icon="icon-search" label-placeholder="Search-Value" v-model="search" class="is-label-placeholder w-full" />
+		          <vs-input icon-pack="feather" icon="icon-search" label-placeholder="Search-Value" v-model="search_value" class="is-label-placeholder w-full" />
 		      	</div>
 	      	</div>
 	    </div>
-	    <div class="vx-col md:w-1/3 sm:w-1/2 w-full">
+	    <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
 	    	<div class="vx-row">
 				<div class="vx-col md:w-1/2 sm:w-1/2 w-full">
 			      <label class="text-sm">From</label>
@@ -31,7 +31,7 @@
 		  		</div>
 			</div>
 	    </div>
-	    <div class="vx-col md:w-1/3 sm:w-1/2 w-full">
+	    <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
 	      <label class="text-sm">Birth OF Date</label>
 	      <flat-pickr 
 	        v-model="bod" 
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
@@ -59,7 +58,7 @@ export default {
 	data() {
 		return {
 			globalSearchFilter: { label: 'All', value: 'All' },
-			search: '',
+			search_value: '',
 		    globalSearchOptions: [
 		        { label: 'All', value: 'All' },
 		        { label: 'Name', value: 'name'},
@@ -67,14 +66,14 @@ export default {
 		        { label: 'UserName', value: 'user_name' },
 		        { label: 'Phone', value: 'phone' },
 		    ],
-		    from: moment(new Date()).format('DD-MM-YYYY'),
+		    from: moment(new Date()).subtract(1, 'months').format('DD-MM-YYYY'),
 		    to: moment(new Date()).format('DD-MM-YYYY'),
 		    bod: moment(new Date()).format('DD-MM-YYYY'),
 		   	dateConfig:{
 	          dateFormat: 'd-m-Y',
 	          weekNumbers: false, //show week number
 	          monthSelectorType:'dropdown', //can be static
-	          // maxDate:moment().format('d-m-Y'),
+	          maxDate:moment(new Date()).format('DD-MM-YYYY'),
 	          // minDate:'01-05-1991',
 	          enableTime : false,
 	          defaultDate:moment(new Date()).format('DD-MM-YYYY'),
@@ -82,11 +81,8 @@ export default {
       		}
 		}
 	},
-	computed:{
-		...mapState('user',['search'])
-	},
 	watch:{
-	    search:{
+	    search_value:{
 	      handler:function(value) {
 	      	// set search key in search state value 
 	      	var payload = {key:this.globalSearchFilter.value, value:value}

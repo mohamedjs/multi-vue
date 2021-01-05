@@ -26,7 +26,14 @@ class UserService
     {
         $this->uploaderService = $uploaderService;
     }
-
+    /**
+     * Create or Update user
+     *
+     * @param      \Illuminate\Http\Request  $request  The request
+     * @param      User|\App\Models\User     $user     The user
+     *
+     * @return     User|\App\Models\User     ( instance from create user )
+     */
     public function fill(Request $request, User $user = null)
     {
         if (!$user) {

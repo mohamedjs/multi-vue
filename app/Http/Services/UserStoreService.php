@@ -37,12 +37,10 @@ class UserStoreService
      */
     public function handle($request)
     {
+        $request['bod']   = date('Y-m-d',strtotime($request['bod']));
         if(isset($request['image']) && is_file($request['image'])) {
-            array_merge($request, [
-                'image' => $this->handleFile($request['image'])
-            ]);
+            $request['image'] = $this->handleFile($request['image']);
         }
-
     	$user = $this->userRepository->create($request);
 
     	return $user;

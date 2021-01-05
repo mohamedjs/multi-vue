@@ -107,7 +107,7 @@ export default {
 	      }
 	      return 0
 	    },
-		...mapState('user',['users', 'total', 'currentPage', 'itemsPerPage']),
+		...mapState('user',['users', 'total', 'currentPage', 'itemsPerPage', 'search']),
 	},
 	watch:{
 	    currentx:{

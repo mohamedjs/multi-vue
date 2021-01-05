@@ -74,21 +74,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
-/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
-/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flatpickr/dist/themes/airbnb.css */ "./node_modules/flatpickr/dist/themes/airbnb.css");
-/* harmony import */ var flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_4__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr/dist/flatpickr.css */ "./node_modules/flatpickr/dist/flatpickr.css");
+/* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/themes/airbnb.css */ "./node_modules/flatpickr/dist/themes/airbnb.css");
+/* harmony import */ var flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_themes_airbnb_css__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -133,7 +126,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 
 
 
@@ -142,8 +134,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
-    flatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default.a
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a,
+    flatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
@@ -151,7 +143,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         label: 'All',
         value: 'All'
       },
-      search: search.global_search,
+      search_value: '',
       globalSearchOptions: [{
         label: 'All',
         value: 'All'
@@ -168,7 +160,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         label: 'Phone',
         value: 'phone'
       }],
-      from: moment(new Date()).format('DD-MM-YYYY'),
+      from: moment(new Date()).subtract(1, 'months').format('DD-MM-YYYY'),
       to: moment(new Date()).format('DD-MM-YYYY'),
       bod: moment(new Date()).format('DD-MM-YYYY'),
       dateConfig: {
@@ -177,7 +169,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //show week number
         monthSelectorType: 'dropdown',
         //can be static
-        // maxDate:moment().format('d-m-Y'),
+        maxDate: moment(new Date()).format('DD-MM-YYYY'),
         // minDate:'01-05-1991',
         enableTime: false,
         defaultDate: moment(new Date()).format('DD-MM-YYYY') // locale: Arabic, // locale for this instance only          
@@ -185,9 +177,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['search'])),
   watch: {
-    search: {
+    search_value: {
       handler: function handler(value) {
         // set search key in search state value 
         var payload = {
@@ -965,7 +956,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return 0;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['users', 'total', 'currentPage', 'itemsPerPage'])),
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['users', 'total', 'currentPage', 'itemsPerPage', 'search'])),
   watch: {
     currentx: {
       handler: function handler(value) {
@@ -1152,7 +1143,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "vx-row" }, [
-    _c("div", { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" }, [
+    _c("div", { staticClass: "vx-col md:w-1/2 sm:w-1/2 w-full" }, [
       _c("div", { staticClass: "vx-row" }, [
         _c(
           "div",
@@ -1192,11 +1183,11 @@ var render = function() {
                 "label-placeholder": "Search-Value"
               },
               model: {
-                value: _vm.search,
+                value: _vm.search_value,
                 callback: function($$v) {
-                  _vm.search = $$v
+                  _vm.search_value = $$v
                 },
-                expression: "search"
+                expression: "search_value"
               }
             })
           ],
@@ -1205,7 +1196,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" }, [
+    _c("div", { staticClass: "vx-col md:w-1/4 sm:w-1/2 w-full" }, [
       _c("div", { staticClass: "vx-row" }, [
         _c(
           "div",
@@ -1255,7 +1246,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "vx-col md:w-1/3 sm:w-1/2 w-full" },
+      { staticClass: "vx-col md:w-1/4 sm:w-1/2 w-full" },
       [
         _c("label", { staticClass: "text-sm" }, [_vm._v("Birth OF Date")]),
         _vm._v(" "),
@@ -1302,8 +1293,6 @@ var render = function() {
     "div",
     { staticClass: "vx-col mt-1 md:w-1/4 sm:w-1/2 w-full" },
     [
-      _c("br"),
-      _c("br"),
       _c("br"),
       _vm._v(" "),
       _c(

@@ -13,6 +13,14 @@ use File;
 
 class UploaderService
 {
+    /**
+     * upload image in locale storage
+     *
+     * @param      \Illuminate\Http\UploadedFile  $file    The file
+     * @param      string                         $folder  The folder
+     *
+     * @return     string                         
+     */
     public function upload(UploadedFile $file, $folder)
     {
         $date_path = date("Y") . '/' . date("m") . '/' . date("d") . '/';

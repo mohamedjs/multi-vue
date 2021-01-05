@@ -27,6 +27,6 @@ export default {
 	    GlobalSearchFilter,
 	    UserGenderFilter,
 	    InitSearch
-	}, 
+	},
 }
 </script>
