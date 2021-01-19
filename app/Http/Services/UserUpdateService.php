@@ -32,16 +32,22 @@ class UserUpdateService
     }
 
     /**
+     * handle
+     * 
      * handle function that make create for user
+     * 
      * @param array $request 
+     * @param User $user
      * @return Bool
      */
     public function handle($request, $user)
     {
-        if( isset($request['image']) && is_file($request['image'])) {
+        if(isset($request['image']) && is_file($request['image'])) {
             $request['image'] = $this->handleFile($request['image']);
         }
-        $request['bod']   = date('Y-m-d',strtotime($request['bod']));
+        if(isset($request['bod'])) {
+            $request['bod']  = date('Y-m-d',strtotime($request['bod']));
+        }
         $user = tap($user, function($user) use($request) {
             $this->userRepository->find($user->id)->update($request);
         });
@@ -49,7 +55,10 @@ class UserUpdateService
     }
 
     /**
+     * handleFile
+     * 
      * handle image file that return file path
+     * 
      * @param File $file 
      * @return string
      */

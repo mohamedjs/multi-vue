@@ -91,14 +91,14 @@ export default {
 	computed: {
 		chipColor() {
 	      return (value) => {
-	        if(value === "active") return "success"
-	        else if(value === "disabled") return "danger"
-	        else "primary"
+	        if(value === "Active") return "success"
+	        else if(value === "Disabled") return "danger"
+	        else return "primary"
 	      }
 	    },
 	    textColor() {
 	      return (value) => {
-	        value ? "text-primary" : "text-grey"
+	        return value ? "text-success" : "text-grey"
 	      } 
 	    },
 	    currentPage() {

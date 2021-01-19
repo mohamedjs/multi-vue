@@ -941,12 +941,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({
     chipColor: function chipColor() {
       return function (value) {
-        if (value === "active") return "success";else if (value === "disabled") return "danger";else "primary";
+        if (value === "Active") return "success";else if (value === "Disabled") return "danger";else return "primary";
       };
     },
     textColor: function textColor() {
       return function (value) {
-        value ? "text-primary" : "text-grey";
+        return value ? "text-success" : "text-grey";
       };
     },
     currentPage: function currentPage() {

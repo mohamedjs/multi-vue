@@ -77,7 +77,7 @@ body {
   overflow-x: hidden;
   max-width: 100%;
   height: 100%;
-  transition: background-color 0.3s ease;
+  transition: background-color .3s ease;
 }
 
 [dir] body {
@@ -137,7 +137,7 @@ body {
   height: 100%;
   top: 0;
   bottom: 0;
-  transition: opacity 0.7s;
+  transition: opacity .7s;
   z-index: -1;
 }
 
@@ -220,7 +220,7 @@ body {
   }
 }
 
-[dir] div[id$=demo] .vx-card:not(:last-of-type) {
+[dir] div[id$="demo"] .vx-card:not(:last-of-type) {
   margin-bottom: 2.2rem;
 }
 
@@ -546,12 +546,12 @@ body {
 
 .vs-navbar.navbar-skelton {
   width: 100%;
-  transition: all 0.5s;
+  transition: all .5s;
   z-index: 10000;
 }
 
 [dir] .vs-navbar.navbar-skelton {
-  padding: 0.8rem 2.2rem;
+  padding: .8rem 2.2rem;
 }
 
 .navbar-sticky .vx-navbar-wrapper,
@@ -605,12 +605,12 @@ body {
 }
 
 [dir] .navbar-floating .vx-navbar {
-  border-radius: 0.5rem;
-  padding: 0.8rem 1rem;
+  border-radius: .5rem;
+  padding: .8rem 1rem;
 }
 
 [dir] .navbar-floating .vx-navbar .search-full-container {
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 
 [dir] .navbar-sticky .vx-navbar-wrapper {
@@ -667,7 +667,7 @@ body {
   height: 100%;
 }
 
-[dir] .search-full-container .vx-auto-suggest input[type=text], [dir] .search-full-container .vx-auto-suggest .input-span-placeholder {
+[dir] .search-full-container .vx-auto-suggest input[type="text"], [dir] .search-full-container .vx-auto-suggest .input-span-placeholder {
   padding: 1.6rem 3rem !important;
 }
 
@@ -706,7 +706,7 @@ body {
 
 @media (max-width: 1200px) {
   [dir] .navbar-sticky .vx-navbar-wrapper .vx-navbar {
-    padding: 0.8rem 2.2rem;
+    padding: .8rem 2.2rem;
   }
 }
 
@@ -720,7 +720,7 @@ body {
   }
 
   [dir] .navbar-sticky .vx-navbar-wrapper .vx-navbar {
-    padding: 0.8rem 1.5rem;
+    padding: .8rem 1.5rem;
   }
 
   [dir] .navbar-static .vx-navbar-wrapper {
@@ -728,7 +728,7 @@ body {
   }
 
   [dir] .navbar-static .vx-navbar-wrapper .vx-navbar {
-    padding: 0.8rem 1.5rem;
+    padding: .8rem 1.5rem;
   }
 
   [dir] .navbar-static.main-vertical .router-view .router-content {
@@ -770,7 +770,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   width: auto;
-  transition: 0.35s;
+  transition: .35s;
 }
 
 .notification-dropdown,
@@ -957,7 +957,7 @@ code {
 
 [dir] code {
   background: #eee;
-  padding: 0.1rem 0.3rem;
+  padding: 0.1rem .3rem;
   border-radius: 3px;
 }
 
@@ -1115,7 +1115,7 @@ i.wizard-icon {
 }
 
 [dir] .stepTitle {
-  margin-top: 0.5rem;
+  margin-top: .5rem;
 }
 
 [dir] .select-large input.vs-select--input {
@@ -1161,11 +1161,11 @@ i.wizard-icon {
 =========================================================*/
 
 .v-select:not(.vs--single) .vs__selected {
-  font-size: 0.9rem;
+  font-size: .9rem;
 }
 
 [dir] .v-select .vs__dropdown-toggle {
-  padding: 0.59px 0 4px 0;
+  padding: .59px 0 4px 0;
 }
 
 .v-select .vs__dropdown-toggle .vs__search {
@@ -1320,21 +1320,21 @@ i.wizard-icon {
  *  rearranging the child elements visually.
  */
 
-.v-select[dir=rtl] .vs__actions {
+.v-select[dir="rtl"] .vs__actions {
   padding: 0 3px 0 6px;
 }
 
-.v-select[dir=rtl] .vs__clear {
+.v-select[dir="rtl"] .vs__clear {
   margin-left: 6px;
   margin-right: 0;
 }
 
-.v-select[dir=rtl] .vs__deselect {
+.v-select[dir="rtl"] .vs__deselect {
   margin-left: 0;
   margin-right: 2px;
 }
 
-.v-select[dir=rtl] .vs__dropdown-menu {
+.v-select[dir="rtl"] .vs__dropdown-menu {
   text-align: right;
 }
 
@@ -1587,7 +1587,7 @@ i.wizard-icon {
 
 .vs--single.vs--open .vs__selected {
   position: absolute;
-  opacity: 0.4;
+  opacity: .4;
 }
 
 .vs--single.vs--searching .vs__selected {
@@ -1672,7 +1672,7 @@ i.wizard-icon {
 }
 
 .vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search {
-  opacity: 0.2;
+  opacity: .2;
 }
 
 /* Loading Spinner */
@@ -1683,7 +1683,7 @@ i.wizard-icon {
   font-size: 5px;
   text-indent: -9999em;
   overflow: hidden;
-  transition: opacity 0.1s;
+  transition: opacity .1s;
 }
 
 [dir] .vs__spinner {
@@ -1780,7 +1780,7 @@ i.wizard-icon {
 
 [dir] .v-context {
   padding: 0 !important;
-  border-radius: 0.4rem !important;
+  border-radius: .4rem !important;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.14) !important;
 }
 
@@ -1789,7 +1789,7 @@ i.wizard-icon {
 }
 
 [dir] .v-context li a {
-  padding: 0.7rem 1rem !important;
+  padding: .7rem 1rem !important;
 }
 
 [dir] .v-context li a:focus, [dir] .v-context li a:hover {
@@ -1899,13 +1899,13 @@ i.wizard-icon {
 }
 
 [dir] .vdp-datepicker input {
-  padding: 0.7rem;
+  padding: .7rem;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .vdp-datepicker input[disabled] {
-  opacity: 0.5;
+  opacity: .5;
 }
 
 .vdp-datepicker .vdp-datepicker__calendar {
@@ -1913,23 +1913,23 @@ i.wizard-icon {
 }
 
 [dir] .vdp-datepicker .vdp-datepicker__calendar {
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 
 [dir=ltr] .vdp-datepicker .vdp-datepicker__calendar header .pre {
-  border-top-left-radius: 0.5rem;
+  border-top-left-radius: .5rem;
 }
 
 [dir=rtl] .vdp-datepicker .vdp-datepicker__calendar header .pre {
-  border-top-right-radius: 0.5rem;
+  border-top-right-radius: .5rem;
 }
 
 [dir=ltr] .vdp-datepicker .vdp-datepicker__calendar header .next {
-  border-top-right-radius: 0.5rem;
+  border-top-right-radius: .5rem;
 }
 
 [dir=rtl] .vdp-datepicker .vdp-datepicker__calendar header .next {
-  border-top-left-radius: 0.5rem;
+  border-top-left-radius: .5rem;
 }
 
 [dir] .vdp-datepicker .day.blank {
@@ -1957,7 +1957,7 @@ i.wizard-icon {
 }
 
 [dir] .vdp-datepicker .cell.month, [dir] .vdp-datepicker .cell.year {
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 
 [dir] .vdp-datepicker .cell:hover {
@@ -2034,7 +2034,7 @@ i.wizard-icon {
 
 [dir] .flatpickr-calendar {
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08) !important;
-  border-radius: 0.5rem !important;
+  border-radius: .5rem !important;
 }
 
 .flatpickr-calendar.arrowTop:after,
@@ -2082,7 +2082,7 @@ i.wizard-icon {
 
 [dir] .flatpickr-calendar .flatpickr-monthDropdown-months {
   border: 1px solid rgba(0, 0, 0, 0.3) !important;
-  border-radius: 0.5rem !important;
+  border-radius: .5rem !important;
 }
 
 [dir=ltr] .flatpickr-calendar .flatpickr-monthDropdown-months {
@@ -2173,7 +2173,7 @@ i.wizard-icon {
 }
 
 [dir] .flatpickr-input {
-  padding: 0.7rem;
+  padding: .7rem;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -2243,7 +2243,7 @@ i.wizard-icon {
 .theme-dark .flatpickr-calendar .flatpickr-day.prevMonthDay,
 .theme-dark .flatpickr-calendar .flatpickr-day.nextMonthDay,
 .theme-dark .flatpickr-calendar .flatpickr-day.disabled {
-  opacity: 0.3;
+  opacity: .3;
 }
 
 [dir] .theme-dark .flatpickr-calendar .flatpickr-time {
@@ -2314,7 +2314,7 @@ i.wizard-icon {
 }
 
 .theme-dark .main-horizontal .menu-item .h-nav-menu-item.disabled-item {
-  opacity: 0.3;
+  opacity: .3;
 }
 
 @media (min-width: 1200px) {
@@ -2343,16 +2343,16 @@ i.wizard-icon {
   background: #262c49;
 }
 
-[dir] .theme-dark pre[class*=language-] {
+[dir] .theme-dark pre[class*="language-"] {
   background-color: #1E1E1E;
   text-shadow: none;
 }
 
-[dir] .theme-dark pre[class*=language-] code {
+[dir] .theme-dark pre[class*="language-"] code {
   background-color: transparent;
 }
 
-[dir] .theme-dark pre[class*=language-] code[class*=language-] {
+[dir] .theme-dark pre[class*="language-"] code[class*="language-"] {
   text-shadow: none;
 }
 
@@ -2413,16 +2413,16 @@ i.wizard-icon {
   color: #dae1e7;
 }
 
-[dir] .theme-dark .vx-card .code-content pre[class^=language-] {
+[dir] .theme-dark .vx-card .code-content pre[class^="language-"] {
   background-color: #262c49;
   text-shadow: none;
 }
 
-[dir] .theme-dark .vx-card .code-content pre[class^=language-] code {
+[dir] .theme-dark .vx-card .code-content pre[class^="language-"] code {
   background-color: transparent;
 }
 
-[dir] .theme-dark .vx-card .code-content pre[class^=language-] code[class*=language-] {
+[dir] .theme-dark .vx-card .code-content pre[class^="language-"] code[class*="language-"] {
   text-shadow: none;
 }
 
@@ -3536,7 +3536,7 @@ i.wizard-icon {
 
 .zoom-fade-enter-active,
 .zoom-fade-leave-active {
-  transition: transform 0.35s, opacity 0.28s ease-in-out;
+  transition: transform .35s, opacity .28s ease-in-out;
 }
 
 .zoom-fade-enter {
@@ -3557,7 +3557,7 @@ i.wizard-icon {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.28s ease-in-out;
+  transition: opacity .28s ease-in-out;
 }
 
 .fade-enter,
@@ -3567,7 +3567,7 @@ i.wizard-icon {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: opacity 0.35s, transform 0.4s;
+  transition: opacity .35s, transform .4s;
 }
 
 .slide-fade-enter {
@@ -3596,7 +3596,7 @@ i.wizard-icon {
 
 .zoom-out-enter-active,
 .zoom-out-leave-active {
-  transition: opacity 0.35s ease-in-out, transform 0.45s ease-out;
+  transition: opacity .35s ease-in-out, transform .45s ease-out;
 }
 
 .zoom-out-enter,
@@ -3610,7 +3610,7 @@ i.wizard-icon {
 
 .fade-bottom-enter-active,
 .fade-bottom-leave-active {
-  transition: opacity 0.3s, transform 0.35s;
+  transition: opacity .3s, transform .35s;
 }
 
 .fade-bottom-enter {
@@ -3631,7 +3631,7 @@ i.wizard-icon {
 
 .fade-bottom-2x-enter-active,
 .fade-bottom-2x-leave-active {
-  transition: opacity 0.2s, transform 0.25s;
+  transition: opacity .2s, transform .25s;
 }
 
 .fade-bottom-2x-enter {
@@ -3652,7 +3652,7 @@ i.wizard-icon {
 
 .fade-top-enter-active,
 .fade-top-leave-active {
-  transition: opacity 0.3s, transform 0.35s;
+  transition: opacity .3s, transform .35s;
 }
 
 .fade-top-enter {
@@ -3673,7 +3673,7 @@ i.wizard-icon {
 
 .fade-top-2x-enter-active,
 .fade-top-2x-leave-active {
-  transition: opacity 0.2s, transform 0.25s;
+  transition: opacity .2s, transform .25s;
 }
 
 .fade-top-2x-enter {
@@ -3979,7 +3979,7 @@ i.wizard-icon {
 [dir] .dropdown-custom .vs-dropdown--custom {
   padding: 0 !important;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08) !important;
 }
 
@@ -4179,7 +4179,7 @@ i.wizard-icon {
 }
 
 .user-list .con-vs-avatar {
-  transition: 0.3s;
+  transition: .3s;
 }
 
 .user-list .con-vs-avatar:hover {
@@ -4196,7 +4196,7 @@ i.wizard-icon {
   height: auto;
 }
 
-[dir] ul.bordered-items > li:not(:last-of-type):not([class*=shadow]) {
+[dir] ul.bordered-items > li:not(:last-of-type):not([class*='shadow']) {
   border-bottom: 1px solid #dae1e7;
 }
 
@@ -4248,11 +4248,11 @@ i.wizard-icon {
 }
 
 [dir] .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
-  padding: 0.75rem 2rem;
+  padding: .75rem 2rem;
 }
 
 [dir] .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large).vs-button-border {
-  padding: 0.679rem 2rem;
+  padding: .679rem 2rem;
 }
 
 [dir] .vs-button.small:not(.includeIconOnly) {
@@ -4312,7 +4312,7 @@ i.wizard-icon {
 }
 
 [dir] .con-chips .con-vs-chip {
-  margin: 0.75rem;
+  margin: .75rem;
 }
 
 [dir=ltr] .con-chips .con-chips--remove-all {
@@ -4330,7 +4330,7 @@ i.wizard-icon {
 .con-vs-chip {
   min-height: 26px;
   min-width: 26px;
-  font-size: 0.8rem;
+  font-size: .8rem;
 }
 
 .vs-collapse-item--header {
@@ -4393,11 +4393,11 @@ i.wizard-icon {
 }
 
 [dir=ltr] .con-vs-dialog .vs-dialog footer .vs-button:last-of-type {
-  margin-left: 0.5rem !important;
+  margin-left: .5rem !important;
 }
 
 [dir=rtl] .con-vs-dialog .vs-dialog footer .vs-button:last-of-type {
-  margin-right: 0.5rem !important;
+  margin-right: .5rem !important;
 }
 
 .vs-con-dropdown {
@@ -4406,7 +4406,7 @@ i.wizard-icon {
 }
 
 [dir] .dropdown-button-container .vs-button {
-  padding: 0.72rem 1.5rem !important;
+  padding: .72rem 1.5rem !important;
 }
 
 [dir] .dropdown-button-container .vs-button-line {
@@ -4434,7 +4434,7 @@ i.wizard-icon {
 }
 
 [dir] .vs-con-input .vs-inputx {
-  padding: 0.7rem;
+  padding: .7rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -4447,7 +4447,7 @@ i.wizard-icon {
 }
 
 [dir] .vs-input--input.normal {
-  padding: 0.7rem !important;
+  padding: .7rem !important;
 }
 
 .vs-input--input.normal ~ .vs-input--icon.feather {
@@ -4483,11 +4483,11 @@ i.wizard-icon {
 }
 
 .vs-input--input.small {
-  font-size: 0.8rem !important;
+  font-size: .8rem !important;
 }
 
 [dir] .vs-input--input.small {
-  padding: 0.4rem !important;
+  padding: .4rem !important;
 }
 
 .vs-input--input.small ~ .vs-input--icon.feather {
@@ -4511,7 +4511,7 @@ i.wizard-icon {
 }
 
 [dir] .vs-input--placeholder.normal {
-  padding: 0.7rem !important;
+  padding: .7rem !important;
 }
 
 [dir] .vs-input--placeholder.large {
@@ -4519,19 +4519,19 @@ i.wizard-icon {
 }
 
 .vs-input--placeholder.small {
-  font-size: 0.8rem !important;
+  font-size: .8rem !important;
 }
 
 [dir] .vs-input--placeholder.small {
-  padding: 0.2rem 0.6rem !important;
+  padding: .2rem .6rem !important;
 }
 
 [dir=ltr] .vs-input--icon.feather {
-  padding: 0.2rem 0.5rem 0rem 0.4rem;
+  padding: .2rem .5rem 0rem .4rem;
 }
 
 [dir=rtl] .vs-input--icon.feather {
-  padding: 0.2rem 0.4rem 0rem 0.5rem;
+  padding: .2rem .4rem 0rem .5rem;
 }
 
 [dir] .vs-input.input-rounded-full input {
@@ -4539,15 +4539,15 @@ i.wizard-icon {
 }
 
 [dir=ltr] .vs-input.input-rounded-full .vs-input--input.hasIcon {
-  padding: 0.8rem 1rem 0.8rem 3rem !important;
+  padding: .8rem 1rem 0.8rem 3rem !important;
 }
 
 [dir=rtl] .vs-input.input-rounded-full .vs-input--input.hasIcon {
-  padding: 0.8rem 3rem 0.8rem 1rem !important;
+  padding: .8rem 3rem 0.8rem 1rem !important;
 }
 
 [dir] .vs-input.input-rounded-full .input-span-placeholder {
-  padding-top: 0.7rem !important;
+  padding-top: .7rem !important;
 }
 
 [dir=ltr] .vs-input.input-rounded-full .input-span-placeholder {
@@ -4563,7 +4563,7 @@ i.wizard-icon {
 }
 
 [dir] .vs-input.input-rounded-full .vs-icon {
-  margin-top: 0.1rem !important;
+  margin-top: .1rem !important;
 }
 
 [dir=ltr] .vs-input.input-rounded-full .vs-icon {
@@ -4575,7 +4575,7 @@ i.wizard-icon {
 }
 
 .vs-list--item .list-titles .vs-list--subtitle {
-  font-size: 0.85rem;
+  font-size: .85rem;
 }
 
 [dir] .vs-list--item:last-child {
@@ -4775,7 +4775,7 @@ i.wizard-icon {
 }
 
 [dir] .vs-tabs-position-left .vs-tabs--li {
-  padding: 0.35rem 0.3rem;
+  padding: .35rem 0.3rem;
 }
 
 .vs-tabs--li button {
@@ -4930,6 +4930,6 @@ button:focus {
 }
 
 .vjs-fluid {
-  padding-top: 41.6666666667% !important;
+  padding-top: 41.66666666666667% !important;
 }
 

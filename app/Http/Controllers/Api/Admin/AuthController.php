@@ -8,9 +8,10 @@ use App\Http\Requests\Api\Admin\VerifyRequest;
 use App\Http\Requests\Api\Admin\UpdatePasswordRequest;
 use App\Http\Controllers\Api\APIController;
 use App\Http\Services\AuthService;
-use App\Http\Services\UserService;
+use App\Http\Services\UserUpdateService;
 use App\Http\Repository\UserRepository;
 use App\Http\Resources\UserResource;
+use App\Constants\VerifyStatus;
 
 class AuthController extends APIController
 {
@@ -19,24 +20,24 @@ class AuthController extends APIController
      */
     private $authService;
     /**
-     * @var UserService
+     * @var UserUpdateService
      */
-    private $userService;
+    private $userUpdateService;
     /**
      * @var userRepository
      */
     private $userRepository;
     /**
      * AuthController constructor.
-     * @param AuthService $authService
-     * @param UserService $userService
-     * @param userRepository $userRepository
+     * @param AuthService       $authService
+     * @param UserUpdateService $userUpdateService
+     * @param userRepository    $userRepository
      */
-    public function __construct(AuthService $authService, UserRepository $userRepository, UserService $userService)
+    public function __construct(AuthService $authService, UserRepository $userRepository, UserUpdateService $userUpdateService)
     {
-        $this->authService    = $authService;
-        $this->userRepository = $userRepository;
-        $this->userService    = $userService;
+        $this->authService       = $authService;
+        $this->userRepository    = $userRepository;
+        $this->userUpdateService = $userUpdateService;
     }
     /**
      * Login user and create token
@@ -124,9 +125,10 @@ class AuthController extends APIController
      */
     public function verifyEmail(VerifyRequest $request)
     {
-        $request->merge(['email_verified_at' => now()]);
-        $request->merge(['email' => auth()->user()->email]);
-        $user = $this->userUpdateService->fill($request->validated(), auth()->user());
+        $data['email'] = auth()->user()->email;
+        $data['email_verified_at'] = now();
+        $data['verified'] = VerifyStatus::YES;
+        $user = $this->userUpdateService->handle($data, auth()->user());
         return $this->OK(new UserResource($user), 'Email Verified SuccessFully');
     }
     /**

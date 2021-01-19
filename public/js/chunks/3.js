@@ -365,16 +365,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: 2
       }],
       user_typeOptions: [{
-        label: 'SUPERADMIN',
+        label: 'SuperAdmin',
         value: 1
       }, {
-        label: 'ADMIN',
+        label: 'Admin',
         value: 2
       }, {
-        label: 'STAFF',
+        label: 'Staff',
         value: 3
       }, {
-        label: 'CLIENT',
+        label: 'Client',
         value: 4
       }],
       dateConfig: {
@@ -395,7 +395,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({
     status_local: {
       get: function get() {
-        var status = this.user.status === 'active' ? 1 : 0;
+        var status = this.user.status === 'active' ? 1 : 2;
         return {
           label: this.user.status,
           value: status

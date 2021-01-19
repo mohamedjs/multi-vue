@@ -236,10 +236,10 @@ export default {
         { label: 'Deactivated', value: 2 },
       ],
       user_typeOptions: [
-        { label: 'SUPERADMIN', value: 1 },
-        { label: 'ADMIN', value: 2  },
-        { label: 'STAFF', value: 3  },
-        { label: 'CLIENT', value: 4 },
+        { label: 'SuperAdmin', value: 1 },
+        { label: 'Admin', value: 2  },
+        { label: 'Staff', value: 3  },
+        { label: 'Client', value: 4 },
       ],
       dateConfig:{
         dateFormat: 'd-m-Y',
@@ -257,7 +257,7 @@ export default {
   computed: {
     status_local : {
       get() {
-        var status = this.user.status === 'active' ? 1 : 0;
+        var status = this.user.status === 'active' ? 1 : 2;
         return { label: this.user.status, value: status}
       },
       set(status) {
