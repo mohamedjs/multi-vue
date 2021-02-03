@@ -61,7 +61,7 @@ export default {
     updateUserData({ commit, state }){
       return new Promise((resolve,reject) => {
         commit('FILL_FORM_DATA','patch')
-        axios.post('/api/v1/user/'+state.user.id,state.formData)
+        axios.post('/api/v1/users/'+state.user.id,state.formData)
         .then((response) => {
           commit('SET_USER_DATA', response.data.data)
           resolve(response)

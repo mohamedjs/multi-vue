@@ -85,7 +85,7 @@ class UserController extends Controller
   public function update(UserUpdateFormRequest $request,User $user)
   {
     $user = $this->userUpdateService->handle($request->validated(),$user);
-    return response()->json(['status' => 'success' , 'data' => new UserResource($user) , 'message' => 'Update User SuccessFully'], 204);
+    return response()->json(['status' => 'success' , 'data' => new UserResource($user) , 'message' => 'Update User SuccessFully'], 200);
   }
   
   /**

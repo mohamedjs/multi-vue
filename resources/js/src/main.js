@@ -20,6 +20,7 @@ Vue.use(Vuesax)
 import axios from "./axios.js"
 Vue.prototype.$http = axios
 
+
 // mock
 import "./fake-db/index.js"
 
@@ -58,9 +59,9 @@ require('vue-tour/dist/vue-tour.css')
 // VeeValidate
 import VeeValidate from 'vee-validate'
 import dictionary from './veevalidate/Dictionary'
-Vue.use(VeeValidate,{
-  locale: 'en',
-  dictionary
+Vue.use(VeeValidate, {
+    locale: 'en',
+    dictionary
 });
 
 // Google Maps

@@ -48,6 +48,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('user', ['users'])),
   methods: {},
   created: function created() {
+    // init user search to set all null
+    this.$store.commit("user/INIT_SEARCH");
     this.$store.dispatch("user/fetchUsers").then(function (result) {
       console.log(result);
     }).catch(function (err) {
@@ -55,11 +57,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   mounted: function mounted() {
-    if (this.$route.query.action_type) this.success = true;
-    this.action = this.$route.query.action_type; // init user search to set all null
-
-    this.$store.commit("user/INIT_SEARCH");
     this.isMounted = true;
+    if (this.$route.query.action_type) this.success = true;
+    this.action = this.$route.query.action_type;
   }
 });
 
@@ -248,7 +248,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     resetSearch: function resetSearch() {
-      this.$store.dispatch("user/initSearchKey");
+      // init user search to set all null
+      this.$store.commit("user/INIT_SEARCH");
     }
   }
 });
@@ -926,6 +927,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       currentx: 1,
       selected: [],
+      userId: '',
       columns: {
         'Name': 'name',
         'Email': 'email',
@@ -978,20 +980,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).catch(function () {});
     },
     confirmDeleteRecord: function confirmDeleteRecord(user) {
+      this.userId = user.id;
       this.$vs.dialog({
         type: 'confirm',
         color: 'danger',
         title: "Confirm Delete",
         text: "You are about to delete \"".concat(user.name, "\""),
-        accept: this.deleteRecord(user.id),
+        accept: this.deleteRecord,
         acceptText: "Delete"
       });
     },
-    deleteRecord: function deleteRecord(userId) {
+    deleteRecord: function deleteRecord() {
       var _this = this;
 
       /* UnComment below lines for enabling true flow if deleting user */
-      this.$store.dispatch("user/removeRecord", userId).then(function (result) {
+      this.$store.dispatch("user/removeRecord", this.userId).then(function (result) {
         _this.showDeleteSuccess();
       }).catch(function (err) {
         console.log(err);

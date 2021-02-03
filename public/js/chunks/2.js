@@ -1465,8 +1465,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: !_vm.verify,
-              expression: "!verify"
+              value: !_vm.verify || !_vm.user.email_verified_at,
+              expression: "!verify || !user.email_verified_at"
             }
           ],
           staticClass: "h-full my-4",

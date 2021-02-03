@@ -48,9 +48,7 @@ class UserUpdateService
         if(isset($request['bod'])) {
             $request['bod']  = date('Y-m-d',strtotime($request['bod']));
         }
-        $user = tap($user, function($user) use($request) {
-            $this->userRepository->find($user->id)->update($request);
-        });
+        $user = tap($user)->update($request);
         return $user;
     }
 

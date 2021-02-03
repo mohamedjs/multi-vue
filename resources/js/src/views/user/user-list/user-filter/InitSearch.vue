@@ -17,7 +17,8 @@ export default {
 	},
 	methods:{
 		resetSearch() {
-			this.$store.dispatch("user/initSearchKey")
+			// init user search to set all null
+    		this.$store.commit("user/INIT_SEARCH")
 		}
 	}
 }

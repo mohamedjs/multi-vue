@@ -34,17 +34,18 @@ export default {
 
   },
   created() {
+    // init user search to set all null
+    this.$store.commit("user/INIT_SEARCH")
+    
     this.$store.dispatch("user/fetchUsers")
     .then(result => { console.log(result) })
     .catch(err => { console.log(err) })
   },
   mounted() {
+    this.isMounted = true;
     if(this.$route.query.action_type)
       this.success = true
       this.action  = this.$route.query.action_type
-    // init user search to set all null
-    this.$store.commit("user/INIT_SEARCH")
-    this.isMounted = true;
   }
 }
 </script>

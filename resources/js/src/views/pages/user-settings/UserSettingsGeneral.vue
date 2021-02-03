@@ -44,7 +44,7 @@
       label-placeholder="Email" 
       v-model="user.email" />
     <span class="text-danger text-sm">{{ errors.first('email') }}</span>
-    <vs-alert icon-pack="feather" icon="icon-info" class="h-full my-4" color="warning" v-show="!verify">
+    <vs-alert icon-pack="feather" icon="icon-info" class="h-full my-4" color="warning" v-show="!verify || !user.email_verified_at">
       <span>Your account is not verified. <a @click="sendEmailVerfication()" class="hover:underline">Resend Confirmation</a></span>
     </vs-alert>
 

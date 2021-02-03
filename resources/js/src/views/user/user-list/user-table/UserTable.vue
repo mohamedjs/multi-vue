@@ -85,6 +85,7 @@ export default {
 	    return {
 			currentx: 1,
 			selected:[],
+			userId  :'',
 	      	columns:{'Name':'name', 'Email':'email', 'Phone':'phone', 'UserName':'user_name', 'Status':'status', 'Gender':'gender', 'UserType':'user_type', 'IsVerified':'verified'},
 	    }
 	},
@@ -122,20 +123,21 @@ export default {
               this.$router.push({ name: 'app-user-edit', params: { userId: userId } }).catch(() => {})
           },
           confirmDeleteRecord(user) {
+			this.userId = user.id
             this.$vs.dialog({
               type: 'confirm',
               color: 'danger',
               title: `Confirm Delete`,
               text: `You are about to delete "${user.name}"`,
-              accept: this.deleteRecord(user.id),
+              accept: this.deleteRecord,
               acceptText: "Delete"
             })
           },
-          deleteRecord(userId) {
+          deleteRecord() {
             /* UnComment below lines for enabling true flow if deleting user */
-            this.$store.dispatch("user/removeRecord", userId)
+            this.$store.dispatch("user/removeRecord", this.userId)
             .then(result => { this.showDeleteSuccess() })
-    		.catch(err => { console.log(err) })
+    		    .catch(err => { console.log(err) })
           },
           showDeleteSuccess() {
             this.$vs.notify({
